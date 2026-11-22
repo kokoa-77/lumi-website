@@ -117,11 +117,15 @@ const heroStats = isZh
       {
         value: installerSize || "9.8 MB",
         label: "原生安装包体积",
-        sub: "Rust + Tauri 2 瞬开，告别臃肿卡顿",
+        sub: "Rust + Tauri 2 原生内核，启动迅速",
       },
       { value: "0 遥测", label: "纯本机 · 零广告", sub: "不埋点、不弹窗、不上传用户习惯" },
       { value: "1 键直达", label: "Quick Play 进服", sub: "游戏启动后可自动释放界面内存" },
-      { value: "只读关联", label: "无缝兼容旧启动器", sub: "关联 PCL2 / HMCL / 官方目录，零风险" },
+      {
+        value: "只读关联",
+        label: "无缝兼容旧启动器",
+        sub: "关联 PCL2 / HMCL / 官方目录，不改动原文件",
+      },
     ]
   : [
       {

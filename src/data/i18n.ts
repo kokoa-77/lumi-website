@@ -350,7 +350,7 @@ const EN: Dict = {
         eyebrow: "06 · Native Rust Core & Zero Telemetry",
         title: "Self-developed Rust engine, strictly local-first",
         description:
-          "Built from scratch in Rust with Tauri 2 — no Electron bloat, no ad banners, no tracking beacons, and no dependency on third-party metadata servers.",
+          "Built from scratch in Rust with Tauri 2 — a compact native app with no ad banners, no tracking beacons, and no dependency on third-party metadata servers.",
         bullets: [
           "Concurrent resumable downloads with cryptographic hash verification and optional DoH / HTTP·SOCKS5 proxy",
           "Auto-detects installed Java or downloads official runtimes with smart memory allocation guidance",
@@ -411,7 +411,7 @@ const EN: Dict = {
       },
       {
         q: "Why does Windows show 'Windows protected your PC' (SmartScreen)?",
-        a: "Lumi's Windows installer is not code-signed yet (like many community launchers such as PCL, HMCL, and Axolotl). Click 'More info' → 'Run anyway', and always verify the SHA-256 hash against SHA256SUMS.txt on our Download page or GitHub Releases. Automatic updates are cryptographically signed.",
+        a: "Lumi's Windows installer is not code-signed yet (like most community open-source launchers). Click 'More info' → 'Run anyway', and always verify the SHA-256 hash against SHA256SUMS.txt on our Download page or GitHub Releases. Automatic updates are cryptographically signed.",
       },
       {
         q: "Does Lumi collect telemetry or analytics?",
@@ -490,7 +490,7 @@ const EN: Dict = {
     smartScreenStep2: "2. Confirm the filename matches and click “Run anyway”.",
     smartScreenWhyTitle: "Why does this warning appear?",
     smartScreenWhyBody:
-      "Lumi does not currently carry a commercial Windows code-signing certificate — the same as PCL, HMCL, Axolotl, and many community open-source launchers. Downloading from this official site or GitHub Releases and verifying SHA-256 confirms the file is untouched by third parties. Installed builds still verify cryptographic signatures on every automatic update.",
+      "Lumi does not currently carry a commercial Windows code-signing certificate — the same as most community open-source launchers. Downloading from this official site or GitHub Releases and verifying SHA-256 confirms the file is untouched by third parties. Installed builds still verify cryptographic signatures on every automatic update.",
     smartScreenFalsePositive: "Hit an antivirus false positive? Let us know on GitHub Issues.",
     requirementsTitle: "System Requirements",
     requirements: [
@@ -802,7 +802,7 @@ const ZH: Dict = {
       },
       {
         q: "下载打开时 Windows 提示「已保护你的电脑」（SmartScreen）怎么办？",
-        a: "因为 Lumi 目前没有商业代码签名证书（和 PCL、HMCL、Axolotl 等社区启动器一样），首次运行可能触发 SmartScreen 提醒。请确保从本官网或 GitHub Releases 下载并核对 SHA-256 校验和，然后点击「更多信息 → 仍要运行」即可。安装版的自动更新包均带有密码学签名校验。",
+        a: "因为 Lumi 目前没有商业代码签名证书（和大多数社区开源启动器一样），首次运行可能触发 SmartScreen 提醒。请确保从本官网或 GitHub Releases 下载并核对 SHA-256 校验和，然后点击「更多信息 → 仍要运行」即可。安装版的自动更新包均带有密码学签名校验。",
       },
       {
         q: "Lumi 收不收集任何数据？",
@@ -864,7 +864,7 @@ const ZH: Dict = {
     smartScreenStep2: "2. 确认文件名一致后，点击右下角出现的「仍要运行」。",
     smartScreenWhyTitle: "为什么会弹出这个提醒？",
     smartScreenWhyBody:
-      "Lumi 目前没有购买商业 Windows 代码签名证书，这和 PCL、HMCL、Axolotl 等大多数社区开源启动器是一样的。只要从本官网或 GitHub Releases 下载并核对 SHA-256 一致，文件就与公开构建流水线产出的逐字节相同，可以放心使用；安装版的自动更新包另有独立签名校验。",
+      "Lumi 目前没有购买商业 Windows 代码签名证书，这和大多数社区开源启动器是一样的。只要从本官网或 GitHub Releases 下载并核对 SHA-256 一致，文件就与公开构建流水线产出的逐字节相同，可以放心使用；安装版的自动更新包另有独立签名校验。",
     smartScreenFalsePositive: "如果遇到杀毒软件误报，欢迎到 GitHub Issues 告诉我们。",
     requirementsTitle: "系统要求",
     requirements: [
