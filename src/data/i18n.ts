@@ -361,7 +361,7 @@ const EN: Dict = {
       },
     ],
     migrationEyebrow: "Effortless Migration",
-    migrationTitle: "Bring your existing worlds without risking a single file",
+    migrationTitle: "Bring your existing worlds with you",
     migrationSubtitle:
       "Keep using what you already have. Lumi supports both read-only directory linking and clean one-click imports.",
     migrationLinkTitle: "Link in-place (Read-only)",
@@ -752,7 +752,7 @@ const ZH: Dict = {
       },
     ],
     migrationEyebrow: "搬家很简单",
-    migrationTitle: "无缝接上你原来的世界，不冒一点丢存档的风险",
+    migrationTitle: "直接接上你原来的游戏目录和世界",
     migrationSubtitle:
       "不用重下游戏，也不用担心弄乱旧启动器。Lumi 同时支持原地只读关联与干净导入。",
     migrationLinkTitle: "原地关联（只读，不搬文件）",
