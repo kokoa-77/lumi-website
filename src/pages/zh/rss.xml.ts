@@ -10,11 +10,13 @@ export function GET(context: APIContext) {
     title: "Lumi 微光启动器 · 更新日志",
     description: "Lumi Launcher（Windows Minecraft Java 版开源启动器）官方发布说明。",
     site,
+    // Links already carry their own slash; letting the library append one would land after the #anchor.
+    trailingSlash: false,
     items: releases.map((r) => ({
       title: r.name,
       pubDate: new Date(r.publishedAt),
       description: r.body.slice(0, 280),
-      link: `/zh/changelog#${r.anchor}`,
+      link: `/zh/changelog/#${r.anchor}`,
     })),
   });
 }

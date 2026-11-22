@@ -25,8 +25,8 @@ const { latest } = getReleases();
 const installerHref = primaryDownloadHref(latest.installer, latest.htmlUrl);
 const installerName = latest.installer?.name || "Lumi_0.6.0_x64-setup.exe";
 const langParam = isZh ? "zh-CN" : "en";
-const onboardingSrc = `/demo-app/index.html?lang=${langParam}&theme=light&onboarding=1`;
-const homeSrc = `/demo-app/index.html?lang=${langParam}&theme=light`;
+const onboardingSrc = `/demo-app/?lang=${langParam}&theme=light&onboarding=1`;
+const homeSrc = `/demo-app/?lang=${langParam}&theme=light`;
 const homeHref = localizedPath(locale, "/");
 ---
 

@@ -66,7 +66,7 @@ export const LINKS = {
   securityRepo: "https://github.com/kokoa-77/LumiLauncher/blob/main/SECURITY.md",
   discord: "https://discord.gg/vrAQ7HwUCw",
   qqGroup: "https://qm.qq.com/q/vSHOPvOKt2",
-  qqChannel: "https://pd.qq.com/s/N7vbhid6xg?b=9",
+  qqChannel: "https://pd.qq.com/s/Nr15r3slq",
   bilibili: "https://space.bilibili.com/25681030",
   afdian: "https://afdian.com/a/lumilauncher",
   microsoftConsent: "https://account.live.com/consent/Manage",
@@ -120,10 +120,13 @@ export function localePrefix(locale: Locale): string {
   return locale === "zh" ? "/zh" : "";
 }
 
+// Pages are built as folders (`/zh/demo/index.html`) and Cloudflare Pages answers `/zh/demo`
+// with a 308 to `/zh/demo/`, so every internal link and canonical URL ends with a slash.
 export function localizedPath(locale: Locale, subPath: string): string {
   const normalized = subPath.startsWith("/") ? subPath : `/${subPath}`;
+  const withSlash = normalized.endsWith("/") ? normalized : `${normalized}/`;
   if (locale === "zh") {
-    return normalized === "/" ? "/zh/" : `/zh${normalized}`;
+    return withSlash === "/" ? "/zh/" : `/zh${withSlash}`;
   }
-  return normalized;
+  return withSlash;
 }

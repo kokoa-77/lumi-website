@@ -7,7 +7,7 @@ const siteUrl = (process.env.SITE_URL || "https://lumilauncher.pages.dev").repla
 export default defineConfig({
   site: siteUrl,
   output: "static",
-  trailingSlash: "ignore",
+  trailingSlash: "always",
   vite: {
     plugins: [tailwindcss()],
   },

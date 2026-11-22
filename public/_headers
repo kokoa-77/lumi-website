@@ -4,8 +4,10 @@
   X-Frame-Options: SAMEORIGIN
   Permissions-Policy: camera=(), microphone=(), geolocation=(), interest-cohort=()
 
-/download/v*/*
-  Content-Disposition: attachment
+# Versioned files never change once published. One placeholder plus one splat: the old
+# `/download/v*/*` pattern (two splats) was silently ignored by Cloudflare Pages.
+# No Content-Disposition: .exe/.zip already download by type, and SHA256SUMS.txt stays readable inline.
+/download/:version/*
   Cache-Control: public, max-age=31536000, immutable
 
 /download/latest.json
