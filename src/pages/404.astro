@@ -19,9 +19,16 @@ import "../styles/global.css";
           if (saved === "dark" || saved === "light") {
             document.documentElement.dataset.theme = saved;
           }
+          const savedLang = localStorage.getItem("lumi-lang");
+          const langs =
+            navigator.languages && navigator.languages.length
+              ? navigator.languages
+              : [navigator.language || ""];
+          const prefersZh = langs.some((l) => String(l).toLowerCase().startsWith("zh"));
           const isZh =
             location.pathname.startsWith("/zh") ||
-            (navigator.language || "").toLowerCase().startsWith("zh");
+            savedLang === "zh" ||
+            (savedLang !== "en" && prefersZh);
           if (isZh) {
             document.documentElement.lang = "zh-CN";
             document.documentElement.dataset.lang404 = "zh";
@@ -96,6 +103,17 @@ import "../styles/global.css";
 
     <script is:inline>
       (() => {
+        const sw = document.getElementById("lumi-404-switch");
+        if (sw) {
+          sw.addEventListener("click", () => {
+            try {
+              localStorage.setItem(
+                "lumi-lang",
+                document.documentElement.dataset.lang404 === "zh" ? "en" : "zh",
+              );
+            } catch {}
+          });
+        }
         if (document.documentElement.dataset.lang404 !== "zh") return;
         const set = (id, text, href) => {
           const el = document.getElementById(id);
