@@ -199,11 +199,11 @@ const EN: Dict = {
   home: {
     metaTitle: "Lumi Launcher — Independent, Fast, Open-Source Minecraft: Java Edition Launcher",
     metaDesc:
-      "An independent, lightweight, zero-telemetry Minecraft: Java Edition launcher for Windows built with Tauri 2, Rust, and React 19.",
+      "An independent, lightweight, open-source Minecraft: Java Edition launcher for Windows with no telemetry, built with Tauri 2, Rust, and React 19.",
     heroBadge: "Windows 10 / 11 · Open Source (GPL-3.0)",
     heroHeadline: "Open the launcher.\nJump straight into your world.",
     heroSubtitle:
-      "An independent, lightweight Minecraft: Java Edition launcher for Windows. Built with Rust and Tauri 2 for instant startup, adaptive instance accents, crash-proof rollbacks, and zero telemetry.",
+      "An independent, lightweight Minecraft: Java Edition launcher for Windows, built on a self-developed Rust core and Tauri 2. It opens straight to your last world, changes its accent color with each instance, lets you undo mod changes in one click, and collects no telemetry.",
     ctaDownload: "Download for Windows",
     ctaGitHub: "Source on GitHub",
     heroNotePrereview:
@@ -214,17 +214,15 @@ const EN: Dict = {
       "Free & open source for Windows 10/11 (x64). Requires a legitimate Minecraft: Java Edition Microsoft account.",
     previewTitle: "Light up every world you play",
     previewSubtitle:
-      "Switch scenes below to feel Lumi's adaptive color system — the entire interface softly shifts hue to match your current world or modpack.",
+      "Pick a scene below and the page switches accent color along with the screenshot. In Lumi, the accent follows your current world or instance.",
     previewColorHint: "Adaptive accent hue active",
     showcases: [
       {
         id: "home-light",
         label: "Light World Home",
         labelDark: "Dark World Home",
-        caption:
-          "Opens straight into your latest world in crisp daylight mist — one click on Continue jumps you in.",
-        captionDark:
-          "Opens straight into your latest world in calm night-sky blue — one click on Continue jumps you in.",
+        caption: "Opens on the world you played last. Click Continue to jump straight in.",
+        captionDark: "The dark theme uses a night-sky palette. Click Continue to jump straight in.",
         hue: 245,
         lightL: "54.5%",
         lightC: 0.142,
@@ -235,10 +233,9 @@ const EN: Dict = {
         id: "instances",
         label: "Light Library",
         labelDark: "Dark Library",
-        caption:
-          "Clean isolated instances with pinned favorites, custom groups, and per-world adaptive accent colors.",
+        caption: "Each instance lives in its own folder, with pinning and custom groups.",
         captionDark:
-          "Isolated instance cards on a calm night canvas with pinned favorites and adaptive cherry-pink highlights.",
+          "The instance library in the dark theme, with pinned instances and groups on one page.",
         hue: 350,
         lightL: "58%",
         lightC: 0.148,
@@ -250,9 +247,9 @@ const EN: Dict = {
         label: "Instance Sync",
         labelDark: "Instance Sync",
         caption:
-          "Sync keybinds, video settings, server lists, resource packs, and shaders locally across instances — zero cloud.",
+          "Sync keybinds, video settings, server lists, resource packs and shaders between instances on your PC, with no cloud service.",
         captionDark:
-          "Sync keybinds, video settings, server lists, resource packs, and shaders locally across instances — zero cloud.",
+          "Sync keybinds, video settings, server lists, resource packs and shaders between instances on your PC, with no cloud service.",
         hue: 282,
         lightL: "54%",
         lightC: 0.15,
@@ -263,10 +260,8 @@ const EN: Dict = {
         id: "home-dark",
         label: "Night Glow",
         labelDark: "Sunset Glow",
-        caption:
-          "Deep starlit night canvas that softens glare during late-night builds while matching your world's warm glow.",
-        captionDark:
-          "Warm amber sunset accents glowing softly against Lumi's deep night-sky canvas for late-night builds.",
+        caption: "In the dark theme the accent follows the world cover; here it's a sunset gold.",
+        captionDark: "Dark theme with an accent taken from the sunset in the world cover.",
         hue: 52,
         lightL: "52%",
         lightC: 0.135,
@@ -274,16 +269,16 @@ const EN: Dict = {
         darkC: 0.132,
       },
     ],
-    featuresHeading: "Designed for fewer clicks and zero anxiety",
+    featuresHeading: "Designed to get you into the game faster",
     featuresSubheading:
-      "Every detail exists to get you into your world faster, keep your saves intact, and stay completely out of your way.",
+      "Every feature is weighed against one question: does it get you into the game faster, or slower?",
     features: [
       {
         id: "direct-world",
         eyebrow: "01 · Straight to Your World",
         title: "One click from desktop to spawn",
         description:
-          "Lumi opens directly to an uncluttered full-window canvas of the world or multiplayer server you played last. Auto-captured world covers strip out the crosshair and hotbar, and Quick Play launches you straight in.",
+          "Lumi opens on the world or multiplayer server you played last. World covers are captured from the game automatically with the crosshair and hotbar removed, and Quick Play takes you straight in.",
         bullets: [
           "Single-click Quick Play for worlds and favorite multiplayer servers (with live player count & ping)",
           "Keep up to 5 recent auto-captured covers per world and pin your favorite shot",
@@ -294,27 +289,27 @@ const EN: Dict = {
       {
         id: "adaptive-aesthetics",
         eyebrow: "02 · Adaptive Glow & Original Art",
-        title: "A launcher that breathes with your worlds",
+        title: "Every world gets its own accent color",
         description:
-          "Every world paints Lumi with its own balanced OKLCH accent palette. Pair daylight sky glow or deep night-sky dark mode with native Windows 11 Mica translucency, custom pure-2D adaptive vector visuals, and a Lite mode for older hardware.",
+          "Lumi derives an accent color for each world and modpack from the OKLCH color model while keeping text readable. It supports light and dark themes, the Windows 11 Mica backdrop, original 2D vector illustrations, and a Lite mode for older PCs.",
         bullets: [
-          "Smooth CSS accent transitions tailored to each world's dominant palette",
-          "Native Windows 11 Mica backdrop plus crisp solid mode and Lite mode",
-          "Hand-crafted pure-2D adaptive vector visuals and subtle optional Web Audio feedback",
+          "The accent color transitions smoothly when you switch instances",
+          "Windows 11 Mica backdrop, a solid background, or Lite mode",
+          "Original 2D vector illustrations and optional interface sounds (off by default)",
         ],
         imageKey: "instances",
         artKey: "appearance",
       },
       {
         id: "never-break",
-        eyebrow: "03 · Built Not to Break",
-        title: "Install mods boldly. Undo mistakes in one click.",
+        eyebrow: "03 · Undo Any Mod Change",
+        title: "Roll back a broken modpack in one click",
         description:
-          "Adding or updating mods should never ruin a 200-hour world. Lumi runs a fast local preflight check before launching, snapshots every content change for instant rollback, and backs up your worlds automatically.",
+          "Lumi checks your mods locally before launch, takes a snapshot every time content changes so you can roll back in one click, and backs up your worlds automatically.",
         bullets: [
-          "Local preflight catches missing dependencies, duplicate mod IDs, wrong loaders, and incompatible Java before launch",
+          "Before launch, Lumi checks for missing dependencies, duplicate mod IDs, wrong loaders and incompatible Java",
           "Full change history with one-click undo, version locking, and mod version switching",
-          "Automatic world backups with custom backup directory support and safe migration",
+          "Automatic world backups, with a backup folder you can move to another drive",
         ],
         imageKey: "detail",
         artKey: "rollback",
@@ -327,7 +322,7 @@ const EN: Dict = {
           "Search, install, and update mods, modpacks (.mrpack & CurseForge), shaders, resource packs, worlds, and servers side by side with automatic dependency resolution.",
         bullets: [
           "Unified discovery across Modrinth and CurseForge with automatic dependency preview",
-          "CurseForge restricted files open on the official creator page and match by SHA-256 — never bypassing creator distribution rules",
+          "Files whose authors block third-party downloads open on the official CurseForge page and are matched by SHA-256 once downloaded, respecting the author's settings",
           "Drag-and-drop local .jar, .zip, or .mrpack files straight into the window",
         ],
         imageKey: "discover",
@@ -337,61 +332,61 @@ const EN: Dict = {
         eyebrow: "05 · Local Cross-Instance Sync",
         title: "Set your keybinds once. Keep them everywhere.",
         description:
-          "Stop reconfiguring FOV, sprint key, sound volume, and server addresses every time you start a new modpack. Lumi syncs 6 asset types strictly on your own disk — zero cloud servers, zero data leaving your PC.",
+          "No more resetting FOV, sprint key, volume and server addresses every time you start a new modpack. Lumi syncs 6 kinds of content between instances on your own PC, with no cloud service involved.",
         bullets: [
           "Visual 9-category options.txt editor with direct keyboard/mouse capture",
-          "Lossless NBT server list merging plus hard-linked shared resource packs & shaders",
+          "Server lists are merged and de-duplicated in NBT format; shared resource packs and shaders use hard links on the same drive",
           "Sync command history & creative hotbars with automatic first-time backup and per-instance exclusions",
         ],
         imageKey: "sync",
       },
       {
         id: "fast-clean",
-        eyebrow: "06 · Native Rust Core & Zero Telemetry",
-        title: "Self-developed Rust engine, strictly local-first",
+        eyebrow: "06 · Self-Developed Rust Core",
+        title: "Official sources first, mirrors optional",
         description:
-          "Built from scratch in Rust with Tauri 2 — a compact native app with no ad banners, no tracking beacons, and no dependency on third-party metadata servers.",
+          "The core is written in Rust and built with Tauri 2. Downloads come from official sources by default, with optional BMCLAPI / MCIM community mirrors, and sign-in always goes straight to Microsoft and Mojang.",
         bullets: [
           "Concurrent resumable downloads with cryptographic hash verification and optional DoH / HTTP·SOCKS5 proxy",
-          "Auto-detects installed Java or downloads official runtimes with smart memory allocation guidance",
-          "Storage analyzer, unused version cleaner, and one-click preference export (credentials stripped)",
+          "Detects installed Java or downloads official runtimes, with memory allocation suggestions",
+          "Storage analysis, cleanup of unused game versions, and preference export without account data",
         ],
         imageKey: "architecture",
         artKey: "homeDay",
       },
     ],
-    migrationEyebrow: "Effortless Migration",
+    migrationEyebrow: "Migration",
     migrationTitle: "Bring your existing worlds with you",
     migrationSubtitle:
-      "Keep using what you already have. Lumi supports both read-only directory linking and clean one-click imports.",
-    migrationLinkTitle: "Link in-place (Read-only)",
+      "No need to download the game again: link your existing folder, or import a copy.",
+    migrationLinkTitle: "Link in place (no copying)",
     migrationLinkDesc:
-      "Attach existing .minecraft directories directly — zero copying, zero moving, and removing a link only removes Lumi's reference.",
+      "Link an existing .minecraft folder in Settings → Game and play from it. Nothing is copied, and removing the link only deletes Lumi's record.",
     migrationLinkList: ["Official Minecraft Launcher", "PCL / PCL2", "HMCL"],
     migrationImportTitle: "Import clean isolated copies",
     migrationImportDesc:
-      "Copy instances, mods, configs, and saves into Lumi's modern instances/<name>/ layout while leaving your old launcher untouched.",
+      "Copy instances, mods, configs and saves into Lumi's instances/<name>/ layout. Your old launcher keeps working as before.",
     migrationImportList: ["Prism Launcher / MultiMC", "Modrinth App", "CurseForge", "ATLauncher"],
     migrationGuarantee:
-      "Guarantee: Linking is strictly read-only. Lumi never deletes or alters files in your original launcher directories.",
+      "Linking copies nothing, and removing a link leaves your original files in place. Importing makes a separate copy, so both launchers keep working.",
     securityEyebrow: "Security & Architecture",
-    securityTitle: "Auditable open source down to the process pipe",
+    securityTitle: "Credentials kept separate, source fully open",
     securityItems: [
       {
         title: "Tauri 2 + Rust + React 19",
-        desc: "Strict typed IPC commands with zero direct filesystem or shell access exposed to the WebView frontend.",
+        desc: "The interface can't read files or run commands directly; every system action goes through typed Rust commands.",
       },
       {
         title: "Windows Credential Manager",
-        desc: "OAuth 2.0 PKCE refresh tokens are stored per account in the OS vault — never in plaintext JSON files.",
+        desc: "Microsoft refresh tokens are stored per account in Windows Credential Manager, not in plain config files.",
       },
       {
         title: "Java stdin Session Pipe",
-        desc: "Game arguments and session tokens pass once via standard input (com.lumilauncher.bootstrap.SessionPipe), so --accessToken never appears on process command lines.",
+        desc: "Game arguments and session tokens pass once via standard input (com.lumilauncher.bootstrap.SessionPipe), so --accessToken doesn't show up on the process command line.",
       },
       {
-        title: "Zero Telemetry & Auto-Redaction",
-        desc: "No analytics or crash beacons. Local logs and optional manual mclo.gs uploads scrub secrets to <redacted>.",
+        title: "No Telemetry, Redacted Logs",
+        desc: "No analytics or crash reporting. Secrets in local logs, and in logs you choose to upload to mclo.gs, are replaced with <redacted>.",
       },
     ],
     faqTitle: "Frequently Asked Questions",
@@ -407,23 +402,23 @@ const EN: Dict = {
       },
       {
         q: "Will Lumi modify or delete my existing .minecraft folder?",
-        a: "No. Linking an official, PCL, or HMCL .minecraft folder is strictly read-only, and importing from Prism, Modrinth App, CurseForge, or ATLauncher makes a separate copy. Uninstalling Lumi also keeps your game directory intact by default.",
+        a: "It won't delete or move anything. Linking an official, PCL or HMCL folder copies nothing, and removing the link only deletes Lumi's record. Importing from Prism, Modrinth App, CurseForge or ATLauncher makes a separate copy. Uninstalling Lumi keeps your game directory by default.",
       },
       {
         q: "Why does Windows show 'Windows protected your PC' (SmartScreen)?",
-        a: "Lumi's Windows installer is not code-signed yet (like most community open-source launchers). Click 'More info' → 'Run anyway', and always verify the SHA-256 hash against SHA256SUMS.txt on our Download page or GitHub Releases. Automatic updates are cryptographically signed.",
+        a: "Lumi's Windows installer is not code-signed yet (like most community open-source launchers). Click 'More info' → 'Run anyway', and verify the SHA-256 hash against SHA256SUMS.txt on our Download page or GitHub Releases. Automatic updates are cryptographically signed.",
       },
       {
         q: "Does Lumi collect telemetry or analytics?",
-        a: "No. Lumi has zero telemetry, zero ads, and no backend user database. Neither the launcher nor this website runs third-party ad or behavioral tracking scripts.",
+        a: "No. Lumi has no telemetry, no ads and no backend user database, and neither the launcher nor this website runs third-party ad or tracking scripts.",
       },
       {
         q: "Can I use Lumi alongside PCL, HMCL, or Prism Launcher?",
-        a: "Yes. Lumi uses its own isolated data folder (or a self-contained LumiData folder in Portable mode) and will not interfere with any other launcher installed on your PC.",
+        a: "Yes. Lumi uses its own isolated data folder (or a self-contained LumiData folder in Portable mode) so it doesn't affect other launchers on your PC.",
       },
       {
         q: "Is Lumi free and open source?",
-        a: "Yes — completely free, ad-free, and licensed under GPL-3.0-only with Section 7 brand protection terms so players can always distinguish authentic official builds.",
+        a: "Yes. It's free, has no ads, and is licensed under GPL-3.0-only, with Section 7 brand protection terms so modified builds can't pass themselves off as Lumi.",
       },
     ],
     communityTitle: "Join the Lumi Community",
@@ -449,7 +444,7 @@ const EN: Dict = {
       },
       {
         name: "Support on Afdian",
-        desc: "Voluntary community sponsorship — zero paywalled features",
+        desc: "Voluntary sponsorship that doesn't unlock any features",
         key: "afdian",
       },
     ],
@@ -463,7 +458,7 @@ const EN: Dict = {
     publishedLabel: "Published",
     prereviewNoticeTitle: "Current release is a Pre-review Build",
     prereviewNoticeBody:
-      "Microsoft sign-in is intentionally disabled in this pre-review build while Mojang reviews Lumi's AppID. You can still explore the interface, manage instances and saves, browse Modrinth/CurseForge, and inspect settings. Full playable builds will release as soon as approval lands.",
+      "Microsoft sign-in is intentionally disabled in this pre-review build while Mojang reviews Lumi's AppID. You can still explore the interface, manage instances and saves, browse Modrinth/CurseForge, and inspect settings. A playable build will follow once approval lands.",
     installerTitle: "Windows Installer",
     installerBadge: "Recommended · Auto-updates",
     installerDesc:
@@ -490,7 +485,7 @@ const EN: Dict = {
     smartScreenStep2: "2. Confirm the filename matches and click “Run anyway”.",
     smartScreenWhyTitle: "Why does this warning appear?",
     smartScreenWhyBody:
-      "Lumi does not currently carry a commercial Windows code-signing certificate — the same as most community open-source launchers. Downloading from this official site or GitHub Releases and verifying SHA-256 confirms the file is untouched by third parties. Installed builds still verify cryptographic signatures on every automatic update.",
+      "Lumi does not currently carry a commercial Windows code-signing certificate — the same as most community open-source launchers. Downloading from this official site or GitHub Releases and verifying SHA-256 confirms the file is untouched by third parties. Installed builds also verify signatures on automatic updates.",
     smartScreenFalsePositive: "Hit an antivirus false positive? Let us know on GitHub Issues.",
     requirementsTitle: "System Requirements",
     requirements: [
@@ -520,10 +515,10 @@ const EN: Dict = {
   privacy: {
     metaTitle: "Privacy & Security — Lumi Launcher",
     metaDesc:
-      "Strict local-first privacy policy and security architecture for Lumi Launcher: zero telemetry, OAuth 2.0 PKCE, Windows Credential Manager, and stdin session pipe.",
+      "Privacy policy and security design of Lumi Launcher: no telemetry, OAuth 2.0 PKCE sign-in, Windows Credential Manager, and a stdin session pipe.",
     title: "Privacy & Security",
     subtitle:
-      "Strictly aligned with PRIVACY.md and SECURITY.md in the main repository. Zero telemetry, zero user database, zero ads.",
+      "Matches PRIVACY.md and SECURITY.md in the main repository: no telemetry, no user database, no ads.",
     sourceNote: "Canonical source documents in the public repository:",
     viewPrivacyMd: "PRIVACY.md on GitHub",
     viewSecurityMd: "SECURITY.md on GitHub",
@@ -537,7 +532,7 @@ const EN: Dict = {
       "Unlisted resource page for video creators, streamers, and reviewers. Feel free to use these screenshots and facts in reviews or showcases.",
     blurbTitle: "100-Word Introduction",
     blurbText:
-      "Lumi Launcher is an independent, free, open-source (GPL-3.0) Minecraft: Java Edition launcher for Windows built with Tauri 2, Rust, and React 19. Designed around 'open and play', Lumi launches straight into your latest world or server with adaptive instance colors, pure-2D vector visuals, local preflight checks, one-click mod rollback, unified Modrinth & CurseForge discovery (respecting creator distribution rules), and zero-cloud local cross-instance sync. It supports official Microsoft accounts only and collects zero telemetry.",
+      "Lumi Launcher is an independent, free, open-source (GPL-3.0) Minecraft: Java Edition launcher for Windows built with Tauri 2, Rust, and React 19. Designed around 'open and play', Lumi launches straight into your latest world or server with adaptive instance colors, original 2D vector illustrations, local preflight checks, one-click mod rollback, unified Modrinth & CurseForge discovery (respecting creator distribution rules), and local cross-instance sync with no cloud service. It supports official Microsoft accounts only and collects no telemetry.",
     factsTitle: "Quick Facts",
     facts: [
       { label: "Platform", value: "Windows 10 / 11 (x64)" },
@@ -547,12 +542,12 @@ const EN: Dict = {
       },
       { label: "Tech Stack", value: "Tauri 2 + self-developed Rust core + React 19 + TypeScript" },
       { label: "License", value: "GPL-3.0-only (with Section 7 brand protection & TRADEMARK.md)" },
-      { label: "Telemetry / Ads", value: "Zero telemetry, zero ads, strictly local-first" },
+      { label: "Telemetry / Ads", value: "No telemetry, no ads, local-first" },
       { label: "Source Repository", value: "github.com/kokoa-77/LumiLauncher" },
     ],
-    assetsTitle: "Full Video & GIF Press Archive",
+    assetsTitle: "Video & GIF Archive",
     assetsDesc:
-      "High-bitrate 60fps screen recordings (clean, no music/text) and looping GIFs are hosted on GitHub Releases to keep our website lightweight.",
+      "Clean 60fps screen recordings and GIFs will be published after Mojang approves Lumi's AppID. Until then, feel free to use the screenshots on this page.",
     assetsBtn: "Open GitHub Releases",
     brandTitle: "Brand Guidelines",
     brandDesc:
@@ -596,11 +591,11 @@ const ZH: Dict = {
   home: {
     metaTitle: "Lumi 微光启动器 — 独立、轻快、开源的 Windows Minecraft Java 版启动器",
     metaDesc:
-      "独立、轻快、零遥测的 Windows Minecraft Java 版开源启动器。基于 Tauri 2 + Rust 自研核心 + React 19，打开就有游戏可以点。",
+      "独立、轻快、不收集遥测的 Windows Minecraft Java 版开源启动器，基于 Tauri 2、自研 Rust 核心和 React 19。打开就有游戏可以点。",
     heroBadge: "Windows 10 / 11 · GPL-3.0 开源免费",
     heroHeadline: "点亮你的世界\n打开就有游戏可以点",
     heroSubtitle:
-      "一款独立、轻快、克制的 Windows Minecraft Java 版启动器。基于 Rust 与 Tauri 2 自研核心，瞬开直达你的世界、随实例自适应变色、改动一键回滚，且坚持零遥测。",
+      "一款独立、轻快的 Windows Minecraft Java 版启动器，核心用 Rust 自研、基于 Tauri 2 构建。打开就能进入上次的世界，界面随实例换色，模组改坏了能一键撤回，不收集遥测数据。",
     ctaDownload: "下载 Windows 版",
     ctaGitHub: "查看 GitHub 源码",
     heroNotePrereview:
@@ -611,16 +606,15 @@ const ZH: Dict = {
       "开源免费 · 适用于 Windows 10/11（64 位），需拥有 Minecraft Java 版的 Microsoft 正版账户。",
     previewTitle: "微光实机预览：一换世界，整套界面跟着变色",
     previewSubtitle:
-      "点击下方三个场景胶囊，亲自感受 Lumi 的自适应色板——页面微光与强调色会随当前世界或实例柔和切换。",
+      "点下面的场景，页面和截图会一起换成对应的主色。在 Lumi 里，主色会跟着当前的世界或实例变化。",
     previewColorHint: "当前正在实时驱动界面主色",
     showcases: [
       {
         id: "home-light",
         label: "浅色微光首页",
         labelDark: "深色世界首页",
-        caption:
-          "双击打开即见你上次游玩的浅色通透世界画布，点一下「继续」就能直接进入单人世界或常用多人服。",
-        captionDark: "深夜打开自动融入静谧夜空蓝世界画布，清晰柔和不刺眼，点一下「继续」直达世界。",
+        caption: "打开就是你上次玩的世界，点「继续」直接进入单人世界或常用的多人服务器。",
+        captionDark: "深色主题用夜空蓝配色，点「继续」直接进入世界。",
         hue: 245,
         lightL: "54.5%",
         lightC: 0.142,
@@ -632,8 +626,8 @@ const ZH: Dict = {
         label: "浅色实例库",
         labelDark: "深色实例库",
         caption:
-          "采用国际主流 instances/<实例名>/ 隔离目录，支持置顶、分组，也可在「设置 → 游戏」原地只读关联已有 PCL / HMCL 目录。",
-        captionDark: "夜空下的独立实例卡片库，置顶常用整合包与分组一览无余，柔雾粉强调色轻盈醒目。",
+          "每个实例单独放在 instances/<实例名>/ 目录里，支持置顶和分组；也可以在「设置 → 游戏」直接关联已有的 PCL / HMCL 目录。",
+        captionDark: "深色主题下的实例库，置顶和分组都在一页里。",
         hue: 350,
         lightL: "58%",
         lightC: 0.148,
@@ -645,8 +639,8 @@ const ZH: Dict = {
         label: "本机跨实例同步",
         labelDark: "本机跨实例同步",
         caption:
-          "纯本机同步游戏设置、多人服务器、通用资源包、光影、命令记录与快捷栏——零云端、零账号绑定。",
-        captionDark: "深色模式下同样清晰直观，纯本机同步 6 类游戏资产——零云端、零账号绑定。",
+          "在本机的多个实例之间同步游戏设置、多人服务器、资源包、光影、命令记录和快捷栏，不经过云端，也不需要账号。",
+        captionDark: "深色主题下的实例同步设置，6 类内容都只在本机同步。",
         hue: 282,
         lightL: "54%",
         lightC: 0.15,
@@ -657,8 +651,8 @@ const ZH: Dict = {
         id: "home-dark",
         label: "暗夜落日模式",
         labelDark: "暗夜落日模式",
-        caption: "深夜游玩自动切换静谧夜空深色画布，柔和不刺眼，同时随世界主色点亮温润落日金按钮。",
-        captionDark: "静谧夜空搭配温润落日金主色，熬夜盖房子也不刺眼。",
+        caption: "深色主题下，主色跟着世界封面变化，这张图里是落日的金色。",
+        captionDark: "深色主题，主色取自世界封面里落日的金色。",
         hue: 52,
         lightL: "52%",
         lightC: 0.135,
@@ -666,15 +660,15 @@ const ZH: Dict = {
         darkC: 0.132,
       },
     ],
-    featuresHeading: "把复杂留给底层，把轻快留给进游戏之前",
-    featuresSubheading: "每一项设计都围绕同一个问题取舍：它让你进世界更快、更安心，还是更折腾？",
+    featuresHeading: "围绕「更快进游戏」设计",
+    featuresSubheading: "每个功能先问一句：它让进游戏更快，还是更慢？",
     features: [
       {
         id: "direct-world",
         eyebrow: "01 · 直达你的世界与多人服",
         title: "从双击图标到站在世界里，点一下就够",
         description:
-          "打开 Lumi，映入眼帘的是你最近游玩的世界或常用服务器，而不是密密麻麻的按钮和广告。自动截取的游戏封面会智能去掉准星与快捷栏，点一下右下角微光按钮即可 Quick Play 直连。",
+          "打开 Lumi，首页就是你最近玩的世界或常用的服务器。封面从游戏截图自动生成，会去掉准星和快捷栏；点右下角的「继续」，用 Quick Play 直接进入。",
         bullets: [
           "支持单人世界与常用多人服一键直达，实时展示在线人数与延迟",
           "每个世界保留最近 5 张自动封面，可随时挑选并锁定你最喜欢的一张",
@@ -685,27 +679,27 @@ const ZH: Dict = {
       {
         id: "adaptive-aesthetics",
         eyebrow: "02 · 随实例变色与微光视觉",
-        title: "每个世界，都有属于自己的光线与配色",
+        title: "每个世界都有自己的主色",
         description:
-          "基于 OKLCH 对比度模型，Lumi 会为每个世界和整合包算出柔和耐看的专属主色。支持晴空白天与夜空深色、Windows 11 原生云母（Mica）质感、纯 2D 柔光矢量视觉，以及专为老电脑准备的流畅模式。",
+          "Lumi 按 OKLCH 色彩模型给每个世界和整合包算出主色，并保证文字的对比度。支持浅色和深色主题、Windows 11 云母（Mica）背景、原创 2D 矢量插画，以及给老电脑用的流畅模式。",
         bullets: [
-          "切换实例时整套界面强调色与光晕平滑过渡，细节克制不刺眼",
-          "原创纯 2D 柔光矢量视觉与可选轻柔 Web Audio 交互音效",
-          "精美模式做足质感，老电脑一键切流畅模式保持顺滑",
+          "切换实例时，界面主色平滑过渡",
+          "原创 2D 矢量插画，以及可选的界面音效（默认关闭）",
+          "「精美」模式效果完整，老电脑可以切到「流畅」模式",
         ],
         imageKey: "instances",
         artKey: "appearance",
       },
       {
         id: "never-break",
-        eyebrow: "03 · 永不玩坏",
-        title: "放心折腾模组，装坏了也能一键回到上一步",
+        eyebrow: "03 · 改坏了能撤回",
+        title: "模组装坏了，一键回到上一步",
         description:
-          "进游戏前再也不用提心吊胆。Lumi 内置本地启动前预检、每次内容改动自动快照与一键回滚，并支持世界自动备份与自定义备份盘。",
+          "Lumi 在启动前先在本地检查一遍模组；每次改动内容都会自动记一份快照，可以一键回滚。世界存档支持自动备份，备份目录可以放在别的硬盘上。",
         bullets: [
-          "启动前本地预检：缺前置、重复 modId、错加载器、Java 版本不匹配都会在开游戏前拦下并给中文原因",
-          "完整改动历史支持一键撤销回滚，单个模组可锁定版本或自由升降级",
-          "支持世界自动备份与外置大硬盘备份目录安全迁移",
+          "启动前检查缺少前置、modId 重复、加载器不对和 Java 版本不匹配，发现问题会用中文说明原因",
+          "改动历史可以一键撤销，单个模组可以锁定版本，也可以换成别的版本",
+          "世界自动备份，备份目录可以迁移到别的硬盘",
         ],
         imageKey: "detail",
         artKey: "rollback",
@@ -713,12 +707,12 @@ const ZH: Dict = {
       {
         id: "discover",
         eyebrow: "04 · 内置 Modrinth & CurseForge",
-        title: "双平台一站搜装，同时尊重模组作者",
+        title: "两个平台一起搜、一起装，也尊重模组作者的设置",
         description:
-          "在同一界面流畅搜索、安装与更新模组、整合包（.mrpack / CurseForge）、光影、材质包、地图与服务器，自动预览并补齐前置依赖。",
+          "在同一个界面里搜索、安装和更新模组、整合包（.mrpack / CurseForge）、光影、材质包、地图和服务器，前置会自动列出并补齐。",
         bullets: [
           "Modrinth 与 CurseForge 统一检索，支持中英文名称匹配与依赖预览",
-          "遇到 CurseForge 作者禁止第三方下载的文件，引导前往官方页下载并按哈希自动认领，绝不绕过作者收益规则",
+          "作者不允许第三方下载的 CurseForge 文件，会引导你去官方页面下载，下载后按哈希自动认领，不绕过作者的设置",
           "支持直接把本地 .jar / .zip / .mrpack 拖进窗口安装",
         ],
         imageKey: "discover",
@@ -726,26 +720,26 @@ const ZH: Dict = {
       {
         id: "instance-sync",
         eyebrow: "05 · 纯本机跨实例同步",
-        title: "改一次键位和音量，所有实例都顺手",
+        title: "键位和音量改一次，所有实例都用上",
         description:
-          "每次换新整合包都要重新调疾跑键、视角、音效和重输服务器地址？Lumi 在你本机磁盘上无损同步 6 类高频资产——零云端上传、不绑账号，也不互相污染存档。",
+          "换新整合包时，不用再重新设疾跑键、视角和音量，也不用重新输服务器地址。Lumi 在本机的实例之间同步 6 类内容，不上传云端，也不需要账号，各实例的存档互不影响。",
         bullets: [
-          "内置 9 大分类原版 options.txt 可视化编辑器，支持键盘与鼠标按键直录",
-          "复用 NBT 引擎无损合并多人服务器列表，通用资源包与光影支持硬链接省空间",
-          "同步命令记录与创造模式物品栏，首次开启自动备份，并支持单实例按项排除",
+          "options.txt 分 9 类可视化编辑，按键可以直接按下录入",
+          "多人服务器列表按 NBT 格式合并去重；共享的资源包和光影在同一块硬盘上用硬链接，不额外占空间",
+          "也能同步命令记录和创造模式物品栏；第一次开启会先自动备份，单个实例可以按项排除",
         ],
         imageKey: "sync",
       },
       {
         id: "fast-clean",
-        eyebrow: "06 · 自研 Rust 引擎与零遥测",
-        title: "轻快透明，不依赖第三方元数据服务器",
+        eyebrow: "06 · 自研 Rust 核心",
+        title: "下载走官方源，镜像只是备选",
         description:
-          "底层核心完全用 Rust 自研并配合 Tauri 2 构建，直连官方源并可选 BMCLAPI / MCIM 社区加速镜像（账号认证始终直连微软与 Mojang 官方接口）。",
+          "核心用 Rust 自研，基于 Tauri 2 构建。下载默认走官方源，可以选用 BMCLAPI / MCIM 社区镜像加速；账号登录始终直连 Microsoft 和 Mojang 的官方接口。",
         bullets: [
           "并发断点续传、哈希校验、默认 DoH 解析，支持系统 / 直连 / HTTP·SOCKS5 代理与 6 端点一键网络诊断",
           "自动扫描电脑上的 Java 或一键安装 Mojang 官方 Java，附带内存分配建议",
-          "内置存储空间分析、引用感知的闲置游戏版本清理与偏好设置脱敏导入导出",
+          "存储空间分析、清理没有实例在用的游戏版本，以及导出 / 导入偏好设置（不含账号信息）",
         ],
         imageKey: "architecture",
         artKey: "homeDay",
@@ -753,36 +747,35 @@ const ZH: Dict = {
     ],
     migrationEyebrow: "搬家很简单",
     migrationTitle: "直接接上你原来的游戏目录和世界",
-    migrationSubtitle:
-      "不用重下游戏，也不用担心弄乱旧启动器。Lumi 同时支持原地只读关联与干净导入。",
-    migrationLinkTitle: "原地关联（只读，不搬文件）",
+    migrationSubtitle: "不用重新下载游戏：可以直接关联原来的目录，也可以复制一份导入。",
+    migrationLinkTitle: "原地关联（不复制文件）",
     migrationLinkDesc:
-      "在「设置 → 游戏」直接关联已有的 .minecraft 目录即可游玩；以后移除关联只删除 Lumi 里的记录，绝不动你原目录里的任何文件。",
+      "在「设置 → 游戏」关联已有的 .minecraft 目录就能直接玩，不复制文件；移除关联时只删 Lumi 里的记录，原目录里的文件不动。",
     migrationLinkList: ["Minecraft 官方启动器", "PCL / PCL2", "HMCL"],
     migrationImportTitle: "一键导入独立实例",
     migrationImportDesc:
-      "在「新建实例 → 从其他启动器导入」将其他主流启动器的实例、模组、配置与存档完整复制到 Lumi 的独立实例目录中，原启动器完全不受影响。",
+      "在「新建实例 → 从其他启动器导入」里，把其他启动器的实例、模组、配置和存档复制到 Lumi 的实例目录，原启动器那边照常能用。",
     migrationImportList: ["Prism Launcher / MultiMC", "Modrinth App", "CurseForge", "ATLauncher"],
     migrationGuarantee:
-      "承诺：原地关联为只读关联，绝不删改原目录里的文件；导入采用独立复制，双持零冲突。",
+      "关联不复制文件，移除关联时原目录的文件不动；导入是另外复制一份，两边互不影响。",
     securityEyebrow: "安全与技术底座",
-    securityTitle: "凭据隔离到进程管道，每一行代码都经得起审阅",
+    securityTitle: "登录凭据单独保管，源码全部公开",
     securityItems: [
       {
         title: "Tauri 2 + Rust + React 19",
-        desc: "前端零直接文件系统或命令行权限，所有系统操作均通过强类型 Rust 命令受控执行。",
+        desc: "界面不能直接读写文件或运行命令，所有系统操作都经过有类型约束的 Rust 命令。",
       },
       {
-        title: "Windows 凭据管理器隔离",
-        desc: "OAuth 2.0 PKCE 刷新令牌按账号保存在系统凭据库，绝不以明文 JSON 落地硬盘。",
+        title: "Windows 凭据管理器",
+        desc: "Microsoft 登录的刷新令牌按账号存进 Windows 凭据管理器，不写进普通的配置文件。",
       },
       {
-        title: "Java stdin 管道零命令行泄密",
-        desc: "所有游戏参数与会话令牌均经由标准输入管道一次性交付给 com.lumilauncher.bootstrap.SessionPipe，进程命令行中完全不含 --accessToken。",
+        title: "通过标准输入传递会话",
+        desc: "游戏参数和会话令牌通过标准输入一次性交给 com.lumilauncher.bootstrap.SessionPipe，进程命令行里看不到 --accessToken。",
       },
       {
-        title: "零遥测与全链路自动脱敏",
-        desc: "无任何统计上报；本地日志、诊断包与二次确认手动上传的 mclo.gs 均自动脱敏为 <redacted>。",
+        title: "不收集遥测，日志自动脱敏",
+        desc: "没有统计上报；本地日志、诊断包，以及确认后手动上传到 mclo.gs 的日志，敏感信息都会替换成 <redacted>。",
       },
     ],
     faqTitle: "常见问题",
@@ -798,23 +791,23 @@ const ZH: Dict = {
       },
       {
         q: "会不会动我原来的 .minecraft、PCL 或 HMCL 目录？",
-        a: "不会。在「设置 → 游戏」关联已有目录是只读关联，移除关联也只删除 Lumi 这边的索引，绝不删改原目录里的任何文件；从「新建实例 → 从其他启动器导入」导入 Prism / Modrinth App / CurseForge 则是独立复制。卸载 Lumi 默认也会保留你的游戏目录。",
+        a: "不会删或搬走里面的文件。在「设置 → 游戏」关联已有目录不会复制文件，移除关联也只删 Lumi 这边的记录；从「新建实例 → 从其他启动器导入」导入 Prism / Modrinth App / CurseForge 是另外复制一份。卸载 Lumi 默认也会保留你的游戏目录。",
       },
       {
         q: "下载打开时 Windows 提示「已保护你的电脑」（SmartScreen）怎么办？",
-        a: "因为 Lumi 目前没有商业代码签名证书（和大多数社区开源启动器一样），首次运行可能触发 SmartScreen 提醒。请确保从本官网或 GitHub Releases 下载并核对 SHA-256 校验和，然后点击「更多信息 → 仍要运行」即可。安装版的自动更新包均带有密码学签名校验。",
+        a: "因为 Lumi 目前没有商业代码签名证书（和大多数社区开源启动器一样），首次运行可能触发 SmartScreen 提醒。请确保从本官网或 GitHub Releases 下载并核对 SHA-256 校验和，然后点击「更多信息 → 仍要运行」即可。安装版的自动更新会先校验签名。",
       },
       {
         q: "Lumi 收不收集任何数据？",
-        a: "不收集。Lumi 零遥测、零广告、没有开发者后台数据库；本官网也不挂载任何第三方广告或跨站追踪脚本。",
+        a: "不收集。Lumi 没有遥测和广告，也没有开发者的后台数据库；这个官网也没有第三方广告和跨站追踪脚本。",
       },
       {
         q: "能和 PCL、HMCL 或 Prism 一起装在电脑上吗？",
-        a: "完全可以。Lumi 使用独立的应用数据目录（便携版更是全部收在旁边的 LumiData 文件夹内），与你电脑上的其他启动器互不干扰。",
+        a: "可以。Lumi 用自己的应用数据目录（便携版全部放在旁边的 LumiData 文件夹里），不影响电脑上的其他启动器。",
       },
       {
         q: "免费吗？开源吗？",
-        a: "完全免费、无广告，按 GPL-3.0-only 协议在 GitHub 公开全部源代码（附第 7 条品牌保护条款，防止冒名与夹带私货的改包）。",
+        a: "免费、无广告，按 GPL-3.0-only 协议在 GitHub 公开全部源代码，附带第 7 条品牌保护条款，防止有人冒用 Lumi 的名字发布改过的版本。",
       },
     ],
     communityTitle: "加入 Lumi 社区",
@@ -823,7 +816,7 @@ const ZH: Dict = {
       { name: "QQ 官方交流 1 群", desc: "国内玩家交流、问题反馈与内测通知", key: "qqGroup" },
       { name: "QQ 频道", desc: "版本发布公告与分区讨论", key: "qqChannel" },
       { name: "开发者 B 站", desc: "开发日志、实机演示与设计幕后", key: "bilibili" },
-      { name: "爱发电", desc: "纯自愿社区赞助，绝不设功能门槛或抢先版", key: "afdian" },
+      { name: "爱发电", desc: "自愿赞助，不会用来解锁功能或抢先版本", key: "afdian" },
       { name: "Discord", desc: "中英双语社区、求助论坛与作品展示", key: "discord" },
       { name: "GitHub Discussions", desc: "功能建议、问答与开源协作", key: "discussions" },
     ],
@@ -837,7 +830,7 @@ const ZH: Dict = {
     publishedLabel: "发布日期",
     prereviewNoticeTitle: "当前版本为 Mojang 审核预审构建",
     prereviewNoticeBody:
-      "在 Mojang 通过 Lumi 的 AppID 白名单审核前，本预审构建默认关闭 Microsoft 登录入口。你仍可以抢先体验界面、管理实例与存档、浏览 Modrinth / CurseForge 并检查设置；审核通过后将第一时间发布可正常登录游玩的正式测试版。",
+      "在 Mojang 通过 Lumi 的 AppID 白名单审核前，本预审构建默认关闭 Microsoft 登录入口。你仍可以体验界面、管理实例与存档、浏览 Modrinth / CurseForge 并检查设置；审核通过后会发布可以正常登录游玩的公开测试版。",
     installerTitle: "安装版（推荐）",
     installerBadge: "推荐 · 带签名自动更新",
     installerDesc:
@@ -864,7 +857,7 @@ const ZH: Dict = {
     smartScreenStep2: "2. 确认文件名一致后，点击右下角出现的「仍要运行」。",
     smartScreenWhyTitle: "为什么会弹出这个提醒？",
     smartScreenWhyBody:
-      "Lumi 目前没有购买商业 Windows 代码签名证书，这和大多数社区开源启动器是一样的。只要从本官网或 GitHub Releases 下载并核对 SHA-256 一致，文件就与公开构建流水线产出的逐字节相同，可以放心使用；安装版的自动更新包另有独立签名校验。",
+      "Lumi 目前没有购买商业 Windows 代码签名证书，这和大多数社区开源启动器是一样的。从本官网或 GitHub Releases 下载后核对 SHA-256，和校验清单一致就说明文件没有被第三方改动；安装版的自动更新另有签名校验。",
     smartScreenFalsePositive: "如果遇到杀毒软件误报，欢迎到 GitHub Issues 告诉我们。",
     requirementsTitle: "系统要求",
     requirements: [
@@ -892,10 +885,10 @@ const ZH: Dict = {
   privacy: {
     metaTitle: "隐私与安全 — Lumi 微光启动器",
     metaDesc:
-      "Lumi 微光启动器的隐私政策与安全架构说明：零遥测、OAuth 2.0 PKCE、Windows 凭据管理器与 Java stdin 管道隔离。",
+      "Lumi 微光启动器的隐私政策与安全设计说明：不收集遥测，使用 OAuth 2.0 PKCE 登录，凭据存在 Windows 凭据管理器，会话经 Java 标准输入传递。",
     title: "隐私与安全",
     subtitle:
-      "与主仓 PRIVACY.md、SECURITY.md 严格同源：零遥测、零用户后台、零广告，凭据隔离到系统凭据库与进程管道。",
+      "内容和主仓的 PRIVACY.md、SECURITY.md 一致：不收集遥测，没有用户后台，没有广告；登录凭据存在系统凭据库，通过进程管道交给游戏。",
     sourceNote: "对应主仓公开原文：",
     viewPrivacyMd: "查看主仓 PRIVACY.md",
     viewSecurityMd: "查看主仓 SECURITY.md",
@@ -908,20 +901,20 @@ const ZH: Dict = {
       "本页不进入主导航，供 B 站 UP 主、评测作者和社区创作者取用。评测、介绍或演示视频可直接使用 Lumi 名称、图标与实机截图，无需额外申请授权。",
     blurbTitle: "100 字标准简介（可直接复制）",
     blurbText:
-      "Lumi Launcher 是一款独立、免费、开源（GPL-3.0）的 Windows Minecraft Java 版启动器，基于 Tauri 2、自研 Rust 核心与 React 19 构建。围绕「打开就有游戏可以点」打磨：支持直达单人世界与多人服、随实例自适应变色、全套原创纯 2D 柔光矢量视觉、启动前本地预检与模组改动一键回滚、内置 Modrinth & CurseForge（尊重作者补件流程），以及零云端本机跨实例同步。仅支持正版 Microsoft 账户，零遥测、零广告。",
+      "Lumi Launcher 是一款独立、免费、开源（GPL-3.0）的 Windows Minecraft Java 版启动器，基于 Tauri 2、自研 Rust 核心与 React 19 构建。围绕「打开就有游戏可以点」打磨：支持直达单人世界与多人服、随实例自适应变色、原创 2D 矢量插画、启动前本地预检与模组改动一键回滚、内置 Modrinth & CurseForge（尊重作者补件流程），以及不经过云端的本机跨实例同步。仅支持正版 Microsoft 账户，不收集遥测，没有广告。",
     factsTitle: "核心参数速查",
     facts: [
       { label: "支持平台", value: "Windows 10 / 11（64 位）" },
       { label: "账号体系", value: "仅支持拥有 Minecraft Java 版的 Microsoft 正版账户" },
       { label: "技术底座", value: "Tauri 2 + 自研 Rust 核心 + React 19 + TypeScript" },
       { label: "开源许可", value: "GPL-3.0-only（附第 7 条品牌保护条款与 TRADEMARK.md）" },
-      { label: "遥测与广告", value: "零遥测、零广告、纯本机优先" },
+      { label: "遥测与广告", value: "不收集遥测、没有广告、本地优先" },
       { label: "开源仓库", value: "github.com/kokoa-77/LumiLauncher" },
     ],
-    assetsTitle: "完整 60fps 录屏与动图素材压缩包",
+    assetsTitle: "录屏与动图素材",
     assetsDesc:
-      "无配乐无字幕的 60 秒 1080p 60fps 实机录屏、5 张核心卖点动图与高清原图打包体积较大，单独托管在 GitHub Releases 供自由下载剪辑。",
-    assetsBtn: "前往 GitHub Releases 获取",
+      "无配乐、无字幕的 60fps 实机录屏和动图，会在 Mojang 批准 AppID 后发布；在那之前可以先用本页的截图。",
+    assetsBtn: "查看 GitHub Releases",
     brandTitle: "使用与声明提醒",
     brandDesc:
       "欢迎在视频、直播与文章中自由使用 Lumi 实机画面和官方图标；请勿暗示与 Mojang / Microsoft 存在官方合作关系，并在简介中保留非官方声明。",

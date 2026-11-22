@@ -119,24 +119,24 @@ const heroStats = isZh
         label: "原生安装包体积",
         sub: "Rust + Tauri 2 原生内核，启动迅速",
       },
-      { value: "0 遥测", label: "纯本机 · 零广告", sub: "不埋点、不弹窗、不上传用户习惯" },
+      { value: "0 遥测", label: "本地优先 · 无广告", sub: "不埋点、不弹窗、不上传用户习惯" },
       { value: "1 键直达", label: "Quick Play 进服", sub: "游戏启动后可自动释放界面内存" },
       {
-        value: "只读关联",
+        value: "直接关联",
         label: "兼容旧启动器目录",
-        sub: "关联 PCL2 / HMCL / 官方目录，不改动原文件",
+        sub: "关联 PCL2 / HMCL / 官方目录，不复制文件",
       },
     ]
   : [
       {
         value: installerSize || "9.8 MB",
         label: "Native Installer",
-        sub: "Rust + Tauri 2 instant cold start",
+        sub: "Rust + Tauri 2, quick to start",
       },
       {
         value: "0 Telemetry",
         label: "Local-First & Ad-Free",
-        sub: "Zero trackers, popups, or cloud lock-in",
+        sub: "No trackers, pop-ups or cloud accounts",
       },
       {
         value: "1-Click Play",
@@ -144,9 +144,9 @@ const heroStats = isZh
         sub: "Frees WebView memory while you play",
       },
       {
-        value: "Read-Only",
-        label: "Safe Migration",
-        sub: "Links PCL2 / HMCL / Official untouched",
+        value: "Direct Link",
+        label: "Existing Folders",
+        sub: "Link PCL2 / HMCL / official folders, no copying",
       },
     ];
 
@@ -172,7 +172,7 @@ const discoverPresets = isZh
         tab: "Sodium · 钠",
         badge: "Modrinth + CurseForge 双源去重",
         title: "Sodium 0.6.6 · 1.21.1 NeoForge",
-        detail: "Modrinth 2.55 亿+ 下载 · 自动锁定当前实例版本，无需手动翻页筛选 · 一键直装",
+        detail: "Modrinth 2.55 亿+ 下载 · 自动按当前实例的版本筛选 · 一键安装",
       },
       {
         id: "create",
@@ -186,7 +186,7 @@ const discoverPresets = isZh
         tab: "受限模组认领",
         badge: "尊重作者分发规则",
         title: "打开官方页 → 自动监听下载目录 → SHA-256 哈希自动认领",
-        detail: "绝不绕过 CurseForge 作者限制，下载完成后自动识别归位进当前实例",
+        detail: "不绕过 CurseForge 作者的限制，下载完成后自动识别并放进当前实例",
       },
     ]
   : [
@@ -211,7 +211,7 @@ const discoverPresets = isZh
         tab: "Creator-Safe Claim",
         badge: "Respecting Authors",
         title: "Official Page → Downloads Watch → SHA-256 Auto-Match",
-        detail: "Never bypasses CurseForge distribution flags — matches downloaded jars by hash",
+        detail: "Respects CurseForge distribution settings and matches downloaded jars by hash",
       },
     ];
 
@@ -222,7 +222,7 @@ const ecoRow1 = [
     hue: 155,
     tip: isZh
       ? "在 Lumi 发现页可直接一键安装并自动检测更新 Sodium"
-      : "1-click install & auto-update Sodium inside Lumi Discover",
+      : "1-click install and update checks for Sodium in Discover",
   },
   {
     name: "Iris Shaders",
@@ -237,16 +237,14 @@ const ecoRow1 = [
     tag: isZh ? "科技" : "Tech",
     hue: 52,
     tip: isZh
-      ? "安装时自动预览并补齐所需前置库，不漏文件"
+      ? "安装时自动列出并补齐所需的前置库"
       : "Preview and auto-install required dependencies together",
   },
   {
     name: "Jade",
     tag: "HUD",
     hue: 145,
-    tip: isZh
-      ? "双平台自动去重，不会搜出一堆重复条目"
-      : "Deduplicated across Modrinth and CurseForge",
+    tip: isZh ? "两个平台的同名条目会自动合并" : "Deduplicated across Modrinth and CurseForge",
   },
   {
     name: isZh ? "Waystones · 传送石碑" : "Waystones",
@@ -254,7 +252,7 @@ const ecoRow1 = [
     hue: 235,
     tip: isZh
       ? "支持中文名直接检索，自动映射英文官方项目"
-      : "Instant cross-platform search with version locking",
+      : "Search Modrinth and CurseForge together",
   },
   {
     name: "EMI / JEI",
@@ -262,7 +260,7 @@ const ecoRow1 = [
     hue: 280,
     tip: isZh
       ? "可在实例内容页随时一键开关、锁定版本或升降级"
-      : "Toggle, pin versions, or downgrade safely anytime",
+      : "Toggle, lock or switch versions anytime",
   },
   {
     name: "AppleSkin",
@@ -277,23 +275,23 @@ const ecoRow1 = [
     tag: isZh ? "联机" : "Social",
     hue: 210,
     tip: isZh
-      ? "搭配首页多人服直连，一键进服开麦畅玩"
-      : "Pairs with Home Quick Play for instant server joins",
+      ? "搭配首页的多人服直连，一键进服"
+      : "Pairs with Quick Play on the home page to join servers in one click",
   },
   {
     name: "Xaero's Minimap",
     tag: isZh ? "地图" : "Map",
     hue: 165,
     tip: isZh
-      ? "升级出问题？改动历史里点一下立刻退回上一版本"
-      : "Hit a bug after updating? One click reverts via Change History",
+      ? "升级后出问题，可以在改动历史里退回上一个版本"
+      : "If an update breaks something, roll back from Change History",
   },
   {
     name: "Distant Horizons",
     tag: "LOD",
     hue: 245,
     tip: isZh
-      ? "启动前自动预检 Java 21 与推荐内存，大型视距更稳"
+      ? "启动前检查 Java 21 和内存设置"
       : "Local preflight checks Java 21 & memory before launch",
   },
   {
@@ -301,16 +299,16 @@ const ecoRow1 = [
     tag: isZh ? "优化" : "Perf",
     hue: 35,
     tip: isZh
-      ? "支持按客户端 / 服务端环境筛选，找优化模组极快"
-      : "Filter cleanly by client/server environment & categories",
+      ? "可以按客户端 / 服务端环境筛选模组"
+      : "Filter by client/server environment and category",
   },
   {
     name: isZh ? "Farmer's Delight · 农夫乐事" : "Farmer's Delight",
     tag: isZh ? "农耕" : "Food",
     hue: 85,
     tip: isZh
-      ? "支持收藏夹跨实例复用，常装模组一秒找回"
-      : "Bookmark favorite mods and install across instances fast",
+      ? "收藏的模组可以在不同实例里直接安装"
+      : "Bookmark mods and install them into any instance",
   },
 ];
 
@@ -320,16 +318,16 @@ const ecoRow2 = [
     tag: isZh ? "加载器" : "Loader",
     hue: 68,
     tip: isZh
-      ? "新建实例自动拉取最新稳定版 Fabric，支持后续一键切换版本"
-      : "Auto-fetches latest Fabric with easy in-place upgrades",
+      ? "新建实例时自动选好最新的稳定版 Fabric"
+      : "Picks the latest stable Fabric when you create an instance",
   },
   {
     name: "NeoForge",
     tag: isZh ? "加载器" : "Loader",
     hue: 40,
     tip: isZh
-      ? "原生完整支持 NeoForge 1.20.4 – 1.21+ 安装与模组筛选"
-      : "First-class NeoForge support with automatic mod filtering",
+      ? "支持 NeoForge 1.20.4 – 1.21+ 的安装和模组筛选"
+      : "NeoForge install support with automatic mod filtering",
   },
   {
     name: "Forge",
@@ -343,17 +341,15 @@ const ecoRow2 = [
     name: "Quilt",
     tag: isZh ? "加载器" : "Loader",
     hue: 295,
-    tip: isZh
-      ? "原生识别 Quilt 加载器与兼容模组筛选"
-      : "Native Quilt loader provisioning and filtering",
+    tip: isZh ? "支持 Quilt 加载器和兼容模组筛选" : "Quilt loader install and mod filtering",
   },
   {
     name: "Complementary Unbound",
     tag: isZh ? "光影包" : "Shader",
     hue: 220,
     tip: isZh
-      ? "开启「通用光影同步」后，同盘硬链接共享到所有实例 0 额外占用"
-      : "Share across all instances via zero-copy local hard links",
+      ? "开启「通用光影同步」后，同一块硬盘上用硬链接共享到所有实例，不额外占空间"
+      : "Shared across instances with hard links on the same drive",
   },
   {
     name: "BSL Shaders",
@@ -361,15 +357,15 @@ const ecoRow2 = [
     hue: 55,
     tip: isZh
       ? "在发现页「光影包」分区直接检索安装，免手动找文件夹"
-      : "Install directly from Discover → Shaders with zero manual copying",
+      : "Install from Discover → Shaders without copying files by hand",
   },
   {
     name: "Solas Shaders",
     tag: isZh ? "光影包" : "Shader",
     hue: 265,
     tip: isZh
-      ? "搭配 Lumi 自动去 HUD 封面功能，把绝美风景定格在首页"
-      : "Pairs beautifully with Lumi's HUD-free auto world covers",
+      ? "搭配自动去掉 HUD 的世界封面，首页直接显示你的风景"
+      : "Pairs with Lumi's HUD-free automatic world covers",
   },
   {
     name: "Cobblemon",
@@ -384,7 +380,7 @@ const ecoRow2 = [
     tag: isZh ? "整合包" : "Modpack",
     hue: 278,
     tip: isZh
-      ? "大型整合包游玩时开启「释放界面到托盘」，省出宝贵内存"
+      ? "玩大型整合包时开启「释放界面到托盘」，可以省出内存"
       : "Release UI to tray during heavy modpacks to save RAM",
   },
   {
@@ -392,8 +388,8 @@ const ecoRow2 = [
     tag: isZh ? "整合包" : "Modpack",
     hue: 155,
     tip: isZh
-      ? "整合包更新自动走增量差异，绝不覆盖你的自定义按键与存档"
-      : "Clean updates without wiping your worlds or settings",
+      ? "每个整合包都装在独立的实例里，互不影响"
+      : "Each modpack gets its own isolated instance",
   },
   {
     name: ".mrpack",
@@ -408,7 +404,7 @@ const ecoRow2 = [
     tag: isZh ? "合规导入" : "Creator-Safe",
     hue: 38,
     tip: isZh
-      ? "严格遵守作者分发规则，受限文件自动按 SHA-256 哈希认领"
+      ? "遵守作者的分发设置，受限文件按 SHA-256 哈希自动认领"
       : "Creator-compliant CurseForge import with SHA-256 auto-claim",
   },
 ];
@@ -419,13 +415,13 @@ const ecoRow3 = isZh
         name: "Windows 11 原生云母 Mica",
         tag: "质感",
         hue: 245,
-        tip: "原生调用系统 DWM Mica 材质，同时提供纯净实色与流畅模式",
+        tip: "使用系统的 Mica 材质，也可以换成纯色背景或流畅模式",
       },
       {
         name: "老电脑一键流畅模式",
         tag: "轻快",
         hue: 155,
-        tip: "低配电脑自动识别并关闭高消耗动效，依然丝滑跟手",
+        tip: "低配电脑会自动关掉耗性能的动效",
       },
       {
         name: "Modrinth + CurseForge 双源合搜",
@@ -440,10 +436,10 @@ const ecoRow3 = isZh
         tip: "公开游戏文件可选镜像加速，正版登录始终直连微软官方",
       },
       {
-        name: "只读关联 PCL2 / HMCL / 官方",
+        name: "直接关联 PCL2 / HMCL / 官方",
         tag: "迁移",
         hue: 268,
-        tip: "在「设置 → 游戏」直接关联原目录，绝不改动或删除旧启动器文件",
+        tip: "在「设置 → 游戏」直接关联原来的目录，不复制文件，移除时原文件不动",
       },
       {
         name: "自动匹配 Java 8 / 17 / 21 / 25",
@@ -452,16 +448,16 @@ const ecoRow3 = isZh
         tip: "在「设置 → Java」自动检测本机 Java 或一键安装推荐版本（含新版所需的 Java 25）",
       },
       {
-        name: "全套纯 2D 柔光矢量视觉",
+        name: "原创 2D 矢量插画",
         tag: "美学",
         hue: 350,
-        tip: "全套手写纯 2D 柔光矢量图标与场景背景，随实例主色与昼夜实时融合",
+        tip: "原创的 2D 矢量图标和场景背景，跟着实例主色和深浅色变化",
       },
       {
-        name: "GPL-3.0 开源 · 零遥测",
+        name: "GPL-3.0 开源 · 不收集遥测",
         tag: "透明",
         hue: 165,
-        tip: "前后端全部代码公开可审计，不收集任何隐私或遥测数据",
+        tip: "全部源码公开，不收集遥测数据",
       },
     ]
   : [
@@ -469,7 +465,7 @@ const ecoRow3 = isZh
         name: "Native Windows 11 Mica",
         tag: "Craft",
         hue: 245,
-        tip: "Real DWM Mica translucency with solid & Lite modes included",
+        tip: "Uses the system Mica material, with solid and Lite modes as alternatives",
       },
       {
         name: "One-Click Lite Mode",
@@ -481,7 +477,7 @@ const ecoRow3 = isZh
         name: "Modrinth + CurseForge Unified",
         tag: "Discover",
         hue: 148,
-        tip: "One search spans both ecosystems with smart deduplication",
+        tip: "One search covers both platforms and merges duplicates",
       },
       {
         name: "Optional Mirror Acceleration",
@@ -490,42 +486,47 @@ const ecoRow3 = isZh
         tip: "Optional mirrors for public assets; auth always hits Microsoft directly",
       },
       {
-        name: "Read-Only Link PCL / HMCL / Official",
+        name: "Link PCL / HMCL / Official Folders",
         tag: "Migrate",
         hue: 268,
-        tip: "Play existing installations in-place with zero altered files",
+        tip: "Play existing installations in place without copying anything",
       },
       {
         name: "Auto Java 8 / 17 / 21 / 25 Matching",
-        tag: "Zero Setup",
+        tag: "Auto Setup",
         hue: 48,
         tip: "Detects local runtimes or installs the recommended Mojang Java (including Java 25) in Settings → Java",
       },
       {
-        name: "Pure-2D Adaptive Vector Visuals",
+        name: "Original 2D Vector Art",
         tag: "Design",
         hue: 350,
-        tip: "Hand-crafted pure-2D luminous vectors and scenes that adapt to every hue",
+        tip: "Original 2D vector icons and scenes that follow the accent color and theme",
       },
       {
-        name: "GPL-3.0 · Zero Telemetry",
+        name: "GPL-3.0 · No Telemetry",
         tag: "Trust",
         hue: 165,
-        tip: "100% open-source Rust & React codebase with zero tracking",
+        tip: "Fully open-source Rust & React code with no tracking",
       },
     ];
 
 const interactiveSyncItems = isZh
   ? [
-      { id: "options", label: "游戏设置 options.txt", detail: "9 大分类键位音量", on: true },
-      { id: "servers", label: "多人服务器列表", detail: "NBT 无损去重", on: true },
-      { id: "rp", label: "通用资源包", detail: "同盘硬链接 0 占用", on: true },
+      { id: "options", label: "游戏设置 options.txt", detail: "9 类键位和音量", on: true },
+      { id: "servers", label: "多人服务器列表", detail: "按 NBT 合并去重", on: true },
+      { id: "rp", label: "通用资源包", detail: "同盘硬链接，不额外占空间", on: true },
       { id: "shaders", label: "通用光影包", detail: "独立整合包可排除", on: false },
     ]
   : [
       { id: "options", label: "Game Settings (options.txt)", detail: "9 vanilla tabs", on: true },
       { id: "servers", label: "Multiplayer Servers", detail: "Lossless NBT merge", on: true },
-      { id: "rp", label: "Shared Resource Packs", detail: "Zero-copy hard links", on: true },
+      {
+        id: "rp",
+        label: "Shared Resource Packs",
+        detail: "Hard links on the same drive",
+        on: true,
+      },
       { id: "shaders", label: "Shared Shaders", detail: "Per-instance opt-out", on: false },
     ];
 ---
@@ -860,15 +861,15 @@ const interactiveSyncItems = isZh
             <span class="[html[data-theme='dark']_&]:hidden">
               {
                 isZh
-                  ? "点击上方「浅色微光首页 / 浅色实例库 / 本机跨实例同步 / 暗夜落日模式」标签，整站光晕与启动器画面同步变色"
-                  : "Click the Light World Home / Library / Instance Sync / Night Glow tabs above to shift page & UI palette together"
+                  ? "点击上方「浅色微光首页 / 浅色实例库 / 本机跨实例同步 / 暗夜落日模式」标签，页面和启动器截图会一起换颜色"
+                  : "Click the Light World Home / Library / Instance Sync / Night Glow tabs above to switch the page and screenshot colors together"
               }
             </span>
             <span class="hidden [html[data-theme='dark']_&]:inline">
               {
                 isZh
-                  ? "点击上方「深色世界首页 / 深色实例库 / 本机跨实例同步 / 暗夜落日模式」标签，整站光晕与启动器画面同步变色"
-                  : "Click the Dark World Home / Library / Instance Sync / Sunset Glow tabs above to shift page & UI palette together"
+                  ? "点击上方「深色世界首页 / 深色实例库 / 本机跨实例同步 / 暗夜落日模式」标签，页面和启动器截图会一起换颜色"
+                  : "Click the Dark World Home / Library / Instance Sync / Sunset Glow tabs above to switch the page and screenshot colors together"
               }
             </span>
           </span>
@@ -929,8 +930,8 @@ const interactiveSyncItems = isZh
       <p class="mt-4 text-balance text-sm leading-relaxed text-[var(--fg-muted)] sm:text-base">
         {
           isZh
-            ? "打开即见你最近游玩的世界或常用多人服务器，支持一键切服并实时探测在线人数与延迟；智能去 HUD 自动封面保留最近 5 张，随时锁定最满意的一张。"
-            : "Jump directly into your latest singleplayer world or favorite multiplayer server with live player counts and latency, plus HUD-free auto world covers."
+            ? "打开就是你最近玩的世界或常用的多人服务器，可以一键切换，并显示在线人数和延迟；自动封面会去掉 HUD，保留最近 5 张，可以锁定最喜欢的一张。"
+            : "Jump into your latest singleplayer world or favorite multiplayer server, with player counts and ping shown up front and HUD-free automatic world covers."
         }
       </p>
     </div>
@@ -991,12 +992,12 @@ const interactiveSyncItems = isZh
             {isZh ? "单人世界 + 多人服首页直达" : "Worlds & Multiplayer Quick Play"}
           </p>
           <p class="mt-1 text-xs text-[var(--fg-muted)]">
-            {isZh ? "实时探测服务器在线人数与延迟，省去层层菜单。" : "Live player counts and ping right on the home canvas."}
+            {isZh ? "首页直接显示服务器的在线人数和延迟。" : "Player counts and ping right on the home page."}
           </p>
         </div>
         <div class="rounded-2xl bg-[var(--surface-2)] px-4 py-3">
           <p class="font-bold text-[var(--fg)]">
-            {isZh ? "智能去 HUD 自动封面" : "HUD-Free Auto World Covers"}
+            {isZh ? "自动封面，去掉 HUD" : "HUD-Free Automatic Covers"}
           </p>
           <p class="mt-1 text-xs text-[var(--fg-muted)]">
             {isZh ? "保留最近 5 张自动封面，可随时锁定你最满意的一张。" : "Keeps 5 recent shots per world with one-click cover locking."}
@@ -1022,10 +1023,10 @@ const interactiveSyncItems = isZh
         <div class="flex items-start justify-between gap-4">
           <div>
             <p class="text-xs font-bold tracking-[0.14em] text-[var(--accent)] uppercase">
-              {isZh ? "02 · 永不玩坏" : "02 · BUILT NOT TO BREAK"}
+              {isZh ? "02 · 改坏了能撤回" : "02 · UNDO ANY MOD CHANGE"}
             </p>
             <h3 class="mt-2 text-2xl font-extrabold tracking-tight text-[var(--fg)] sm:text-3xl">
-              {isZh ? "大胆装模组，装坏了一键回滚" : "Mod fearlessly. Undo mistakes in one click."}
+              {isZh ? "装坏了模组，一键回滚" : "Broke a mod setup? Roll back in one click."}
             </h3>
           </div>
           <SpotArt kind="rollback" class="hidden h-16 w-16 shrink-0 sm:grid" />
@@ -1033,8 +1034,8 @@ const interactiveSyncItems = isZh
         <p class="mt-3 text-sm leading-relaxed text-[var(--fg-muted)]">
           {
             isZh
-              ? "启动前本地预检提前拦下缺前置、重复 modId、错加载器与 Java 冲突；每次改动自动留快照，点下方按钮亲自试一次「一键回滚」："
-              : "Fast local preflight catches missing dependencies and loader mismatches before launch. Try a live one-click snapshot rollback below:"
+              ? "启动前先在本地检查缺少前置、modId 重复、加载器不对和 Java 冲突；每次改动都会自动留一份快照。点下面的按钮试一下「一键回滚」："
+              : "A local check before launch catches missing dependencies and loader mismatches, and every change leaves a snapshot. Try a one-click rollback below:"
           }
         </p>
 
@@ -1112,7 +1113,7 @@ const interactiveSyncItems = isZh
               {isZh ? "03 · 双平台搜装" : "03 · UNIFIED DISCOVERY"}
             </p>
             <h3 class="mt-2 text-2xl font-extrabold tracking-tight text-[var(--fg)]">
-              {isZh ? "Modrinth & CurseForge 一站搜装，尊重作者" : "Browse both platforms, respecting creators"}
+              {isZh ? "Modrinth 和 CurseForge 一起搜、一起装" : "Search and install from both platforms"}
             </h3>
           </div>
           <SpotArt kind="empty-search" class="hidden h-14 w-14 shrink-0 sm:grid" />
@@ -1120,7 +1121,7 @@ const interactiveSyncItems = isZh
         <p class="mt-3 text-sm leading-relaxed text-[var(--fg-muted)]">
           {
             isZh
-              ? "统一检索并自动补齐前置；遇到 CurseForge 受限文件直达官方页按哈希自动认领，绝不绕过作者规则。点下面 3 个场景看看："
+              ? "统一搜索并自动补齐前置；CurseForge 上限制第三方下载的文件会打开官方页面，下载后按哈希认领，不绕过作者的设置。点下面 3 个场景看看："
               : "Unified discovery with dependency preview and SHA-256 hash matching for restricted CurseForge files. Click to preview:"
           }
         </p>
@@ -1198,16 +1199,16 @@ const interactiveSyncItems = isZh
     >
       <div>
         <p class="text-xs font-bold tracking-[0.14em] text-[var(--accent)] uppercase">
-          {isZh ? "04 · 硬核安全底座" : "04 · RUST & ZERO TELEMETRY"}
+          {isZh ? "04 · 账号与隐私" : "04 · ACCOUNT & PRIVACY"}
         </p>
         <h3 class="mt-2 text-2xl font-extrabold tracking-tight text-[var(--fg)]">
-          {isZh ? "凭据隔离到进程管道，全代码可审计" : "Auditable down to the process pipe"}
+          {isZh ? "登录凭据单独保管，源码全部公开" : "Credentials kept separate, source fully open"}
         </h3>
         <p class="mt-2.5 text-sm leading-relaxed text-[var(--fg-muted)]">
           {
             isZh
-              ? "自研 Rust 核心 + Tauri 2，零遥测零广告；可选国内镜像加速公开游戏文件，账号认证始终直连微软与 Mojang 官方。"
-              : "Self-developed Rust core with Tauri 2 — zero telemetry, zero ads, and direct official auth endpoints."
+              ? "自研 Rust 核心加 Tauri 2，没有遥测和广告；公开的游戏文件可以选国内镜像加速，账号登录始终直连 Microsoft 和 Mojang 官方。"
+              : "A self-developed Rust core on Tauri 2, with no telemetry or ads. Optional mirrors speed up public game files; sign-in always goes straight to Microsoft and Mojang."
           }
         </p>
       </div>
@@ -1216,7 +1217,7 @@ const interactiveSyncItems = isZh
       <div class="rounded-2xl border border-[var(--line)] bg-[var(--surface-2)] p-3.5 text-xs">
         <div class="flex flex-wrap items-center justify-between gap-2">
           <span class="font-bold text-[var(--fg)]">
-            {isZh ? "Lumi 启动隔离实景" : "Lumi Launch Isolation"}
+            {isZh ? "Lumi 启动游戏时的进程示意" : "How Lumi launches the game"}
           </span>
           <button
             type="button"
@@ -1226,7 +1227,7 @@ const interactiveSyncItems = isZh
             data-label-pipe={isZh ? "返回进程命令行视角" : "Back to process argv"}
             data-cmd-proc="javaw.exe -Xmx4G -cp %TEMP%\\lumi-game-xxxx;<cp> com.lumilauncher.bootstrap.SessionPipe"
             data-cmd-pipe="stdin pipe → [mainClass, ...gameArgs] → shutdown() // one-shot handoff"
-            data-log-proc={isZh ? "[进程列表视角] 命令行中完全不含 --accessToken 或任何游戏参数" : "[Task Manager / argv] Zero --accessToken or game arguments exposed"}
+            data-log-proc={isZh ? "[进程列表] 命令行里没有 --accessToken，也没有游戏参数" : "[Task Manager / argv] No --accessToken or game arguments on the command line"}
             data-log-pipe={isZh ? "[本地日志脱敏] User: <redacted> · Bearer: <redacted> · Token: <redacted>" : "[Local log redaction] User: <redacted> · Bearer: <redacted> · Token: <redacted>"}
             class="lumi-pill cursor-pointer bg-[var(--accent)] px-2.5 py-1 text-[11px] font-semibold text-[var(--on-accent)] hover:opacity-90"
           >
@@ -1242,8 +1243,8 @@ const interactiveSyncItems = isZh
         <p id="lumi-redact-log" class="mt-2 font-mono text-[10.5px] leading-relaxed text-[var(--fg-muted)]">
           {
             isZh
-              ? "[进程列表视角] 命令行中完全不含 --accessToken 或任何游戏参数"
-              : "[Task Manager / argv] Zero --accessToken or game arguments exposed"
+              ? "[进程列表] 命令行里没有 --accessToken，也没有游戏参数"
+              : "[Task Manager / argv] No --accessToken or game arguments on the command line"
           }
         </p>
       </div>
@@ -1251,32 +1252,32 @@ const interactiveSyncItems = isZh
       <div class="grid flex-1 content-between gap-2.5 text-xs">
         <div class="rounded-2xl bg-[var(--surface-2)] p-3.5">
           <p class="font-bold text-[var(--fg)]">
-            {isZh ? "Windows 凭据管理器隔离" : "Windows Credential Manager"}
+            {isZh ? "Windows 凭据管理器" : "Windows Credential Manager"}
           </p>
           <p class="mt-1 leading-relaxed text-[var(--fg-muted)]">
-            {isZh ? "OAuth 2.0 PKCE 刷新令牌按账号存入系统凭据库，绝不明文落地 JSON。" : "Per-account OAuth 2.0 PKCE refresh tokens stored in OS vault, never plaintext JSON."}
+            {isZh ? "OAuth 2.0 PKCE 刷新令牌按账号存进系统凭据库，不写进普通文件。" : "Per-account OAuth 2.0 PKCE refresh tokens live in the OS credential vault, not in plain files."}
           </p>
         </div>
         <div class="rounded-2xl bg-[var(--surface-2)] p-3.5">
           <p class="font-bold text-[var(--fg)]">
-            {isZh ? "Java stdin 管道零命令行泄密" : "Java stdin Session Pipe"}
+            {isZh ? "通过标准输入传递会话" : "Java stdin Session Pipe"}
           </p>
           <p class="mt-1 leading-relaxed text-[var(--fg-muted)]">
             {
               isZh
-                ? "所有游戏参数与会话令牌经一次性标准输入管道交给 SessionPipe 引导类，交付完毕立即关闭管道。"
+                ? "游戏参数和会话令牌通过标准输入一次性交给 SessionPipe 引导类，交付后立即关闭管道。"
                 : "Game arguments and session tokens stream once over stdin to SessionPipe and close immediately after handoff."
             }
           </p>
         </div>
         <div class="rounded-2xl bg-[var(--surface-2)] p-3.5">
           <p class="font-bold text-[var(--fg)]">
-            {isZh ? "全链路自动脱敏 + 签名自动更新" : "Auto-Redaction & Signed Updates"}
+            {isZh ? "日志脱敏，更新验签" : "Redacted Logs & Signed Updates"}
           </p>
           <p class="mt-1 leading-relaxed text-[var(--fg-muted)]">
             {
               isZh
-                ? "本地日志与二次确认上传的 mclo.gs 自动脱敏为 <redacted>；前端零直接文件系统权限，更新包强制密码学验签。"
+                ? "本地日志和确认后上传到 mclo.gs 的日志会自动脱敏为 <redacted>；界面不能直接读写文件，更新包安装前会校验签名。"
                 : "Logs and opt-in mclo.gs shares auto-redact secrets; updates verify cryptographic signatures before install."
             }
           </p>
@@ -1284,7 +1285,7 @@ const interactiveSyncItems = isZh
         <div class="flex flex-wrap gap-1.5 pt-0.5 text-[11px] font-medium text-[var(--fg-muted)]">
           <span class="lumi-pill bg-[var(--surface-2)] px-2.5 py-1">Tauri 2 + Rust</span>
           <span class="lumi-pill bg-[var(--surface-2)] px-2.5 py-1">
-            {isZh ? "0 前端文件权限" : "0 Frontend FS Access"}
+            {isZh ? "界面无文件权限" : "No UI File Access"}
           </span>
           <span class="lumi-pill bg-[var(--surface-2)] px-2.5 py-1">
             {isZh ? "6 端点网络诊断" : "6-Endpoint Net Check"}
@@ -1306,21 +1307,21 @@ const interactiveSyncItems = isZh
           </p>
           <span
             id="lumi-sync-counter"
-            data-tpl-zh="已选 {n}/4 项 · 纯本机 0 KB 上传云端"
-            data-tpl-en="{n}/4 enabled · 0 KB sent to cloud"
+            data-tpl-zh="已选 {n}/4 项 · 只在本机同步"
+            data-tpl-en="{n}/4 enabled · synced on this PC only"
             class="lumi-tabular lumi-pill bg-[var(--accent-soft)] px-3 py-0.5 text-[11px] font-semibold text-[var(--accent)]"
           >
-            {isZh ? "已选 3/4 项 · 纯本机 0 KB 上传云端" : "3/4 enabled · 0 KB sent to cloud"}
+            {isZh ? "已选 3/4 项 · 只在本机同步" : "3/4 enabled · synced on this PC only"}
           </span>
         </div>
         <h3 class="mt-2 text-2xl font-extrabold tracking-tight text-[var(--fg)] sm:text-3xl">
-          {isZh ? "改一次键位和音量，所有实例都顺手" : "Configure once. Stay comfortable everywhere."}
+          {isZh ? "键位和音量改一次，所有实例都用上" : "Configure once. Stay comfortable everywhere."}
         </h3>
         <p class="mt-3 text-sm leading-relaxed text-[var(--fg-muted)]">
           {
             isZh
-              ? "纯本机磁盘无损合并，零云端、不绑账号；支持按项自由拨动开关，也可给独立整合包单独排除："
-              : "100% local lossless merging with zero cloud servers. Toggle each category freely below — individual modpacks can always opt out:"
+              ? "只在本机合并，不经过云端，也不需要账号；每一类都能单独开关，某个整合包也可以单独排除："
+              : "Merged locally on your PC, with no cloud service or account. Toggle each category below; any modpack can opt out:"
           }
         </p>
 
@@ -1380,17 +1381,17 @@ const interactiveSyncItems = isZh
     <div class="flex flex-col justify-between gap-4 md:flex-row md:items-end">
       <div>
         <p class="text-xs font-bold tracking-[0.16em] text-[var(--accent)] uppercase">
-          {isZh ? "06 · 生态全兼容" : "06 · FULL ECOSYSTEM"}
+          {isZh ? "06 · 加载器与整合包" : "06 · LOADERS & MODPACKS"}
         </p>
         <h2 class="mt-2 text-3xl font-black tracking-[-0.03em] text-[var(--fg)] sm:text-4xl">
-          {isZh ? "从纯净原版到大型整合包，开箱即顺手" : "From vanilla worlds to massive modpacks"}
+          {isZh ? "从原版到大型整合包都能装" : "From vanilla worlds to large modpacks"}
         </h2>
       </div>
       <p class="max-w-md text-sm leading-relaxed text-[var(--fg-muted)]">
         {
           isZh
-            ? "原生支持 Fabric、NeoForge、Forge、Quilt 与 .mrpack，悬停可暂停、点击任意胶囊可查看 Lumi 的专属支持细节。"
-            : "Native Fabric, NeoForge, Forge, Quilt, and .mrpack support — hover to pause or click any pill to see how Lumi handles it."
+            ? "支持 Fabric、NeoForge、Forge、Quilt 和 .mrpack。鼠标停上去会暂停滚动，点任意胶囊可以看 Lumi 对它的支持。"
+            : "Fabric, NeoForge, Forge, Quilt and .mrpack are supported. Hover to pause, or click any pill to see how Lumi handles it."
         }
       </p>
     </div>
@@ -1525,10 +1526,10 @@ const interactiveSyncItems = isZh
         </div>
       </div>
       <p class="mt-4 max-w-[220px] text-center text-xs font-semibold leading-relaxed text-[var(--fg)]">
-        {isZh ? "只读关联 · 绝不删改原目录" : "Read-only link · Zero altered files"}
+        {isZh ? "直接关联 · 不复制文件" : "Direct link · Nothing copied"}
       </p>
       <p class="mt-1 text-center text-[11px] text-[var(--fg-muted)]">
-        {isZh ? "支持与旧启动器长期双持共存" : "Runs cleanly side by side"}
+        {isZh ? "可以和旧启动器一直同时使用" : "Keep using both launchers"}
       </p>
     </div>
 
@@ -1807,11 +1808,11 @@ const interactiveSyncItems = isZh
           {
             isZh ? (
               <>
-                关于 Lumi，
-                <span class="inline-block">你需要了解的一切</span>
+                关于 Lumi
+                <span class="inline-block">的几个常见问题</span>
               </>
             ) : (
-              "Everything you should know about Lumi"
+              "Common questions about Lumi"
             )
           }
         </h2>
@@ -1946,7 +1947,7 @@ const interactiveSyncItems = isZh
             {isZh ? "QQ 频道" : "QQ Channel"}
           </h3>
           <p class="mt-1.5 text-xs leading-relaxed text-[var(--fg-muted)]">
-            {isZh ? "第一时间获取版本公告、长期问答帖与精选活动。" : "Release announcements, pinned guides, and topic threads."}
+            {isZh ? "版本公告、置顶问答和话题讨论。" : "Release announcements, pinned guides, and topic threads."}
           </p>
         </div>
         <div class="mt-5">
