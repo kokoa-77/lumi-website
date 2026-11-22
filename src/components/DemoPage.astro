@@ -31,7 +31,7 @@ const homeHref = localizedPath(locale, "/");
 ---
 
 <section class="mx-auto max-w-7xl px-3 pb-10 pt-6 sm:px-6">
-  <!-- Sleek demo control ribbon -->
+  {/* 试玩控制条 */}
   <div
     class="lumi-glass mb-4 flex flex-wrap items-center justify-between gap-3 rounded-2xl px-4 py-3 text-xs sm:text-sm"
   >
@@ -82,7 +82,7 @@ const homeHref = localizedPath(locale, "/");
     </div>
   </div>
 
-  <!-- Desktop live interactive iframe frame (src assigned via JS only on >=768px to guarantee 0 KB mobile transfer) -->
+  {/* 桌面端试玩框：宽度不小于 768 像素时才由脚本设置 src，手机上不加载试玩包 */}
   <div class="hidden md:block">
     <div class="lumi-window-frame relative overflow-hidden rounded-3xl">
       <iframe
@@ -101,7 +101,7 @@ const homeHref = localizedPath(locale, "/");
     </p>
   </div>
 
-  <!-- Mobile graceful preview (saves 100% demo bundle bandwidth) -->
+  {/* 手机端只显示截图，不加载试玩包 */}
   <div class="space-y-5 md:hidden">
     <div class="lumi-panel p-5 text-center">
       <p class="text-sm font-bold text-[var(--fg)]">

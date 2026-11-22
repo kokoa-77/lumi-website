@@ -3,7 +3,7 @@ import path from "node:path";
 import zlib from "node:zlib";
 
 const DIST = path.join(process.cwd(), "dist");
-const MAX_HOME_JS_GZIP_BYTES = 30 * 1024; // 30 KiB budget from plan section 2.3
+const MAX_HOME_JS_GZIP_BYTES = 30 * 1024; // 首页 JS 预算 30 KiB（gzip 后）
 const FORBIDDEN_EXTERNAL_PATTERNS = [
   /fonts\.googleapis\.com/i,
   /fonts\.gstatic\.com/i,
@@ -40,7 +40,7 @@ function checkPageJsBudget(relHtml) {
   const htmlPath = path.join(DIST, relHtml);
   const html = fs.readFileSync(htmlPath, "utf8");
 
-  // External CDN / font / tracker scan
+  // 检查有没有外部 CDN、字体或统计脚本
   for (const re of FORBIDDEN_EXTERNAL_PATTERNS) {
     if (re.test(html)) {
       throw new Error(`Forbidden external reference ${re} found in ${relHtml}`);
@@ -49,7 +49,7 @@ function checkPageJsBudget(relHtml) {
 
   let totalGzip = 0;
 
-  // Count inline <script> blocks
+  // 统计内联 <script>
   const inlineMatches = html.matchAll(/<script\b(?![^>]*\bsrc=)[^>]*>([\s\S]*?)<\/script>/gi);
   for (const m of inlineMatches) {
     if (m[1]?.trim()) {
@@ -57,7 +57,7 @@ function checkPageJsBudget(relHtml) {
     }
   }
 
-  // Count referenced external local <script src="/...">
+  // 统计引用的本站 <script src="/...">
   const srcMatches = html.matchAll(/<script\b[^>]*\bsrc=["']([^"']+)["'][^>]*>/gi);
   const seen = new Set();
   for (const m of srcMatches) {

@@ -1,4 +1,4 @@
-# Formal 301 redirects for legacy /download paths to homepage inline download section
+# 旧的 /download 地址 301 跳到首页的下载区
 /download /#download 301
 /download/ /#download 301
 /zh/download /zh/#download 301

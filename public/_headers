@@ -4,9 +4,8 @@
   X-Frame-Options: SAMEORIGIN
   Permissions-Policy: camera=(), microphone=(), geolocation=(), interest-cohort=()
 
-# Versioned files never change once published. One placeholder plus one splat: the old
-# `/download/v*/*` pattern (two splats) was silently ignored by Cloudflare Pages.
-# No Content-Disposition: .exe/.zip already download by type, and SHA256SUMS.txt stays readable inline.
+# 已发布版本的文件不会再变。这里用一个占位符加一个通配符：原来的 `/download/v*/*`（两个通配符）会被 Cloudflare Pages 直接忽略。
+# 不设 Content-Disposition：.exe / .zip 按类型自动下载，SHA256SUMS.txt 仍能在浏览器里直接查看。
 /download/:version/*
   Cache-Control: public, max-age=31536000, immutable
 

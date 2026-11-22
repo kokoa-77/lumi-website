@@ -37,7 +37,7 @@
   }
 }
 
-/* Fallback tokens for pure-2D SpotArt in case upstream tokens.css is from an older release tag */
+/* 插画用的备用令牌：同步来的 tokens.css 来自旧版本时用 */
 [data-theme="light"] {
   --lumi-art-back: oklch(91.5% 0.036 var(--accent-h) / 0.78);
   --lumi-art-front: oklch(100% 0 0 / 0.92);
@@ -56,9 +56,7 @@
   --lumi-art-line: oklch(100% 0 0 / 0.24);
 }
 
-/* ================================================================
-   1. Lumi Atmospheric Sky-Light Hero & Animated Aurora Orbs
-   ================================================================ */
+/* ===== 1. 首屏天空背景和光球 ===== */
 .lumi-sky {
   position: relative;
   background: linear-gradient(180deg, var(--sky-top) 0%, var(--sky-bottom) 52%, var(--bg) 100%);
@@ -131,7 +129,7 @@
   }
 }
 
-/* Subtle halftone sky weave inspired by social-preview.png */
+/* 淡淡的网点天空纹理，和宣传横幅一致 */
 .lumi-dot-grid {
   background-image: radial-gradient(
     circle,
@@ -150,7 +148,7 @@
   );
 }
 
-/* Ambient floating light motes (GPU transform/opacity only) */
+/* 背景光点（只动 transform 和 opacity） */
 .lumi-mote {
   position: absolute;
   border-radius: 999px;
@@ -173,7 +171,7 @@
   }
 }
 
-/* Luminous editorial gradient text */
+/* 渐变标题文字 */
 .lumi-gradient-word {
   background: linear-gradient(
     115deg,
@@ -198,9 +196,7 @@
   color: transparent;
 }
 
-/* ================================================================
-   2. Frosted Glass Surfaces, Floating Capsule Nav & 3D Stage
-   ================================================================ */
+/* ===== 2. 浮层表面、悬浮导航和展示台 ===== */
 .lumi-floating-nav {
   background-color: oklch(100% 0 0 / 0.74);
   border: 1px solid oklch(20% 0.02 var(--accent-h) / 0.08);
@@ -307,7 +303,7 @@
   border-color: oklch(var(--accent-l-dark) var(--accent-c-dark) var(--accent-h) / 0.36);
 }
 
-/* 3D Perspective Showcase Stage */
+/* 展示台的透视 */
 .lumi-stage-perspective {
   perspective: 1600px;
 }
@@ -336,7 +332,7 @@
   background: radial-gradient(72% 62% at 50% 48%, var(--glow) 0%, transparent 74%);
 }
 
-/* Soft glass specular sheen gliding over the 3D window stage on pointer move */
+/* 鼠标移动时展示台上的反光 */
 .lumi-stage-sheen {
   pointer-events: none;
   position: absolute;
@@ -355,7 +351,7 @@
   opacity: 1;
 }
 
-/* Ultra-thin top reading progress bar synced to adaptive accent */
+/* 顶部滚动进度条，颜色跟随主色 */
 .lumi-scroll-progress {
   position: fixed;
   top: 0;
@@ -374,7 +370,7 @@
   will-change: transform;
 }
 
-/* Interactive floating eco-pill feedback toast */
+/* 生态墙胶囊的提示 */
 .lumi-eco-toast {
   position: fixed;
   bottom: 24px;
@@ -401,9 +397,7 @@
   overflow: hidden;
 }
 
-/* ================================================================
-   3. Controls, Pills, CTAs & Hairline Dividers
-   ================================================================ */
+/* ===== 3. 控件、胶囊、主按钮和分隔线 ===== */
 .lumi-pill {
   border-radius: var(--r-control);
   transition:
@@ -463,9 +457,7 @@
   font-variant-numeric: tabular-nums;
 }
 
-/* ================================================================
-   4. Choreographed Scroll Reveals & Smooth Grid Accordion (<=400ms contract)
-   ================================================================ */
+/* ===== 4. 滚动淡入和折叠面板（时长不超过 400 毫秒） ===== */
 html.lumi-js .lumi-reveal {
   opacity: 0;
   transform: translate3d(0, 18px, 0) scale(0.99);
@@ -490,7 +482,7 @@ html[data-fx="lite"].lumi-js .lumi-reveal {
   transition: opacity 180ms var(--motion-ease-out);
 }
 
-/* Smooth CSS Grid accordion (no jerky jump) */
+/* 折叠面板：靠网格行高过渡，展开时不跳 */
 .lumi-acc-body {
   display: grid;
   grid-template-rows: 0fr;
@@ -517,9 +509,7 @@ html[data-fx="lite"].lumi-js .lumi-reveal {
   transform: rotate(90deg);
 }
 
-/* ================================================================
-   5. Playful Overlapping Tilted Community Cards
-   ================================================================ */
+/* ===== 5. 社区区的倾斜卡片 ===== */
 .lumi-tilt-card {
   background-color: var(--surface);
   border: 1px solid oklch(20% 0.02 var(--accent-h) / 0.07);
@@ -548,9 +538,7 @@ html[data-fx="lite"].lumi-js .lumi-reveal {
   border-color: oklch(var(--accent-l-dark) var(--accent-c-dark) var(--accent-h) / 0.4);
 }
 
-/* ================================================================
-   6. Infinite Seamless Multi-Row Reverse Ecosystem Wall
-   ================================================================ */
+/* ===== 6. 生态墙滚动 ===== */
 .lumi-marquee {
   mask-image: linear-gradient(90deg, transparent 0%, black 7%, black 93%, transparent 100%);
   -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 7%, black 93%, transparent 100%);
@@ -580,7 +568,7 @@ html[data-fx="lite"].lumi-js .lumi-reveal {
   }
 }
 
-/* Interactive Mini Switch for Live Homepage Widgets */
+/* 首页演示里的小开关 */
 .lumi-switch {
   position: relative;
   display: inline-flex;
@@ -612,7 +600,7 @@ html[data-fx="lite"].lumi-js .lumi-reveal {
   transform: translateX(16px);
 }
 
-/* Clean hidden scrollbar for mobile floating pill nav */
+/* 手机端导航条隐藏滚动条 */
 .lumi-no-scrollbar {
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -622,7 +610,7 @@ html[data-fx="lite"].lumi-js .lumi-reveal {
   display: none;
 }
 
-/* Active showcase tab dot switches cleanly to button foreground */
+/* 选中页签上的小圆点用按钮文字色 */
 .lumi-tab-dot {
   background: oklch(64% 0.16 var(--dot-hue, 245));
 }
@@ -632,21 +620,19 @@ html[data-fx="lite"].lumi-js .lumi-reveal {
   opacity: 0.92;
 }
 
-/* Opaque, zero-blur moving marquee capsule (smooth even on software-rendered / older PCs) */
+/* 滚动胶囊不透明、不用模糊，老电脑上也流畅 */
 .lumi-eco-pill {
   background-color: var(--surface);
   border: 1px solid var(--line);
   box-shadow: var(--shadow-raised);
 }
 
-/* Balanced line wrapping for CJK & English display titles */
+/* 中英文标题均衡换行 */
 .lumi-balance {
   text-wrap: balance;
 }
 
-/* ================================================================
-   7. Reduced Motion Respect
-   ================================================================ */
+/* ===== 7. 减少动效 ===== */
 @media (prefers-reduced-motion: reduce) {
   .lumi-mote,
   .lumi-aurora-orb,

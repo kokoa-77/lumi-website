@@ -74,8 +74,7 @@ const ogImageUrl = `${siteOrigin}/og-card.png`;
           const zhTarget = document.documentElement.dataset.zhHref;
           if (zhTarget) {
             const savedLang = localStorage.getItem("lumi-lang");
-            // Only the first preferred language counts, so English-first visitors who merely
-            // list Chinese further down are not sent to /zh/.
+            // 只看第一个首选语言：英文优先、只是把中文排在后面的访客不跳到 /zh/
             const primary =
               (navigator.languages && navigator.languages[0]) || navigator.language || "";
             const prefersZh = String(primary).toLowerCase().startsWith("zh");
@@ -101,7 +100,7 @@ const ogImageUrl = `${siteOrigin}/og-card.png`;
             document.documentElement.dataset.theme = saved;
           }
         } catch {
-          // Storage unavailable; keep default daylight theme
+          // 读不到本地存储时保持默认的浅色主题
         }
       })();
     </script>

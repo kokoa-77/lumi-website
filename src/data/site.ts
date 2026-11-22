@@ -84,7 +84,7 @@ export function getReleases(): ReleasesBundle {
       cachedReleases = parsed;
       return parsed;
     } catch {
-      // Fall back cleanly to committed snapshot
+      // 读取失败时改用仓库里的快照
     }
   }
   cachedReleases = fallbackData as ReleasesBundle;
@@ -120,8 +120,8 @@ export function localePrefix(locale: Locale): string {
   return locale === "zh" ? "/zh" : "";
 }
 
-// Pages are built as folders (`/zh/demo/index.html`) and Cloudflare Pages answers `/zh/demo`
-// with a 308 to `/zh/demo/`, so every internal link and canonical URL ends with a slash.
+// 页面按文件夹生成（`/zh/demo/index.html`），Cloudflare Pages 会把 `/zh/demo` 308 跳转到 `/zh/demo/`，
+// 所以站内链接和规范地址都以斜杠结尾
 export function localizedPath(locale: Locale, subPath: string): string {
   const normalized = subPath.startsWith("/") ? subPath : `/${subPath}`;
   const withSlash = normalized.endsWith("/") ? normalized : `${normalized}/`;

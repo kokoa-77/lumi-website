@@ -4,8 +4,7 @@ on:
   push:
     branches: [main]
   schedule:
-    # Check upstream GitHub Releases hourly (public repo, so Actions minutes are free);
-    # skips build & deploy when the tag is unchanged.
+    # 每小时检查一次主仓的 GitHub Releases（公开仓库，Actions 分钟数免费）；标签没变时跳过构建和部署
     - cron: "15 * * * *"
   workflow_dispatch:
     inputs:

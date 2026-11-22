@@ -55,7 +55,7 @@ const shots = [
 </section>
 
 <section class="mx-auto max-w-5xl space-y-8 px-4 py-10 sm:px-6">
-  <!-- 100-word blurb -->
+  {/* 百字简介 */}
   <div class="lumi-panel p-6 sm:p-8">
     <div class="flex flex-wrap items-center justify-between gap-3">
       <h2 class="text-xl font-bold text-[var(--fg)]">{p.blurbTitle}</h2>
@@ -72,7 +72,7 @@ const shots = [
     <p class="mt-4 text-sm leading-relaxed text-[var(--fg-muted)] sm:text-base">{p.blurbText}</p>
   </div>
 
-  <!-- Quick Facts -->
+  {/* 基本信息 */}
   <div class="lumi-panel p-6 sm:p-8">
     <h2 class="text-xl font-bold text-[var(--fg)]">{p.factsTitle}</h2>
     <dl class="mt-4 grid gap-4 sm:grid-cols-2">
@@ -87,7 +87,7 @@ const shots = [
     </dl>
   </div>
 
-  <!-- Brand Guidelines (60fps recording archive will be added after Mojang AppID approval) -->
+  {/* 品牌规范（60 帧录屏素材等 Mojang 批准 AppID 后再加） */}
   <div class="lumi-panel flex flex-col justify-between gap-4 p-6 sm:flex-row sm:items-center sm:p-8">
     <div class="max-w-2xl">
       <h2 class="text-lg font-bold text-[var(--fg)]">{p.brandTitle}</h2>
@@ -105,7 +105,7 @@ const shots = [
     </div>
   </div>
 
-  <!-- Official Screenshots Gallery -->
+  {/* 官方截图 */}
   <div class="lumi-panel p-6 sm:p-8">
     <h2 class="text-xl font-bold text-[var(--fg)]">
       {locale === "zh" ? "高清实机截图预览" : "Official Screenshots"}
@@ -149,7 +149,7 @@ const shots = [
             btn.textContent = copyLabel;
           }, 1800);
         } catch {
-          // ignore
+          // 浏览器不允许写剪贴板时忽略
         }
       });
     }

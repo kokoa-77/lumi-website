@@ -186,7 +186,7 @@ const navLinks = [
     </div>
   </div>
 
-  <!-- Compact mobile nav pill row -->
+  {/* 手机端导航胶囊 */}
   <nav
     aria-label="Mobile"
     class="lumi-floating-nav lumi-no-scrollbar mt-2 flex items-center justify-between gap-1 overflow-x-auto rounded-full px-2 py-1 text-xs font-medium md:hidden"
@@ -209,7 +209,7 @@ const navLinks = [
   </nav>
 </header>
 
-<!-- Non-intrusive floating download-started toast -->
+{/* 开始下载时的提示 */}
 <div
   id="lumi-download-toast"
   hidden
@@ -258,7 +258,7 @@ const navLinks = [
         try {
           localStorage.setItem("lumi-theme", next);
         } catch {
-          // ignore
+          // 浏览器禁用本地存储时忽略
         }
       });
     }
@@ -271,7 +271,7 @@ const navLinks = [
             localStorage.setItem("lumi-lang", targetLang);
           }
         } catch {
-          // ignore
+          // 浏览器禁用本地存储时忽略
         }
       });
     }
@@ -284,14 +284,14 @@ const navLinks = [
         const prefersZh = (navigator.language || "").toLowerCase().startsWith("zh");
         if (prefersZh && !dismissed && savedLang !== "en") banner.hidden = false;
       } catch {
-        // ignore
+        // 浏览器禁用本地存储时忽略
       }
       banner.querySelector("[data-zh-dismiss]")?.addEventListener("click", () => {
         banner.hidden = true;
         try {
           localStorage.setItem("lumi-lang-banner-dismissed", "1");
         } catch {
-          // ignore
+          // 浏览器禁用本地存储时忽略
         }
       });
     }

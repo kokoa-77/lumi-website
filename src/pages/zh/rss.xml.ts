@@ -10,7 +10,7 @@ export function GET(context: APIContext) {
     title: "Lumi 微光启动器 · 更新日志",
     description: "Lumi Launcher（Windows Minecraft Java 版开源启动器）官方发布说明。",
     site,
-    // Links already carry their own slash; letting the library append one would land after the #anchor.
+    // 链接本身已经带斜杠，再让库补一个会补到 #锚点后面
     trailingSlash: false,
     items: releases.map((r) => ({
       title: r.name,

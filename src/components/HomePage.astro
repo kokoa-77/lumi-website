@@ -530,10 +530,10 @@ const interactiveSyncItems = isZh
     ];
 ---
 
-<!-- Top ultra-thin luminous scroll progress line -->
+{/* 顶部滚动进度条 */}
 <div id="lumi-scroll-progress" class="lumi-scroll-progress" aria-hidden="true"></div>
 
-<!-- Interactive bottom micro-toast for ecosystem capsules -->
+{/* 点生态墙胶囊时底部弹出的提示 */}
 <div
   id="lumi-eco-toast"
   role="status"
@@ -543,9 +543,7 @@ const interactiveSyncItems = isZh
 >
 </div>
 
-<!-- =================================================================
-     1. CINEMATIC SKY-LIGHT HERO + DIRECT DOWNLOAD + COLOR-LOCKED 3D STAGE
-     ================================================================= -->
+{/* ===== 1. 首屏：标题、下载入口、界面展示台 ===== */}
 <section class="lumi-sky -mt-[68px] overflow-x-clip pb-16 pt-28 sm:pb-24 sm:pt-32">
   <div class="lumi-aurora-orb lumi-aurora-a" aria-hidden="true"></div>
   <div class="lumi-aurora-orb lumi-aurora-b" aria-hidden="true"></div>
@@ -563,7 +561,7 @@ const interactiveSyncItems = isZh
 
   <div class="relative mx-auto max-w-6xl px-4 sm:px-6">
     <div class="mx-auto max-w-3xl text-center">
-      <!-- Status pill row -->
+      {/* 状态胶囊 */}
       <div class="inline-flex flex-wrap items-center justify-center gap-2">
         <span
           class="lumi-glass lumi-pill inline-flex items-center gap-2 px-3.5 py-1 text-xs font-medium text-[var(--fg-muted)]"
@@ -579,7 +577,7 @@ const interactiveSyncItems = isZh
         </a>
       </div>
 
-      <!-- Editorial Display Headline -->
+      {/* 主标题 */}
       <h1
         class="mt-7 text-balance text-4xl font-black tracking-[-0.035em] text-[var(--fg)] sm:text-6xl lg:text-[4.25rem] lg:leading-[1.08]"
       >
@@ -606,7 +604,7 @@ const interactiveSyncItems = isZh
         {h.heroSubtitle}
       </p>
 
-      <!-- Desktop Primary CTA: Auto-switches during prereview (Demo + Beta Group) vs beta/stable (Direct Download + Demo) -->
+      {/* 桌面端主按钮：预审阶段是「在线试玩 + 内测群」，测试版和正式版是「直接下载 + 在线试玩」 */}
       <div class="mt-9 hidden flex-wrap items-center justify-center gap-3.5 md:flex">
         {
           latest.kind === "prereview" ? (
@@ -680,7 +678,7 @@ const interactiveSyncItems = isZh
         }
       </div>
 
-      <!-- Mobile Primary CTA: Copy Clean Link for PC + Fallback Select Box + Join QQ Group / Discord -->
+      {/* 手机端主按钮：复制链接到电脑上打开，复制失败时显示可选中的链接，另有 QQ 群 / Discord 入口 */}
       <div class="mt-8 flex flex-col items-center justify-center gap-3 md:hidden">
         <button
           type="button"
@@ -700,7 +698,7 @@ const interactiveSyncItems = isZh
           <span>{isZh ? "复制链接，到电脑上打开" : "Copy link to open on PC"}</span>
         </button>
 
-        <!-- Bilibili / in-app WebView fallback when clipboard API is blocked -->
+        {/* B 站等应用内浏览器不能用剪贴板时的备用显示 */}
         <div
           id="lumi-mobile-copy-fallback"
           hidden
@@ -756,7 +754,7 @@ const interactiveSyncItems = isZh
       </div>
     </div>
 
-    <!-- Interactive 3D Color-Locked Adaptive Stage: Light & Dark synchronized -->
+    {/* 界面展示台：跟随浅色 / 深色切换截图 */}
     <div id="preview" class="mt-14 sm:mt-16">
       <div class="mb-5 flex flex-col items-center justify-between gap-4 sm:flex-row">
         <div
@@ -855,7 +853,7 @@ const interactiveSyncItems = isZh
           </div>
         </div>
 
-        <!-- Clean ribbon BELOW stage — ZERO obstruction over Lumi's Continue button! -->
+        {/* 说明条放在展示台下方，不挡住截图里的「继续」按钮 */}
         <div class="mt-4 flex flex-wrap items-center justify-between gap-3 px-1 text-xs text-[var(--fg-muted)]">
           <span class="inline-flex items-center gap-2">
             <span class="h-2 w-2 shrink-0 rounded-full bg-[var(--accent)]"></span>
@@ -884,7 +882,7 @@ const interactiveSyncItems = isZh
         </div>
       </div>
 
-      <!-- 4 High-Impact Core Strength Highlights (2x2 compact grid on mobile, 4-col on desktop) -->
+      {/* 四个数据条：手机两列，桌面四列 */}
       <div class="mt-10 grid grid-cols-2 gap-3 sm:mt-12 sm:gap-3.5 lg:grid-cols-4">
         {
           heroStats.map((stat) => (
@@ -906,11 +904,9 @@ const interactiveSyncItems = isZh
   </div>
 </section>
 
-<!-- =================================================================
-     2. SPOTLIGHT 01 (LIGHT-FIRST + DAY/NIGHT FLIP) + ALL-INTERACTIVE BENTO
-     ================================================================= -->
+{/* ===== 2. 功能介绍：重点功能和四宫格 ===== */}
 <section id="features" class="mx-auto max-w-6xl scroll-mt-24 px-4 py-16 sm:px-6 sm:py-24">
-  <!-- Spotlight 01: Distinct Live Multiplayer Server + World Switcher Showcase (Zero duplicate of Hero!) -->
+  {/* 重点功能 01：多人服务器和世界切换，内容不和首屏重复 */}
   <div class="lumi-reveal">
     <div class="mx-auto max-w-2xl text-center">
       <p class="text-xs font-bold tracking-[0.16em] text-[var(--accent)] uppercase">
@@ -968,7 +964,7 @@ const interactiveSyncItems = isZh
           </div>
         </div>
 
-        <!-- Live Light/Night flip pill inside Spotlight -->
+        {/* 昼夜切换按钮 */}
         <div class="lumi-glass absolute right-3 top-3 inline-flex items-center gap-1 rounded-full p-1 text-xs">
           <button
             type="button"
@@ -1018,9 +1014,9 @@ const interactiveSyncItems = isZh
     </div>
   </div>
 
-  <!-- Asymmetric All-Interactive Bento Grid (7+5 / 5+7) -->
+  {/* 四宫格：两行，宽度 7+5 / 5+7 交错 */}
   <div class="mt-8 grid gap-6 lg:grid-cols-12">
-    <!-- Bento 1 (7 col): Never Break + LIVE CLICKABLE ROLLBACK MICRO-WIDGET -->
+    {/* 格子 1（7 列）：改动回滚，带可点的回滚演示 */}
     <article class="lumi-bento-card lumi-reveal flex flex-col justify-between overflow-hidden p-6 sm:p-8 lg:col-span-7">
       <div>
         <div class="flex items-start justify-between gap-4">
@@ -1042,7 +1038,7 @@ const interactiveSyncItems = isZh
           }
         </p>
 
-        <!-- Live Clickable Rollback Micro-Widget -->
+        {/* 回滚演示 */}
         <div
           id="lumi-rollback-widget"
           data-state="broken"
@@ -1104,7 +1100,7 @@ const interactiveSyncItems = isZh
       </div>
     </article>
 
-    <!-- Bento 2 (5 col): Modrinth & CurseForge + LIVE CLICKABLE DISCOVER WIDGET -->
+    {/* 格子 2（5 列）：Modrinth 与 CurseForge，带可点的场景切换 */}
     <article
       class="lumi-bento-card lumi-reveal flex flex-col justify-between overflow-hidden p-6 sm:p-8 lg:col-span-5"
       style="--reveal-delay: 80ms"
@@ -1129,7 +1125,7 @@ const interactiveSyncItems = isZh
           }
         </p>
 
-        <!-- Live Clickable Discover Scenario Switcher (eliminates blank gap!) -->
+        {/* 发现内容的三个场景，填满格子下半部分 */}
         <div class="mt-4 space-y-2.5">
           <div class="flex flex-wrap gap-1.5" role="tablist" aria-label="Discover scenarios">
             {
@@ -1195,7 +1191,7 @@ const interactiveSyncItems = isZh
       </div>
     </article>
 
-    <!-- Bento 3 (5 col): Rust + Security + REAL SessionPipe Inspector (self-contained, no blank gap) -->
+    {/* 格子 3（5 列）：账号安全，带启动参数传递和日志脱敏的示意 */}
     <article
       class="lumi-bento-card lumi-reveal flex flex-col gap-4 p-6 sm:p-8 lg:col-span-5"
       style="--reveal-delay: 40ms"
@@ -1216,7 +1212,7 @@ const interactiveSyncItems = isZh
         </p>
       </div>
 
-      <!-- Real Lumi SessionPipe & Log Redaction Inspector (Strictly describes Lumi only) -->
+      {/* 启动参数传递和日志脱敏示意，只写 Lumi 自己的做法 */}
       <div class="rounded-2xl border border-[var(--line)] bg-[var(--surface-2)] p-3.5 text-xs">
         <div class="flex flex-wrap items-center justify-between gap-2">
           <span class="font-bold text-[var(--fg)]">
@@ -1298,7 +1294,7 @@ const interactiveSyncItems = isZh
       </div>
     </article>
 
-    <!-- Bento 4 (7 col): Local Cross-Instance Sync + LIVE CLICKABLE SWITCH WIDGET -->
+    {/* 格子 4（7 列）：跨实例同步，带可点的开关 */}
     <article
       class="lumi-bento-card lumi-reveal flex flex-col justify-between overflow-hidden p-6 sm:p-8 lg:col-span-7"
       style="--reveal-delay: 100ms"
@@ -1328,7 +1324,7 @@ const interactiveSyncItems = isZh
           }
         </p>
 
-        <!-- Live Interactive Sync Switch Grid -->
+        {/* 同步开关 */}
         <div class="mt-4 grid gap-2 sm:grid-cols-2">
           {
             interactiveSyncItems.map((item) => (
@@ -1378,9 +1374,7 @@ const interactiveSyncItems = isZh
   </div>
 </section>
 
-<!-- =================================================================
-     3. 3-ROW REVERSE-SCROLLING CLICKABLE ECOSYSTEM WALL
-     ================================================================= -->
+{/* ===== 3. 生态墙：三行滚动胶囊，相邻两行方向相反 ===== */}
 <section class="lumi-reveal overflow-x-clip py-16 sm:py-22">
   <div class="mx-auto max-w-6xl px-4 sm:px-6">
     <div class="flex flex-col justify-between gap-4 md:flex-row md:items-end">
@@ -1403,7 +1397,7 @@ const interactiveSyncItems = isZh
   </div>
 
   <div class="mt-10 space-y-3">
-    <!-- Row 1: Popular Mods (left) -->
+    {/* 第一行：常用模组（向左） */}
     <div class="lumi-marquee overflow-hidden py-1">
       <div class="lumi-marquee-track" style="--marquee-dur: 46s">
         {
@@ -1430,7 +1424,7 @@ const interactiveSyncItems = isZh
       </div>
     </div>
 
-    <!-- Row 2: Loaders, Shaders & Modpacks (right / reverse) -->
+    {/* 第二行：加载器、光影、整合包（向右） */}
     <div class="lumi-marquee overflow-hidden py-1">
       <div class="lumi-marquee-track lumi-marquee-reverse" style="--marquee-dur: 52s">
         {
@@ -1457,7 +1451,7 @@ const interactiveSyncItems = isZh
       </div>
     </div>
 
-    <!-- Row 3: Lumi Craft & Platform Highlights (left, calmer speed) -->
+    {/* 第三行：Lumi 自身的特点（向左，速度更慢） */}
     <div class="lumi-marquee overflow-hidden py-1">
       <div class="lumi-marquee-track" style="--marquee-dur: 58s">
         {
@@ -1484,9 +1478,7 @@ const interactiveSyncItems = isZh
   </div>
 </section>
 
-<!-- =================================================================
-     4. EFFORTLESS MIGRATION VISUAL BRIDGE (#migration)
-     ================================================================= -->
+{/* ===== 4. 迁移（#migration） ===== */}
 <section id="migration" class="lumi-reveal mx-auto max-w-6xl scroll-mt-24 px-4 py-16 sm:px-6 sm:py-24">
   <div class="mx-auto max-w-2xl text-center">
     <p class="text-xs font-bold tracking-[0.16em] text-[var(--accent)] uppercase">
@@ -1501,7 +1493,7 @@ const interactiveSyncItems = isZh
   </div>
 
   <div class="mt-12 grid items-center gap-6 lg:grid-cols-11">
-    <!-- Left: Read-only Link -->
+    {/* 左：只读关联 */}
     <div class="lumi-bento-card p-6 sm:p-7 lg:col-span-4">
       <span class="lumi-pill inline-block bg-[var(--accent-soft)] px-3 py-1 text-xs font-bold text-[var(--accent)]">
         {h.migrationLinkTitle}
@@ -1518,7 +1510,7 @@ const interactiveSyncItems = isZh
       </div>
     </div>
 
-    <!-- Center: Glowing Lumi Hub -->
+    {/* 中：Lumi 图标 */}
     <div class="flex flex-col items-center justify-center py-4 lg:col-span-3">
       <div class="relative flex items-center justify-center">
         <div
@@ -1540,7 +1532,7 @@ const interactiveSyncItems = isZh
       </p>
     </div>
 
-    <!-- Right: Clean Isolated Import -->
+    {/* 右：复制导入 */}
     <div class="lumi-bento-card p-6 sm:p-7 lg:col-span-4">
       <span class="lumi-pill inline-block bg-[var(--accent-soft)] px-3 py-1 text-xs font-bold text-[var(--accent)]">
         {h.migrationImportTitle}
@@ -1559,9 +1551,7 @@ const interactiveSyncItems = isZh
   </div>
 </section>
 
-<!-- =================================================================
-     5. CLEAN PLAYER-FRIENDLY INLINE DOWNLOAD SECTION (#download)
-     ================================================================= -->
+{/* ===== 5. 下载（#download） ===== */}
 <section id="download" class="lumi-reveal relative scroll-mt-24 py-20 sm:py-28">
   <div class="mx-auto max-w-4xl px-4 text-center sm:px-6">
     <p class="text-xs font-bold tracking-[0.16em] text-[var(--accent)] uppercase">
@@ -1572,7 +1562,7 @@ const interactiveSyncItems = isZh
     </h2>
     <p class="mt-3 text-sm text-[var(--fg-muted)] sm:text-base">{d.subtitle}</p>
 
-    <!-- Release Channel Pill -->
+    {/* 发布渠道胶囊 */}
     <div class="mt-7 flex flex-col items-center gap-2">
       <div
         class="lumi-glass lumi-pill lumi-tabular inline-flex items-center gap-2.5 px-5 py-2 text-xs font-semibold text-[var(--fg)] sm:text-sm"
@@ -1592,11 +1582,11 @@ const interactiveSyncItems = isZh
       }
     </div>
 
-    <!-- Clean Open 2-Column Split with Hairline Divider -->
+    {/* 两列，中间一条细分隔线 */}
     <div
       class="mt-12 grid divide-y divide-[var(--line)] sm:grid-cols-2 sm:divide-x sm:divide-y-0"
     >
-      <!-- Installer Column -->
+      {/* 安装版 */}
       <div class="flex flex-col items-center px-6 py-8 sm:py-4">
         <svg class="h-10 w-10 text-[var(--fg)]" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
           <path d="M3 5.5 10.5 4.4v7.1H3V5.5Zm8.7-1.3L21 3v8.5h-9.3V4.2ZM3 12.6h7.5v7.1L3 18.6v-6Zm8.7 0H21V21l-9.3-1.3v-7.1Z" />
@@ -1642,7 +1632,7 @@ const interactiveSyncItems = isZh
         }
       </div>
 
-      <!-- Portable Column -->
+      {/* 便携版 */}
       <div class="flex flex-col items-center px-6 py-8 sm:py-4">
         <svg class="h-10 w-10 text-[var(--fg)]" viewBox="0 0 24 24" fill="none" aria-hidden="true">
           <path
@@ -1694,7 +1684,7 @@ const interactiveSyncItems = isZh
       </div>
     </div>
 
-    <!-- Helpful 2-Step SmartScreen Drawer Only -->
+    {/* SmartScreen 提示的两步说明（可折叠） */}
     <div class="mx-auto mt-10 max-w-2xl text-left">
       <div
         id="smartscreen"
@@ -1803,9 +1793,7 @@ const interactiveSyncItems = isZh
   </div>
 </section>
 
-<!-- =================================================================
-     6. ASYMMETRIC STICKY-LEFT EDITORIAL FAQ (#faq)
-     ================================================================= -->
+{/* ===== 6. 常见问题（#faq）：左侧标题固定 ===== */}
 <section id="faq" class="lumi-reveal mx-auto max-w-6xl scroll-mt-24 px-4 py-16 sm:px-6 sm:py-24">
   <div class="grid gap-10 lg:grid-cols-12 lg:gap-12">
     <div class="lg:col-span-4">
@@ -1863,9 +1851,7 @@ const interactiveSyncItems = isZh
   </div>
 </section>
 
-<!-- =================================================================
-     7. PLAYFUL OVERLAPPING TILTED-CARDS COMMUNITY SECTION (#community)
-     ================================================================= -->
+{/* ===== 7. 社区（#community） ===== */}
 <section id="community" class="lumi-reveal mx-auto max-w-6xl scroll-mt-24 px-4 py-16 sm:px-6 sm:py-24">
   <div class="grid items-center gap-12 lg:grid-cols-12">
     <div class="lg:col-span-5">
@@ -1910,7 +1896,7 @@ const interactiveSyncItems = isZh
       </div>
     </div>
 
-    <!-- Overlapping tactile tilted community cards -->
+    {/* 叠放的倾斜卡片 */}
     <div class="grid gap-4 sm:grid-cols-3 sm:gap-0 lg:col-span-7">
       <div
         class="lumi-tilt-card relative z-10 flex flex-col justify-between p-6"
@@ -2005,13 +1991,13 @@ const interactiveSyncItems = isZh
   </div>
 </section>
 
-<!-- Lean interactive runtime (~4 KiB gzip): Color-locked stage + 3D sheen + All 4 Bento widgets + Eco toast + Scroll bar -->
+{/* 首页交互脚本（gzip 后约 4 KiB）：展示台、四宫格演示、生态墙提示、滚动进度条 */}
 <script is:inline>
   (() => {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const fine = window.matchMedia("(pointer: fine)").matches;
 
-    // 1. Top luminous scroll progress bar
+    // 1. 顶部滚动进度条
     const progressBar = document.getElementById("lumi-scroll-progress");
     if (progressBar) {
       let ticking = false;
@@ -2035,7 +2021,7 @@ const interactiveSyncItems = isZh
       updateBar();
     }
 
-    // 2. Adaptive color-locked showcase tabs (syncs caption & spotlight smoothly across light/dark)
+    // 2. 展示台页签：切换截图和说明，跟随浅色 / 深色
     const tabs = Array.from(document.querySelectorAll("[data-showcase-tab]"));
     const panels = Array.from(document.querySelectorAll("[data-showcase-panel]"));
     const captionEl = document.getElementById("lumi-showcase-caption");
@@ -2075,7 +2061,7 @@ const interactiveSyncItems = isZh
       });
     }
 
-    // 3. Spotlight 01 Day/Night inline preview toggle (follows page theme automatically + allows manual flip)
+    // 3. 重点功能 01 的昼夜切换：默认跟随页面主题，也能手动切
     const spotBtns = Array.from(document.querySelectorAll("[data-spot-toggle]"));
     const spotPanels = Array.from(document.querySelectorAll("[data-spot-theme]"));
     const applySpotTheme = (target) => {
@@ -2110,7 +2096,7 @@ const interactiveSyncItems = isZh
       attributeFilter: ["data-theme"],
     });
 
-    // 3b. Mobile Hero "Copy clean link to open on PC" with Bilibili/in-app WebView fallback
+    // 3b. 手机端「复制链接到电脑上打开」，应用内浏览器复制失败时显示链接
     const mobileCopyBtn = document.getElementById("lumi-mobile-copy-link");
     const mobileFallback = document.getElementById("lumi-mobile-copy-fallback");
     const mobileInput = document.getElementById("lumi-mobile-copy-input");
@@ -2158,7 +2144,7 @@ const interactiveSyncItems = isZh
       });
     }
 
-    // 4. Pointer-driven 3D tilt + specular glass sheen + bento cursor spotlight glow
+    // 4. 跟随鼠标的展示台倾斜、反光和四宫格光斑
     const stage = document.getElementById("lumi-3d-stage");
     if (stage && !reduced && fine) {
       stage.addEventListener("pointermove", (e) => {
@@ -2186,7 +2172,7 @@ const interactiveSyncItems = isZh
       }
     }
 
-    // 5. Bento 02 Live Rollback Widget
+    // 5. 回滚演示
     const rbBox = document.getElementById("lumi-rollback-widget");
     const rbBtn = document.getElementById("lumi-rollback-btn");
     if (rbBox && rbBtn) {
@@ -2212,7 +2198,7 @@ const interactiveSyncItems = isZh
       });
     }
 
-    // 6. Bento 03 Live Discover Scenario Widget
+    // 6. 发现内容的场景切换
     const discTabs = Array.from(document.querySelectorAll("[data-disc-tab]"));
     const discBadge = document.getElementById("lumi-disc-badge");
     const discTitle = document.getElementById("lumi-disc-title");
@@ -2235,7 +2221,7 @@ const interactiveSyncItems = isZh
       });
     }
 
-    // 7. Bento 04 Real Lumi SessionPipe & Log Redaction Inspector
+    // 7. 启动参数传递和日志脱敏示意
     const redactBtn = document.getElementById("lumi-redact-btn");
     const redactCmd = document.getElementById("lumi-redact-cmd");
     const redactLog = document.getElementById("lumi-redact-log");
@@ -2249,7 +2235,7 @@ const interactiveSyncItems = isZh
       });
     }
 
-    // 8. Bento 05 Live Cross-Instance Sync Switch Widget
+    // 8. 跨实例同步开关
     const syncSwitches = Array.from(document.querySelectorAll("[data-sync-toggle]"));
     const syncCounter = document.getElementById("lumi-sync-counter");
     if (syncSwitches.length > 0) {
@@ -2272,7 +2258,7 @@ const interactiveSyncItems = isZh
       }
     }
 
-    // 9. Clickable Ecosystem Wall Toast Feedback
+    // 9. 点生态墙胶囊时的提示
     const ecoToast = document.getElementById("lumi-eco-toast");
     let toastTimer = 0;
     if (ecoToast) {
@@ -2290,7 +2276,7 @@ const interactiveSyncItems = isZh
       }
     }
 
-    // 10. Choreographed scroll reveals + instant hash-jump reveal
+    // 10. 滚动到时淡入；带锚点打开时直接显示
     const reveals = Array.from(document.querySelectorAll(".lumi-reveal"));
     const revealAll = () => {
       for (const el of reveals) el.classList.add("is-visible");
@@ -2314,7 +2300,7 @@ const interactiveSyncItems = isZh
       revealAll();
     }
 
-    // 11. Smooth CSS Grid Accordions (FAQ + SmartScreen drawer)
+    // 11. 折叠面板（常见问题和 SmartScreen 说明）
     for (const trigger of document.querySelectorAll("[data-acc-trigger]")) {
       trigger.addEventListener("click", () => {
         const item = trigger.closest(".lumi-acc-item");

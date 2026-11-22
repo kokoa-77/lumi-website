@@ -10,7 +10,7 @@ export function GET(context: APIContext) {
     title: "Lumi Launcher Releases",
     description: "Official release notes for Lumi Launcher (Minecraft: Java Edition for Windows).",
     site,
-    // Links already carry their own slash; letting the library append one would land after the #anchor.
+    // 链接本身已经带斜杠，再让库补一个会补到 #锚点后面
     trailingSlash: false,
     items: releases.map((r) => ({
       title: r.name,

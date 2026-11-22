@@ -5,7 +5,7 @@ import path from "node:path";
 const UPSTREAM_REPO = process.env.UPSTREAM_REPO || "kokoa-77/LumiLauncher";
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN || "";
 const DOWNLOAD_ASSETS = process.env.SYNC_DOWNLOAD_ASSETS !== "false";
-const MAX_PAGES_FILE_BYTES = 25 * 1024 * 1024; // Cloudflare Pages 25 MiB hard ceiling
+const MAX_PAGES_FILE_BYTES = 25 * 1024 * 1024; // Cloudflare Pages 单个文件上限 25 MiB
 
 const ROOT = process.cwd();
 const GENERATED_JSON_PATH = path.join(ROOT, "src", "data", "releases.generated.json");
@@ -79,7 +79,7 @@ async function downloadBuffer(url) {
 
 async function main() {
   console.log(`[sync-release] Fetching releases from ${UPSTREAM_REPO}...`);
-  // Always use /releases?per_page=10 instead of /releases/latest so prereleases are included.
+  // 用 /releases?per_page=10 而不是 /releases/latest，这样也能读到预发布版本
   const rawReleases = await fetchJson(
     `https://api.github.com/repos/${UPSTREAM_REPO}/releases?per_page=10`,
   );
@@ -110,7 +110,7 @@ async function main() {
     throw new Error(`Release ${tag} is missing SHA256SUMS.txt; refusing to deploy.`);
   }
 
-  // Reset public/download so only the latest version is hosted on Cloudflare Pages
+  // 清空 public/download，Cloudflare Pages 上只放最新版本
   if (fs.existsSync(PUBLIC_DOWNLOAD_ROOT)) {
     fs.rmSync(PUBLIC_DOWNLOAD_ROOT, { recursive: true, force: true });
   }
@@ -209,7 +209,7 @@ async function main() {
   fs.writeFileSync(GENERATED_JSON_PATH, `${JSON.stringify(payload, null, 2)}\n`, "utf8");
   console.log(`[sync-release] Wrote ${path.relative(ROOT, GENERATED_JSON_PATH)} (latest=${tag}).`);
 
-  // Also update fallback snapshot when explicitly requested
+  // 明确要求时顺便更新备用快照
   if (process.env.UPDATE_FALLBACK === "true") {
     const fallbackPayload = structuredClone(payload);
     if (fallbackPayload.latest.installer) fallbackPayload.latest.installer.sitePath = null;
