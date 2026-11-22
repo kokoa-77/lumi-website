@@ -4,9 +4,9 @@ on:
   push:
     branches: [main]
   schedule:
-    # Check upstream GitHub Releases every 6 hours (private repo Actions minutes are limited);
-    # skips build & deploy when the tag is unchanged. Run it manually right after a release.
-    - cron: "15 */6 * * *"
+    # Check upstream GitHub Releases hourly (public repo, so Actions minutes are free);
+    # skips build & deploy when the tag is unchanged.
+    - cron: "15 * * * *"
   workflow_dispatch:
     inputs:
       force_deploy:
