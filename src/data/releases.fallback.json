@@ -4,7 +4,7 @@
   "latest": {
     "tag": "v0.6.0-prereview",
     "version": "0.6.0-prereview",
-    "name": "Lumi v0.6.0 (Pre-review Build)",
+    "name": "Lumi Launcher v0.6.0 (Pre-review Build)",
     "kind": "prereview",
     "prerelease": true,
     "publishedAt": "2026-11-21T00:47:27Z",
@@ -32,7 +32,7 @@
     {
       "tag": "v0.6.0-prereview",
       "version": "0.6.0-prereview",
-      "name": "Lumi v0.6.0 (Pre-review Build)",
+      "name": "Lumi Launcher v0.6.0 (Pre-review Build)",
       "kind": "prereview",
       "prerelease": true,
       "publishedAt": "2026-11-21T00:47:27Z",
