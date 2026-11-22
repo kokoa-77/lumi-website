@@ -1,0 +1,5 @@
+# Formal 301 redirects for legacy /download paths to homepage inline download section
+/download /#download 301
+/download/ /#download 301
+/zh/download /zh/#download 301
+/zh/download/ /zh/#download 301

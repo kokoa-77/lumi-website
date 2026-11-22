@@ -1,0 +1,11 @@
+---
+import HomePage from "../../components/HomePage.astro";
+import { getDict } from "../../data/i18n";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const t = getDict("zh");
+---
+
+<BaseLayout locale="zh" title={t.home.metaTitle} description={t.home.metaDesc} routePath="/">
+  <HomePage locale="zh" />
+</BaseLayout>

@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <title>Lumi Launcher</title>
+  <!-- Lumi 图标方块：照 README 横幅，白边 + 深蓝圆角方块 + 柔光球 -->
+  <defs>
+    <linearGradient id="base" x1="0" y1="0" x2="0.8" y2="1">
+      <stop offset="0" stop-color="#0D1C3A"/>
+      <stop offset="0.45" stop-color="#132C58"/>
+      <stop offset="0.62" stop-color="#173769"/>
+      <stop offset="1" stop-color="#1F5498"/>
+    </linearGradient>
+    <radialGradient id="glow" gradientUnits="userSpaceOnUse" cx="512.0" cy="512.0" r="415.8">
+      <stop offset="0.45" stop-color="#6AA8FF" stop-opacity="0.56"/>
+      <stop offset="0.476" stop-color="#6AA8FF" stop-opacity="0.52"/>
+      <stop offset="0.614" stop-color="#6AA8FF" stop-opacity="0.33"/>
+      <stop offset="0.733" stop-color="#6AA8FF" stop-opacity="0.17"/>
+      <stop offset="0.852" stop-color="#6AA8FF" stop-opacity="0.07"/>
+      <stop offset="1" stop-color="#6AA8FF" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="orb" gradientUnits="userSpaceOnUse" cx="454.5" cy="440.7" r="288.0">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="0.2" stop-color="#EEF8FF"/>
+      <stop offset="0.31" stop-color="#E2F2FF"/>
+      <stop offset="0.42" stop-color="#C9E5FF"/>
+      <stop offset="0.52" stop-color="#B0D8FF"/>
+      <stop offset="0.63" stop-color="#96CBFF"/>
+      <stop offset="0.74" stop-color="#75AEEF"/>
+      <stop offset="0.84" stop-color="#5089D8"/>
+      <stop offset="0.95" stop-color="#2E61B2"/>
+      <stop offset="1" stop-color="#2656A5"/>
+    </radialGradient>
+    <clipPath id="inner"><rect x="81" y="81" width="862" height="862" rx="217"/></clipPath>
+  </defs>
+  <rect x="12" y="12" width="1000" height="1000" rx="286" fill="#FFFFFF"/>
+  <g clip-path="url(#inner)">
+    <rect x="81" y="81" width="862" height="862" fill="url(#base)"/>
+    <circle cx="512" cy="512" r="415.8" fill="url(#glow)"/>
+  </g>
+  <circle cx="512" cy="512" r="198" fill="url(#orb)"/>
+</svg>

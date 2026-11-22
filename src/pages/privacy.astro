@@ -1,0 +1,16 @@
+---
+import PrivacyPage from "../components/PrivacyPage.astro";
+import { getDict } from "../data/i18n";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const t = getDict("en");
+---
+
+<BaseLayout
+  locale="en"
+  title={t.privacy.metaTitle}
+  description={t.privacy.metaDesc}
+  routePath="/privacy"
+>
+  <PrivacyPage locale="en" />
+</BaseLayout>

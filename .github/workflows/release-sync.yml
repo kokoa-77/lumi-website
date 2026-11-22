@@ -1,0 +1,168 @@
+name: Sync Releases & Deploy Lumi Website
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    # Check upstream GitHub Releases hourly; skips build & deploy when tag is unchanged
+    - cron: "15 * * * *"
+  workflow_dispatch:
+    inputs:
+      force_deploy:
+        description: "Force deploy even if release version is unchanged"
+        required: false
+        default: "true"
+        type: choice
+        options:
+          - "true"
+          - "false"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: lumi-website-deploy
+  cancel-in-progress: false
+
+jobs:
+  check-changes:
+    name: Check Upstream Release Tag
+    runs-on: ubuntu-latest
+    outputs:
+      should_deploy: ${{ steps.check.outputs.should_deploy }}
+      latest_tag: ${{ steps.check.outputs.latest_tag }}
+    env:
+      SITE_URL: ${{ vars.SITE_URL || 'https://lumilauncher.pages.dev' }}
+      UPSTREAM_REPO: kokoa-77/LumiLauncher
+    steps:
+      - name: Compare live release-meta.json against upstream GitHub Releases
+        id: check
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          EVENT_NAME: ${{ github.event_name }}
+          FORCE_DEPLOY: ${{ github.event.inputs.force_deploy || 'false' }}
+        run: |
+          node - <<'EOF'
+          const fs = require("node:fs");
+          (async () => {
+            const out = process.env.GITHUB_OUTPUT;
+            const event = process.env.EVENT_NAME;
+            const force = process.env.FORCE_DEPLOY === "true";
+            const repo = process.env.UPSTREAM_REPO;
+            const siteUrl = (process.env.SITE_URL || "").replace(/\/+$/, "");
+
+            const headers = {
+              Accept: "application/vnd.github+json",
+              "User-Agent": "lumi-website-release-check",
+            };
+            if (process.env.GITHUB_TOKEN) {
+              headers.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
+            }
+
+            const relRes = await fetch(`https://api.github.com/repos/${repo}/releases?per_page=10`, { headers });
+            if (!relRes.ok) throw new Error(`GitHub API HTTP ${relRes.status}`);
+            const rels = (await relRes.json()).filter((r) => !r.draft);
+            const latestTag = rels[0]?.tag_name || "";
+            fs.appendFileSync(out, `latest_tag=${latestTag}\n`);
+
+            if (event === "push" || (event === "workflow_dispatch" && force)) {
+              console.log(`Event=${event} force=${force} -> deploying (${latestTag}).`);
+              fs.appendFileSync(out, "should_deploy=true\n");
+              return;
+            }
+
+            let liveTag = "";
+            try {
+              const liveRes = await fetch(`${siteUrl}/release-meta.json`, {
+                headers: { "User-Agent": "lumi-website-release-check" },
+              });
+              if (liveRes.ok) {
+                const liveJson = await liveRes.json();
+                liveTag = liveJson.tag || "";
+              }
+            } catch (err) {
+              console.log("Could not read live release-meta.json; proceeding with deploy:", err.message);
+            }
+
+            if (liveTag && latestTag && liveTag === latestTag) {
+              console.log(`Live site already serves ${liveTag}; skipping build & deploy.`);
+              fs.appendFileSync(out, "should_deploy=false\n");
+            } else {
+              console.log(`Version changed (${liveTag || "none"} -> ${latestTag}); deploying.`);
+              fs.appendFileSync(out, "should_deploy=true\n");
+            }
+          })().catch((err) => {
+            console.error(err);
+            process.exit(1);
+          });
+          EOF
+
+  build-and-deploy:
+    name: Build & Deploy to Cloudflare Pages
+    needs: check-changes
+    if: needs.check-changes.outputs.should_deploy == 'true'
+    runs-on: ubuntu-latest
+    env:
+      SITE_URL: ${{ vars.SITE_URL || 'https://lumilauncher.pages.dev' }}
+      PAGES_PROJECT_NAME: ${{ vars.PAGES_PROJECT_NAME || 'lumilauncher' }}
+      UPSTREAM_REPO: kokoa-77/LumiLauncher
+
+    steps:
+      - name: Checkout lumi-website
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - name: Install dependencies (including pinned wrangler)
+        run: pnpm install --frozen-lockfile
+
+      - name: Cache Astro image optimization output
+        uses: actions/cache@v4
+        with:
+          path: node_modules/.astro/assets
+          key: astro-assets-${{ runner.os }}-${{ hashFiles('src/assets/**') }}
+          restore-keys: |
+            astro-assets-${{ runner.os }}-
+
+      - name: Sync latest release & verify SHA-256 checksums
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SYNC_DOWNLOAD_ASSETS: "true"
+        run: pnpm run sync:release
+
+      - name: Sync upstream tokens.css & build live /demo from latest release tag
+        run: |
+          TAG=$(node -e "const d=require('./src/data/releases.generated.json'); console.log(d.latest.tag)")
+          echo "Syncing tokens.css & building /demo from tag: $TAG"
+          UPSTREAM_REF="$TAG" pnpm run sync:tokens
+          git clone --depth 1 --branch "$TAG" "https://github.com/${UPSTREAM_REPO}.git" .tmp-upstream
+          pnpm --dir .tmp-upstream install --frozen-lockfile
+          UPSTREAM_APP_DIR="$PWD/.tmp-upstream/app" pnpm run build:demo
+          rm -rf .tmp-upstream
+
+      - name: Typecheck & build site
+        run: |
+          pnpm run check:astro
+          pnpm run build
+          pnpm run check:budget
+
+      - name: Ensure Cloudflare Pages project exists
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          pnpm exec wrangler pages project create "$PAGES_PROJECT_NAME" --production-branch=main || true
+
+      - name: Deploy dist/ to Cloudflare Pages
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          pnpm exec wrangler pages deploy dist --project-name "$PAGES_PROJECT_NAME" --branch=main --commit-dirty=true

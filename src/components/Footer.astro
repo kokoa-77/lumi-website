@@ -1,0 +1,85 @@
+---
+import { getDict } from "../data/i18n";
+import type { Locale } from "../data/site";
+import { LINKS, localizedPath } from "../data/site";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getDict(locale);
+const isZh = locale === "zh";
+const homeHref = localizedPath(locale, "/");
+
+const footerLinks = [
+  { label: isZh ? "功能" : "Features", href: `${homeHref}#features`, ext: false },
+  { label: isZh ? "常见问题" : "FAQ", href: `${homeHref}#faq`, ext: false },
+  { label: isZh ? "下载" : "Download", href: `${homeHref}#download`, ext: false },
+  { label: isZh ? "在线试玩" : "Demo", href: localizedPath(locale, "/demo"), ext: false },
+  { label: isZh ? "更新日志" : "Changelog", href: localizedPath(locale, "/changelog"), ext: false },
+  { label: isZh ? "社区" : "Community", href: `${homeHref}#community`, ext: false },
+  { label: isZh ? "隐私政策" : "Privacy", href: localizedPath(locale, "/privacy"), ext: false },
+  {
+    label: isZh ? "品牌政策" : "Brand",
+    href: isZh ? LINKS.trademarkZh : LINKS.trademark,
+    ext: true,
+  },
+  { label: isZh ? "爱发电" : "Afdian", href: LINKS.afdian, ext: true },
+  { label: "GitHub", href: LINKS.github, ext: true },
+];
+---
+
+<footer class="mt-24 pb-10 pt-2">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6">
+    <div class="lumi-hairline-accent mb-10"></div>
+
+    <div class="flex flex-col justify-between gap-6 md:flex-row md:items-center">
+      <div class="space-y-1 text-xs leading-relaxed text-[var(--fg-muted)]">
+        <p class="font-medium text-[var(--fg)]">© 2026 Lumi Launcher · kokoa-77 &amp; Contributors</p>
+        <p>
+          {isZh ? "Lumi 是基于 " : "Lumi is free software under "}
+          <a
+            href={LINKS.license}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="underline decoration-[var(--line)] underline-offset-4 hover:text-[var(--accent)]"
+          >
+            GPL-3.0-only
+          </a>
+          {isZh ? " 发布的开源软件。" : "."}
+        </p>
+        <p>
+          {
+            isZh
+              ? "基于 Tauri 2、自研 Rust 核心与 React 19 构建"
+              : "Built with Tauri 2, Rust, and React 19"
+          }
+        </p>
+      </div>
+
+      <nav
+        aria-label="Footer"
+        class="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs font-medium text-[var(--fg-muted)]"
+      >
+        {
+          footerLinks.map((item) => (
+            <a
+              href={item.href}
+              target={item.ext ? "_blank" : undefined}
+              rel={item.ext ? "noopener noreferrer" : undefined}
+              class="no-underline transition-colors hover:text-[var(--accent)]"
+            >
+              {item.label}
+            </a>
+          ))
+        }
+      </nav>
+    </div>
+
+    <div class="mt-8 space-y-1 text-center text-[11px] leading-relaxed text-[var(--fg-muted)]">
+      {isZh && t.footer.mojangZh && <p>{t.footer.mojangZh}</p>}
+      <p>{t.footer.mojangEn}</p>
+    </div>
+  </div>
+</footer>

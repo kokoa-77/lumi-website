@@ -1,0 +1,278 @@
+---
+import { Picture } from "astro:assets";
+import enHomeDark from "../assets/screenshots/en/01-home-dark-blue.png";
+import enHomeLight from "../assets/screenshots/en/01-home-light.png";
+import enInstancesDark from "../assets/screenshots/en/02-instances-dark.png";
+import enInstancesLight from "../assets/screenshots/en/02-instances-light.png";
+import zhHomeDark from "../assets/screenshots/zh/01-home-dark-blue.png";
+import zhHomeLight from "../assets/screenshots/zh/01-home-light.png";
+import zhInstancesDark from "../assets/screenshots/zh/02-instances-dark.png";
+import zhInstancesLight from "../assets/screenshots/zh/02-instances-light.png";
+import type { Locale } from "../data/site";
+import { getReleases, LINKS, localizedPath, primaryDownloadHref } from "../data/site";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const isZh = locale === "zh";
+const shotHomeLight = isZh ? zhHomeLight : enHomeLight;
+const shotHomeDark = isZh ? zhHomeDark : enHomeDark;
+const shotInstancesLight = isZh ? zhInstancesLight : enInstancesLight;
+const shotInstancesDark = isZh ? zhInstancesDark : enInstancesDark;
+const { latest } = getReleases();
+const installerHref = primaryDownloadHref(latest.installer, latest.htmlUrl);
+const installerName = latest.installer?.name || "Lumi_0.6.0_x64-setup.exe";
+const langParam = isZh ? "zh-CN" : "en";
+const onboardingSrc = `/demo-app/index.html?lang=${langParam}&theme=light&onboarding=1`;
+const homeSrc = `/demo-app/index.html?lang=${langParam}&theme=light`;
+const homeHref = localizedPath(locale, "/");
+---
+
+<section class="mx-auto max-w-7xl px-3 pb-10 pt-6 sm:px-6">
+  <!-- Sleek demo control ribbon -->
+  <div
+    class="lumi-glass mb-4 flex flex-wrap items-center justify-between gap-3 rounded-2xl px-4 py-3 text-xs sm:text-sm"
+  >
+    <div class="flex flex-wrap items-center gap-2.5">
+      <span class="relative flex h-2.5 w-2.5">
+        <span
+          class="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--accent)] opacity-60"
+        ></span>
+        <span class="relative inline-flex h-2.5 w-2.5 rounded-full bg-[var(--accent)]"></span>
+      </span>
+      <span class="font-semibold text-[var(--fg)]">
+        {isZh ? "浏览器真实界面试玩" : "Interactive Browser Demo"}
+      </span>
+      <span class="text-[var(--fg-muted)]">
+        {
+          isZh
+            ? "这是 Lumi 的真实 React 界面 + 模拟数据，不会真的下载或启动游戏。"
+            : "Real Lumi UI running with mock data — no files are downloaded or games launched."
+        }
+      </span>
+    </div>
+
+    <div class="hidden flex-wrap items-center gap-2 md:flex">
+      <button
+        type="button"
+        data-demo-src={onboardingSrc}
+        aria-pressed="true"
+        class="lumi-pill cursor-pointer border border-transparent bg-[var(--accent)] px-3 py-1.5 text-xs font-semibold text-[var(--on-accent)]"
+      >
+        {isZh ? "从首次引导开始" : "Start Onboarding"}
+      </button>
+      <button
+        type="button"
+        data-demo-src={homeSrc}
+        aria-pressed="false"
+        class="lumi-pill cursor-pointer border border-[var(--line)] bg-[var(--surface)] px-3 py-1.5 text-xs font-semibold text-[var(--fg)] hover:bg-[var(--surface-hover)]"
+      >
+        {isZh ? "直达世界首页" : "Jump to Home"}
+      </button>
+      <a
+        href={installerHref}
+        download={installerName}
+        data-direct-download={installerName}
+        class="lumi-pill inline-flex items-center gap-1.5 bg-[var(--accent)] px-3.5 py-1.5 text-xs font-semibold text-[var(--on-accent)] no-underline hover:bg-[var(--accent-hover)]"
+      >
+        ↓ {isZh ? "下载桌面版" : "Download App"}
+      </a>
+    </div>
+  </div>
+
+  <!-- Desktop live interactive iframe frame (src assigned via JS only on >=768px to guarantee 0 KB mobile transfer) -->
+  <div class="hidden md:block">
+    <div class="lumi-window-frame relative overflow-hidden rounded-3xl">
+      <iframe
+        id="lumi-demo-frame"
+        data-initial-src={onboardingSrc}
+        title={isZh ? "Lumi Launcher 浏览器试玩" : "Lumi Launcher Live Demo"}
+        class="block h-[min(78vh,780px)] min-h-[600px] w-full border-0 bg-[var(--bg)]"
+      ></iframe>
+    </div>
+    <p class="mt-3 text-center text-xs text-[var(--fg-muted)]">
+      {
+        isZh
+          ? "提示：在首次引导中点「登录正版 Minecraft」会触发模拟登录（约 0.8 秒），进入首页后可自由切换实例体验「随实例变色」、发现页、9 大分类游戏设置编辑器与本机跨实例同步。"
+          : "Tip: Click Sign in during onboarding to simulate login (~0.8s), then explore adaptive instance colors, Discover, the 9-category game settings editor, and Local Instance Sync."
+      }
+    </p>
+  </div>
+
+  <!-- Mobile graceful preview (saves 100% demo bundle bandwidth) -->
+  <div class="space-y-5 md:hidden">
+    <div class="lumi-panel p-5 text-center">
+      <p class="text-sm font-bold text-[var(--fg)]">
+        {isZh ? "请在电脑浏览器上打开体验完整试玩" : "Open on desktop for the interactive demo"}
+      </p>
+      <p class="mt-1.5 text-xs leading-relaxed text-[var(--fg-muted)]">
+        {
+          isZh
+            ? "Lumi 是 Windows 桌面启动器，窄屏设备不会加载演示包，为你节省手机流量并改以高清实机截图预览。"
+            : "Lumi is a Windows desktop launcher. Narrow screens skip loading the demo bundle to save mobile data and show screenshots instead."
+        }
+      </p>
+      <div class="mt-4 flex flex-wrap justify-center gap-2">
+        <button
+          type="button"
+          id="lumi-demo-copy-link"
+          data-copied-label={isZh ? "已复制链接，发到电脑打开" : "Link copied for desktop"}
+          class="lumi-pill cursor-pointer bg-[var(--accent)] px-4 py-2 text-xs font-semibold text-[var(--on-accent)]"
+        >
+          {isZh ? "复制试玩链接到电脑打开" : "Copy Demo Link for PC"}
+        </button>
+        <a
+          href={isZh ? LINKS.qqGroup : homeHref}
+          target={isZh ? "_blank" : undefined}
+          rel={isZh ? "noopener noreferrer" : undefined}
+          class="lumi-pill border border-[var(--line)] bg-[var(--surface-2)] px-4 py-2 text-xs font-semibold text-[var(--fg)] no-underline"
+        >
+          {isZh ? "加入官方 QQ 群" : "Back Home"}
+        </a>
+      </div>
+      <div
+        id="lumi-demo-copy-fallback"
+        hidden
+        class="mx-auto mt-3 max-w-xs rounded-2xl border border-[var(--line)] bg-[var(--surface-2)] p-3 text-left text-xs"
+      >
+        <p class="font-semibold text-[var(--fg)]">
+          {isZh ? "自动复制受限，请长按下方网址复制：" : "Clipboard unavailable — press & hold to copy:"}
+        </p>
+        <input
+          id="lumi-demo-copy-input"
+          type="text"
+          readonly
+          aria-label={isZh ? "试玩页链接" : "Demo URL"}
+          class="mt-1.5 w-full rounded-xl border border-[var(--line)] bg-[var(--surface)] px-3 py-1.5 font-mono text-[11px] text-[var(--fg)] select-all"
+        />
+      </div>
+    </div>
+
+    <div class="lumi-window-frame">
+      <Picture
+        src={shotHomeLight}
+        alt="Lumi Home"
+        widths={[640, 1024]}
+        sizes="100vw"
+        formats={["avif", "webp"]}
+        fallbackFormat="webp"
+        class="block h-auto w-full [html[data-theme='dark']_&]:hidden"
+      />
+      <Picture
+        src={shotHomeDark}
+        alt="Lumi Home (Dark)"
+        widths={[640, 1024]}
+        sizes="100vw"
+        formats={["avif", "webp"]}
+        fallbackFormat="webp"
+        class="hidden h-auto w-full [html[data-theme='dark']_&]:block"
+      />
+    </div>
+    <div class="lumi-window-frame">
+      <Picture
+        src={shotInstancesLight}
+        alt="Lumi Instances"
+        widths={[640, 1024]}
+        sizes="100vw"
+        formats={["avif", "webp"]}
+        fallbackFormat="webp"
+        class="block h-auto w-full [html[data-theme='dark']_&]:hidden"
+      />
+      <Picture
+        src={shotInstancesDark}
+        alt="Lumi Instances (Dark)"
+        widths={[640, 1024]}
+        sizes="100vw"
+        formats={["avif", "webp"]}
+        fallbackFormat="webp"
+        class="hidden h-auto w-full [html[data-theme='dark']_&]:block"
+      />
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  (() => {
+    const frame = document.getElementById("lumi-demo-frame");
+    const mq = window.matchMedia("(min-width: 768px)");
+
+    function mountFrameIfDesktop() {
+      if (!frame || !mq.matches) return;
+      if (!frame.getAttribute("src")) {
+        const init = frame.getAttribute("data-initial-src");
+        if (init) frame.setAttribute("src", init);
+      }
+    }
+
+    mountFrameIfDesktop();
+    mq.addEventListener?.("change", mountFrameIfDesktop);
+
+    if (frame) {
+      const btns = Array.from(document.querySelectorAll("[data-demo-src]"));
+      for (const btn of btns) {
+        btn.addEventListener("click", () => {
+          const src = btn.getAttribute("data-demo-src");
+          if (src && mq.matches) frame.setAttribute("src", src);
+          for (const b of btns) {
+            const on = b === btn;
+            b.setAttribute("aria-pressed", on ? "true" : "false");
+            b.classList.toggle("bg-[var(--accent)]", on);
+            b.classList.toggle("text-[var(--on-accent)]", on);
+            b.classList.toggle("border-transparent", on);
+            b.classList.toggle("bg-[var(--surface)]", !on);
+            b.classList.toggle("text-[var(--fg)]", !on);
+            b.classList.toggle("border-[var(--line)]", !on);
+          }
+        });
+      }
+    }
+
+    const copyBtn = document.getElementById("lumi-demo-copy-link");
+    const copyFallback = document.getElementById("lumi-demo-copy-fallback");
+    const copyInput = document.getElementById("lumi-demo-copy-input");
+    if (copyBtn) {
+      const orig = copyBtn.textContent || "";
+      copyBtn.addEventListener("click", async () => {
+        const cleanUrl = `${window.location.origin}${window.location.pathname}`;
+        let ok = false;
+        try {
+          if (navigator.clipboard?.writeText) {
+            await navigator.clipboard.writeText(cleanUrl);
+            ok = true;
+          }
+        } catch {
+          ok = false;
+        }
+        if (!ok) {
+          try {
+            const ta = document.createElement("textarea");
+            ta.value = cleanUrl;
+            ta.setAttribute("readonly", "");
+            ta.style.position = "fixed";
+            ta.style.opacity = "0";
+            document.body.appendChild(ta);
+            ta.select();
+            ok = document.execCommand("copy");
+            ta.remove();
+          } catch {
+            ok = false;
+          }
+        }
+        if (ok) {
+          if (copyFallback) copyFallback.hidden = true;
+          copyBtn.textContent = copyBtn.getAttribute("data-copied-label") || "Copied";
+          setTimeout(() => {
+            copyBtn.textContent = orig;
+          }, 2200);
+        } else if (copyFallback && copyInput) {
+          copyInput.value = cleanUrl;
+          copyFallback.hidden = false;
+          copyInput.focus();
+          copyInput.select();
+        }
+      });
+    }
+  })();
+</script>

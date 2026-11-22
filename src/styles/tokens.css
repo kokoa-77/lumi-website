@@ -1,0 +1,264 @@
+/*
+ * 设计令牌：所有颜色、圆角、阴影、字体、动效都只能从这里取。
+ * 这里是「底层外观」的默认值。主题引擎（lib/themeEngine.ts）运行时只改这些变量，组件不用改。
+ * 命名避开 Tailwind 自带的变量名（--radius-*、--ease-* 等），由 global.css 统一映射。
+ */
+
+:root {
+  /* 字体：只用系统已装字体，不打包中文字体 */
+  --font-ui:
+    "MiSans", "HarmonyOS Sans SC", "PingFang SC", "Microsoft YaHei UI", system-ui, sans-serif;
+  --font-code: "JetBrains Mono", "Cascadia Code", Consolas, monospace;
+
+  /*
+   * 圆角分级（两条规则，见 docs/DESIGN.md）：
+   * 能点的控件一律胶囊；装东西的（行、卡片、面板、弹窗）是圆角矩形，越外层越圆。
+   */
+  --r-row: 8px; /* 列表行、模组图标、小图片 */
+  --r-control: 999px; /* 按钮、输入框、下拉框、分段选择：胶囊 */
+  --r-panel: 16px; /* 面板、卡片、横幅、弹出菜单、启动条 */
+  --r-dialog: 20px; /* 弹窗 */
+  --r-cta: 999px; /* 主按钮：继续、开始游戏 */
+  --r-icon: 999px; /* 图标按钮、头像 */
+  --r-tag: 999px; /* 标签 */
+  /* 套在里面的圆角 = 外面的圆角 − 间距，边缘才平行 */
+  --r-inner: max(4px, calc(var(--r-control) - 3px));
+  --r-item: max(4px, calc(var(--r-panel) - 6px));
+
+  /* 动效：三条曲线、五种时长，上限 400 毫秒 */
+  --motion-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --motion-ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --motion-ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --motion-press: 100ms;
+  --motion-toggle: 180ms;
+  --motion-overlay: 220ms;
+  --motion-enter: 260ms;
+  --motion-page: 340ms;
+
+  /*
+   * 主色：只由色相、彩度决定，亮度由主题引擎按对比度算好（浅色、深色各一套）。
+   * 下面是默认天空蓝（色相 245、彩度 0.15）算出来的值，和 lib/color.test.ts 对得上；
+   * 换主色时主题引擎会重算这五个数。
+   */
+  --accent-h: 245;
+  --accent-l-light: 54.5%;
+  --accent-c-light: 0.137;
+  --accent-l-dark: 76%;
+  --accent-c-dark: 0.132;
+
+  /* 主按钮（胶囊）：一圈半透明白边 + 带主色的投影，放在截图上也分得清 */
+  --shadow-cta:
+    0 0 0 4px oklch(100% 0 0 / 0.22), 0 12px 30px -10px oklch(10% 0.05 var(--accent-h) / 0.55);
+
+  /* 深色主题的底色色相：夜空蓝。不跟世界的颜色走，主色（按钮、选中）才跟 */
+  --night-h: 268;
+}
+
+/* 画面效果「流畅」（低配电脑）：过渡变短；位移、缩放类动画由 MotionConfig 关掉，只留淡入淡出 */
+:root[data-fx="lite"] {
+  --motion-toggle: 120ms;
+  --motion-overlay: 120ms;
+  --motion-enter: 120ms;
+  --motion-page: 120ms;
+}
+
+/*
+ * 主色的五个变量登记成有类型的变量，才能做过渡：换实例时整套界面平滑换色（招牌 2「随实例变色」）。
+ * 流畅模式、减少动效下直接切换。
+ */
+@property --accent-h {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 245;
+}
+@property --accent-l-light {
+  syntax: "<percentage>";
+  inherits: true;
+  initial-value: 54.5%;
+}
+@property --accent-c-light {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0.137;
+}
+@property --accent-l-dark {
+  syntax: "<percentage>";
+  inherits: true;
+  initial-value: 76%;
+}
+@property --accent-c-dark {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0.132;
+}
+
+/* 过渡挂在 html 自己身上；global.css 里「减少动效」的规则只管子元素，所以这里单独排除 */
+@media (prefers-reduced-motion: no-preference) {
+  :root[data-fx="rich"]:not([data-reduce-motion="true"]) {
+    transition:
+      --accent-h var(--motion-page) var(--motion-ease-in-out),
+      --accent-l-light var(--motion-page) var(--motion-ease-in-out),
+      --accent-c-light var(--motion-page) var(--motion-ease-in-out),
+      --accent-l-dark var(--motion-page) var(--motion-ease-in-out),
+      --accent-c-dark var(--motion-page) var(--motion-ease-in-out);
+  }
+}
+
+[data-theme="light"] {
+  color-scheme: light;
+  --bg: oklch(97.6% 0.004 var(--accent-h));
+  --surface: oklch(100% 0 0);
+  --surface-2: oklch(95.8% 0.006 var(--accent-h));
+  /* 浮层（下拉列表、弹窗、面板）：永远不透明，开了云母也不透字 */
+  --overlay: oklch(99.5% 0.002 var(--accent-h));
+  --surface-hover: oklch(93.4% 0.008 var(--accent-h));
+  --line: oklch(89.5% 0.008 var(--accent-h));
+  --fg: oklch(23% 0.012 var(--accent-h));
+  --fg-muted: oklch(50% 0.012 var(--accent-h));
+  --accent: oklch(var(--accent-l-light) var(--accent-c-light) var(--accent-h));
+  --accent-hover: oklch(calc(var(--accent-l-light) - 5%) var(--accent-c-light) var(--accent-h));
+  --on-accent: oklch(100% 0 0);
+  /* 选中、做完了的浅底：白底上要一眼看得出（24%），世界颜色偏灰时彩度至少 0.09 */
+  --accent-soft: oklch(
+    var(--accent-l-light) max(var(--accent-c-light), 0.09) var(--accent-h) /
+    0.2
+  );
+  --danger: oklch(56% 0.2 25);
+  --danger-soft: oklch(56% 0.2 25 / 0.12);
+  --on-danger: oklch(99% 0 0);
+  --warning: oklch(58% 0.14 70);
+  --warning-soft: oklch(70% 0.14 75 / 0.16);
+  --scrim: oklch(20% 0.02 260 / 0.4);
+  --shadow-raised: 0 1px 2px oklch(20% 0.02 260 / 0.07);
+  --shadow-overlay: 0 12px 32px -8px oklch(20% 0.02 260 / 0.22);
+  --shadow-dialog: 0 30px 80px -20px oklch(15% 0.03 260 / 0.38);
+
+  /*
+   * 叠在世界截图上（首页、实例横幅）——白天：截图从边上融进浅色底，字是深色，通透、轻。
+   * 遮罩用的就是窗口底色，所以离开首页时截图淡掉，就像融进界面里，标题栏和侧栏也不用换颜色。
+   */
+  --hero-scrim: oklch(97.6% 0.004 var(--accent-h));
+  --hero-tint: oklch(100% 0 0 / 0);
+  --on-hero: var(--fg);
+  --on-hero-muted: var(--fg-muted);
+  --hero-chip: oklch(100% 0 0 / 0.72);
+  --hero-chip-hover: oklch(100% 0 0 / 0.92);
+  --hero-chip-line: oklch(20% 0.02 260 / 0.1);
+
+  /*
+   * 微光的画面（首次运行引导、安装程序、以后的首页默认背景）：白天的天空从白到浅天蓝；
+   * 光点是一颗颗带主色的淡光（白天里白光看不见，换实例时一起变色）
+   */
+  --sky-top: oklch(98.5% 0.008 230);
+  --sky-bottom: oklch(89% 0.045 232);
+  --mote: oklch(var(--accent-l-light) var(--accent-c-light) var(--accent-h) / 0.7);
+  --mote-core: oklch(var(--accent-l-light) var(--accent-c-light) var(--accent-h) / 0.28);
+  --glow: oklch(var(--accent-l-light) var(--accent-c-light) var(--accent-h) / 0.28);
+
+  /* 纯 2D 柔光叠层空状态插画（随实例主色与昼夜实时融合） */
+  --art-back: oklch(91.5% 0.036 var(--accent-h) / 0.78);
+  --art-front: oklch(100% 0 0 / 0.92);
+  --art-stroke: oklch(54% 0.075 var(--accent-h) / 0.28);
+  --art-fill-light: oklch(93% 0.03 var(--accent-h));
+  --art-fill-mid: oklch(83.5% 0.062 var(--accent-h));
+  --art-line: oklch(54% 0.045 var(--accent-h) / 0.28);
+
+  /* 纯 2D 柔光矢量场景背景（首页默认、首次引导、关于横幅） */
+  --scene-hill-far: oklch(91.5% 0.032 var(--accent-h) / 0.65);
+  --scene-hill-mid: oklch(94.5% 0.024 var(--accent-h) / 0.82);
+  --scene-hill-near: oklch(97.2% 0.012 var(--accent-h) / 0.95);
+  --scene-beacon: oklch(80% 0.15 78);
+}
+
+/* 深色 = 夜晚：夜空蓝的底，三层从深到浅（窗口 → 内容面板 → 卡片和控件） */
+[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: oklch(15.5% 0.024 var(--night-h));
+  --surface-2: oklch(18.5% 0.026 var(--night-h));
+  --surface: oklch(22% 0.028 var(--night-h));
+  --overlay: oklch(23.5% 0.03 var(--night-h));
+  --surface-hover: oklch(26.5% 0.03 var(--night-h));
+  --line: oklch(100% 0 0 / 0.08);
+  --fg: oklch(95% 0.008 var(--night-h));
+  --fg-muted: oklch(72% 0.02 var(--night-h));
+  --accent: oklch(var(--accent-l-dark) var(--accent-c-dark) var(--accent-h));
+  --accent-hover: oklch(calc(var(--accent-l-dark) + 5%) var(--accent-c-dark) var(--accent-h));
+  --on-accent: oklch(20% 0.03 var(--accent-h));
+  --accent-soft: oklch(var(--accent-l-dark) var(--accent-c-dark) var(--accent-h) / 0.16);
+  --danger: oklch(66% 0.19 25);
+  --danger-soft: oklch(66% 0.19 25 / 0.16);
+  --on-danger: oklch(99% 0 0);
+  --warning: oklch(80% 0.14 80);
+  --warning-soft: oklch(80% 0.14 80 / 0.16);
+  --scrim: oklch(8% 0.02 var(--night-h) / 0.55);
+  /* 深色玻璃微光顶描边：1px 极淡顶部内高光，零模糊开销即可拉开卡片与浮层质感 */
+  --shadow-raised: inset 0 1px 0 oklch(100% 0 0 / 0.05), 0 1px 2px oklch(0% 0 0 / 0.3);
+  --shadow-overlay: inset 0 1px 0 oklch(100% 0 0 / 0.07), 0 12px 32px -8px oklch(0% 0 0 / 0.5);
+  --shadow-dialog: inset 0 1px 0 oklch(100% 0 0 / 0.08), 0 30px 80px -20px oklch(0% 0 0 / 0.7);
+
+  /* 夜晚：截图整体压一层夜空蓝，边上融进深色底，字是浅色 */
+  --hero-scrim: oklch(15.5% 0.024 var(--night-h));
+  --hero-tint: oklch(20% 0.06 var(--night-h) / 0.32);
+  --on-hero: oklch(97% 0.006 var(--night-h));
+  --on-hero-muted: oklch(84% 0.015 var(--night-h));
+  --hero-chip: oklch(100% 0 0 / 0.12);
+  --hero-chip-hover: oklch(100% 0 0 / 0.2);
+  --hero-chip-line: oklch(100% 0 0 / 0.2);
+
+  /* 微光的画面：夜空从深到稍亮（和窗口底色同一个夜空色相）；光点是主色的亮光，中心近白 */
+  --sky-top: oklch(13% 0.03 var(--night-h));
+  --sky-bottom: oklch(25% 0.06 var(--night-h));
+  --mote: oklch(97% 0.03 var(--accent-h));
+  --mote-core: oklch(var(--accent-l-dark) var(--accent-c-dark) var(--accent-h) / 0.75);
+  --glow: oklch(var(--accent-l-dark) var(--accent-c-dark) var(--accent-h) / 0.32);
+
+  /* 纯 2D 柔光叠层空状态插画（夜间保持柔和通透与清晰边界） */
+  --art-back: oklch(33% 0.052 var(--accent-h) / 0.72);
+  --art-front: oklch(26% 0.032 var(--night-h) / 0.9);
+  --art-stroke: oklch(100% 0 0 / 0.2);
+  --art-fill-light: oklch(30.5% 0.048 var(--accent-h));
+  --art-fill-mid: oklch(42% 0.075 var(--accent-h));
+  --art-line: oklch(100% 0 0 / 0.24);
+
+  /* 纯 2D 柔光矢量场景背景（夜空层叠山丘与星光） */
+  --scene-hill-far: oklch(25% 0.048 var(--night-h) / 0.78);
+  --scene-hill-mid: oklch(20% 0.038 var(--night-h) / 0.88);
+  --scene-hill-near: oklch(15.5% 0.026 var(--night-h) / 0.96);
+  --scene-beacon: oklch(86% 0.14 82);
+}
+
+/* 只给一小块换主色（实例卡片用自己世界的颜色）：元素上写好那五个变量，再加 accent-scope 类 */
+[data-theme="light"] .accent-scope {
+  --accent: oklch(var(--accent-l-light) var(--accent-c-light) var(--accent-h));
+  --accent-hover: oklch(calc(var(--accent-l-light) - 5%) var(--accent-c-light) var(--accent-h));
+  --accent-soft: oklch(
+    var(--accent-l-light) max(var(--accent-c-light), 0.09) var(--accent-h) /
+    0.2
+  );
+}
+
+[data-theme="dark"] .accent-scope {
+  --accent: oklch(var(--accent-l-dark) var(--accent-c-dark) var(--accent-h));
+  --accent-hover: oklch(calc(var(--accent-l-dark) + 5%) var(--accent-c-dark) var(--accent-h));
+  --on-accent: oklch(20% 0.03 var(--accent-h));
+  --accent-soft: oklch(var(--accent-l-dark) var(--accent-c-dark) var(--accent-h) / 0.16);
+}
+
+/*
+ * Windows 11 云母背景：表面改成半透明。窗口底色压一层很淡的天色：
+ * 系统的云母本身是中性灰，深色时侧栏、标题栏发灰、内容面板发蓝，两块不搭；
+ * 压一层夜空蓝 / 白天色后整个窗口是同一种天色，还能透出一点桌面的颜色。
+ */
+[data-backdrop="mica"][data-theme="light"] {
+  --bg: oklch(97.6% 0.004 var(--accent-h) / 0.35);
+  --surface: oklch(100% 0 0 / 0.62);
+  --surface-2: oklch(100% 0 0 / 0.4);
+  --surface-hover: oklch(100% 0 0 / 0.75);
+}
+
+[data-backdrop="mica"][data-theme="dark"] {
+  --bg: oklch(15.5% 0.024 var(--night-h) / 0.6);
+  --surface-2: oklch(20% 0.03 var(--night-h) / 0.4);
+  --surface: oklch(25% 0.032 var(--night-h) / 0.55);
+  --surface-hover: oklch(30% 0.034 var(--night-h) / 0.6);
+}

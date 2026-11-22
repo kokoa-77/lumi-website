@@ -1,0 +1,117 @@
+---
+import SpotArt from "../components/SpotArt.astro";
+import "../styles/global.css";
+---
+
+<!doctype html>
+<html lang="en" data-theme="light" data-fx="rich">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>404 — Page Not Found · Lumi Launcher</title>
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <script is:inline>
+      (() => {
+        try {
+          const saved = localStorage.getItem("lumi-theme");
+          if (saved === "dark" || saved === "light") {
+            document.documentElement.dataset.theme = saved;
+          }
+          const isZh =
+            location.pathname.startsWith("/zh") ||
+            (navigator.language || "").toLowerCase().startsWith("zh");
+          if (isZh) {
+            document.documentElement.lang = "zh-CN";
+            document.documentElement.dataset.lang404 = "zh";
+            document.title = "404 — 找不到这个页面 · Lumi Launcher";
+          }
+        } catch {
+          // ignore
+        }
+      })();
+    </script>
+  </head>
+  <body class="lumi-sky flex min-h-screen flex-col">
+    <header class="mx-auto flex w-full max-w-5xl items-center justify-between px-4 pt-5 sm:px-6">
+      <a
+        id="lumi-404-brand"
+        href="/"
+        class="inline-flex items-center gap-2.5 text-[var(--fg)] no-underline"
+      >
+        <img src="/favicon.svg" alt="Lumi" width="30" height="30" class="h-7.5 w-7.5 rounded-lg" />
+        <span class="text-sm font-extrabold tracking-tight sm:text-base">Lumi</span>
+      </a>
+      <a
+        id="lumi-404-switch"
+        href="/zh/"
+        class="lumi-glass lumi-pill px-3.5 py-1.5 text-xs font-semibold text-[var(--fg-muted)] no-underline hover:text-[var(--fg)]"
+      >
+        中文首页
+      </a>
+    </header>
+
+    <main class="flex flex-1 items-center justify-center px-4 py-16 sm:px-6">
+      <div class="mx-auto max-w-xl text-center">
+        <div class="mx-auto mb-5 flex justify-center">
+          <SpotArt kind="error" class="h-40 w-40" />
+        </div>
+        <p class="lumi-tabular text-xs font-bold tracking-widest text-[var(--accent)] uppercase">
+          404
+        </p>
+        <h1 id="lumi-404-title" class="mt-2 text-3xl font-extrabold text-[var(--fg)] sm:text-4xl">
+          Page not found
+        </h1>
+        <p id="lumi-404-desc" class="mt-3 text-sm leading-relaxed text-[var(--fg-muted)]">
+          The link may be outdated or moved. Head back to Lumi's homepage or jump to the download section.
+        </p>
+        <div class="mt-7 flex flex-wrap items-center justify-center gap-3">
+          <a
+            id="lumi-404-home"
+            href="/"
+            class="lumi-cta px-6 py-2.5 text-sm font-semibold no-underline"
+          >
+            Back Home
+          </a>
+          <a
+            id="lumi-404-dl"
+            href="/#download"
+            class="lumi-pill border border-[var(--line)] bg-[var(--surface)] px-6 py-2.5 text-sm font-semibold text-[var(--fg)] no-underline hover:bg-[var(--surface-hover)]"
+          >
+            Go to Downloads
+          </a>
+        </div>
+      </div>
+    </main>
+
+    <footer class="space-y-1 px-4 pb-8 text-center text-[11px] leading-relaxed text-[var(--fg-muted)]">
+      <p id="lumi-404-foot-zh" hidden>
+        非 Minecraft 官方产品。未经 Mojang 或 Microsoft 批准，也不与 Mojang 或 Microsoft 关联。
+      </p>
+      <p id="lumi-404-foot">
+        NOT AN OFFICIAL MINECRAFT PRODUCT. NOT APPROVED BY OR ASSOCIATED WITH MOJANG OR MICROSOFT.
+      </p>
+    </footer>
+
+    <script is:inline>
+      (() => {
+        if (document.documentElement.dataset.lang404 !== "zh") return;
+        const set = (id, text, href) => {
+          const el = document.getElementById(id);
+          if (!el) return;
+          if (text !== null) el.textContent = text;
+          if (href) el.setAttribute("href", href);
+        };
+        set("lumi-404-brand", null, "/zh/");
+        set("lumi-404-switch", "English Home", "/");
+        set("lumi-404-title", "找不到这个页面");
+        set("lumi-404-desc", "你访问的地址可能已过期或移动，可以返回首页或直接前往下载区。");
+        set("lumi-404-home", "返回首页", "/zh/");
+        set("lumi-404-dl", "前往下载", "/zh/#download");
+        const footZh = document.getElementById("lumi-404-foot-zh");
+        if (footZh) footZh.hidden = false;
+      })();
+    </script>
+  </body>
+</html>

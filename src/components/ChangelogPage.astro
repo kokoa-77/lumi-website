@@ -1,0 +1,196 @@
+---
+import { getDict } from "../data/i18n";
+import type { Locale } from "../data/site";
+import { formatBytes, formatDate, getReleases, localizedPath } from "../data/site";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getDict(locale);
+const c = t.changelog;
+const { releases } = getReleases();
+const rssHref = locale === "zh" ? "/zh/rss.xml" : "/rss.xml";
+const downloadHref = `${localizedPath(locale, "/")}#download`;
+
+const zhReleaseOverrides: Record<string, { name: string; body: string }> = {
+  "v0.6.1-prereview": {
+    name: "Lumi v0.6.1（预审构建）",
+    body: [
+      "面向源码核验与 Mojang AppID 审核的预审更新构建，全套视觉插画升级为原创纯 2D 柔光矢量体系。",
+      "> 说明：在 Mojang 批准 Lumi 的 AppID 之前，本预审构建默认关闭 Microsoft 登录入口。你仍可以体验完整界面、管理实例与世界存档、浏览 Modrinth / CurseForge 并检查各项设置。",
+      "### 本次更新",
+      "- 全套 17 处视觉资源（6 枚状态插画、6 套自适应界面场景与 Windows 安装程序夜空背景）统一升级为原创纯 2D 柔光矢量视觉，零 AI 位图残留、支持昼夜与实例主色实时响应。",
+      "- 优化演示预览内置双语数据与无 HUD 世界封面，并保持首页打包体积低于 250 KiB 预算。",
+      "### 文件校验",
+      "- 请对照该版本附带的 SHA256SUMS.txt 核验安装包与便携版完整性。",
+    ].join("\n"),
+  },
+  "v0.6.0-prereview": {
+    name: "Lumi v0.6.0（预审构建）",
+    body: [
+      "面向源码核验与 Mojang AppID 审核的公开预审构建。",
+      "> 说明：在 Mojang 批准 Lumi 的 AppID 之前，本预审构建默认关闭 Microsoft 登录入口。你仍可以体验完整界面、管理实例与世界存档、浏览 Modrinth / CurseForge 并检查各项设置。",
+      "### 文件校验",
+      "- 请对照该版本附带的 SHA256SUMS.txt 核验安装包与便携版完整性。",
+    ].join("\n"),
+  },
+};
+
+function renderReleaseLines(
+  body: string,
+): Array<{ type: "h3" | "quote" | "li" | "p"; text: string }> {
+  const blocks: Array<{ type: "h3" | "quote" | "li" | "p"; text: string }> = [];
+  for (const raw of body.split(/\r?\n/)) {
+    const line = raw.trim();
+    if (!line || line === ">") continue;
+    if (line.startsWith("### ")) {
+      blocks.push({ type: "h3", text: line.slice(4).trim() });
+    } else if (line.startsWith("## ")) {
+      blocks.push({ type: "h3", text: line.slice(3).trim() });
+    } else if (line.startsWith("> ")) {
+      blocks.push({ type: "quote", text: line.slice(2).replace(/\*\*/g, "").trim() });
+    } else if (line.startsWith("- ") || line.startsWith("* ")) {
+      blocks.push({ type: "li", text: line.slice(2).replace(/\*\*/g, "").trim() });
+    } else {
+      blocks.push({ type: "p", text: line.replace(/\*\*/g, "").trim() });
+    }
+  }
+  return blocks;
+}
+---
+
+<section class="lumi-sky pb-10 pt-12 sm:pt-16">
+  <div class="mx-auto max-w-4xl px-4 sm:px-6">
+    <div class="flex flex-wrap items-center justify-between gap-4">
+      <div>
+        <h1 class="text-3xl font-extrabold tracking-tight text-[var(--fg)] sm:text-5xl">
+          {c.title}
+        </h1>
+        <p class="mt-3 max-w-2xl text-base text-[var(--fg-muted)]">{c.subtitle}</p>
+      </div>
+      <a
+        href={rssHref}
+        class="lumi-pill inline-flex items-center gap-2 border border-[var(--line)] bg-[var(--surface)] px-4 py-2 text-xs font-semibold text-[var(--fg)] no-underline hover:bg-[var(--surface-hover)]"
+      >
+        <svg class="h-3.5 w-3.5 text-[var(--accent)]" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <circle cx="6.18" cy="17.82" r="2.18" />
+          <path d="M4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83c0-8.59-6.97-15.56-15.56-15.56zm0 5.66v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.47-4.43-9.9-9.9-9.9z" />
+        </svg>
+        {c.rssLabel}
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="mx-auto max-w-4xl space-y-6 px-4 py-10 sm:px-6">
+  {
+    releases.map((rel, idx) => {
+      const zhOverride = locale === "zh" ? zhReleaseOverrides[rel.tag] : undefined;
+      const displayName = zhOverride?.name ?? rel.name;
+      const blocks = renderReleaseLines(zhOverride?.body ?? rel.body);
+      const kindLabel = t.releaseKind[rel.kind];
+      return (
+        <article id={rel.anchor} class="lumi-panel scroll-mt-24 p-6 sm:p-8">
+          <div class="flex flex-wrap items-center justify-between gap-3 border-b border-[var(--line)] pb-4">
+            <div>
+              <div class="flex flex-wrap items-center gap-2">
+                <a
+                  href={`#${rel.anchor}`}
+                  class="lumi-tabular text-xl font-bold text-[var(--fg)] no-underline hover:text-[var(--accent)]"
+                >
+                  {displayName}
+                </a>
+                <span class="lumi-pill lumi-tabular bg-[var(--accent-soft)] px-2.5 py-0.5 text-xs font-semibold text-[var(--accent)]">
+                  {rel.tag}
+                </span>
+                <span
+                  class:list={[
+                    "lumi-pill px-2.5 py-0.5 text-xs font-semibold",
+                    rel.kind === "stable"
+                      ? "bg-[var(--accent-soft)] text-[var(--accent)]"
+                      : "bg-[var(--warning-soft)] text-[var(--warning)]",
+                  ]}
+                >
+                  {kindLabel}
+                </span>
+              </div>
+              <p class="mt-1 text-xs text-[var(--fg-muted)]">
+                {formatDate(rel.publishedAt, locale)}
+              </p>
+            </div>
+
+            <div class="flex items-center gap-2">
+              {idx === 0 && (
+                <a
+                  href={downloadHref}
+                  class="lumi-pill bg-[var(--accent)] px-3.5 py-1.5 text-xs font-semibold text-[var(--on-accent)] no-underline hover:bg-[var(--accent-hover)]"
+                >
+                  {c.downloadThis}
+                </a>
+              )}
+              <a
+                href={rel.htmlUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="lumi-pill border border-[var(--line)] bg-[var(--surface-2)] px-3.5 py-1.5 text-xs font-semibold text-[var(--fg)] no-underline hover:bg-[var(--surface-hover)]"
+              >
+                {c.viewOnGithub} ↗
+              </a>
+            </div>
+          </div>
+
+          <div class="mt-4 space-y-2.5 text-sm leading-relaxed text-[var(--fg-muted)]">
+            {blocks.length === 0 ? (
+              <p>{c.emptyNotice}</p>
+            ) : (
+              blocks.map((b) => {
+                if (b.type === "h3") {
+                  return <h3 class="pt-2 text-sm font-bold text-[var(--fg)]">{b.text}</h3>;
+                }
+                if (b.type === "quote") {
+                  return (
+                    <blockquote class="border-l-2 border-[var(--accent)] pl-3.5 text-xs leading-relaxed text-[var(--fg-muted)] sm:text-sm">
+                      {b.text}
+                    </blockquote>
+                  );
+                }
+                if (b.type === "li") {
+                  return (
+                    <p class="flex items-start gap-2 pl-1">
+                      <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--accent)]" />
+                      <span>{b.text}</span>
+                    </p>
+                  );
+                }
+                return <p>{b.text}</p>;
+              })
+            )}
+          </div>
+
+          {rel.assets.length > 0 && (
+            <div class="mt-5 border-t border-[var(--line)] pt-4">
+              <h4 class="text-xs font-semibold tracking-wider text-[var(--fg-muted)] uppercase">
+                {c.assetsHeading}
+              </h4>
+              <div class="mt-2.5 flex flex-wrap gap-2">
+                {rel.assets.map((a) => (
+                  <a
+                    href={a.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="lumi-pill lumi-tabular inline-flex items-center gap-2 border border-[var(--line)] bg-[var(--surface-2)] px-3 py-1.5 text-xs text-[var(--fg)] no-underline hover:border-[var(--accent)] hover:text-[var(--accent)]"
+                  >
+                    <code>{a.name}</code>
+                    <span class="text-[var(--fg-muted)]">{formatBytes(a.size)}</span>
+                  </a>
+                ))}
+              </div>
+            </div>
+          )}
+        </article>
+      );
+    })
+  }
+</section>

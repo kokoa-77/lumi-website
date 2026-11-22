@@ -1,0 +1,664 @@
+@import "tailwindcss";
+@import "./tokens.css";
+
+@layer base {
+  html {
+    font-family: var(--font-ui);
+    background-color: var(--bg);
+    color: var(--fg);
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background-color: var(--bg);
+    color: var(--fg);
+    overflow-x: clip;
+  }
+
+  code,
+  pre,
+  kbd {
+    font-family: var(--font-code);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+}
+
+/* Fallback tokens for pure-2D SpotArt in case upstream tokens.css is from an older release tag */
+[data-theme="light"] {
+  --lumi-art-back: oklch(91.5% 0.036 var(--accent-h) / 0.78);
+  --lumi-art-front: oklch(100% 0 0 / 0.92);
+  --lumi-art-stroke: oklch(54% 0.075 var(--accent-h) / 0.28);
+  --lumi-art-fill-light: oklch(93% 0.03 var(--accent-h));
+  --lumi-art-fill-mid: oklch(83.5% 0.062 var(--accent-h));
+  --lumi-art-line: oklch(54% 0.045 var(--accent-h) / 0.28);
+}
+
+[data-theme="dark"] {
+  --lumi-art-back: oklch(33% 0.052 var(--accent-h) / 0.72);
+  --lumi-art-front: oklch(26% 0.032 var(--night-h) / 0.9);
+  --lumi-art-stroke: oklch(100% 0 0 / 0.2);
+  --lumi-art-fill-light: oklch(30.5% 0.048 var(--accent-h));
+  --lumi-art-fill-mid: oklch(42% 0.075 var(--accent-h));
+  --lumi-art-line: oklch(100% 0 0 / 0.24);
+}
+
+/* ================================================================
+   1. Lumi Atmospheric Sky-Light Hero & Animated Aurora Orbs
+   ================================================================ */
+.lumi-sky {
+  position: relative;
+  background: linear-gradient(180deg, var(--sky-top) 0%, var(--sky-bottom) 52%, var(--bg) 100%);
+}
+
+.lumi-aurora-orb {
+  position: absolute;
+  border-radius: 999px;
+  pointer-events: none;
+  will-change: transform;
+  animation: lumi-aurora-drift 18s var(--motion-ease-in-out) infinite;
+}
+
+.lumi-aurora-a {
+  width: 720px;
+  height: 500px;
+  top: -150px;
+  right: -110px;
+  background: radial-gradient(
+    ellipse at center,
+    oklch(var(--accent-l-light) var(--accent-c-light) var(--accent-h) / 0.24) 0%,
+    oklch(var(--accent-l-light) var(--accent-c-light) var(--accent-h) / 0.12) 34%,
+    oklch(var(--accent-l-light) var(--accent-c-light) var(--accent-h) / 0.04) 60%,
+    transparent 76%
+  );
+}
+
+.lumi-aurora-b {
+  width: 660px;
+  height: 480px;
+  top: 20px;
+  left: -150px;
+  animation-delay: -7s;
+  background: radial-gradient(
+    ellipse at center,
+    oklch(86% 0.08 var(--accent-h) / 0.36) 0%,
+    oklch(86% 0.08 var(--accent-h) / 0.16) 38%,
+    oklch(86% 0.08 var(--accent-h) / 0.04) 62%,
+    transparent 78%
+  );
+}
+
+[data-theme="dark"] .lumi-aurora-a {
+  background: radial-gradient(
+    ellipse at center,
+    oklch(var(--accent-l-dark) var(--accent-c-dark) var(--accent-h) / 0.22) 0%,
+    oklch(var(--accent-l-dark) var(--accent-c-dark) var(--accent-h) / 0.1) 36%,
+    oklch(var(--accent-l-dark) var(--accent-c-dark) var(--accent-h) / 0.03) 62%,
+    transparent 76%
+  );
+}
+
+[data-theme="dark"] .lumi-aurora-b {
+  background: radial-gradient(
+    ellipse at center,
+    oklch(34% 0.09 var(--accent-h) / 0.3) 0%,
+    oklch(34% 0.09 var(--accent-h) / 0.14) 38%,
+    oklch(34% 0.09 var(--accent-h) / 0.03) 64%,
+    transparent 78%
+  );
+}
+
+@keyframes lumi-aurora-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(-24px, 18px, 0) scale(1.06);
+  }
+}
+
+/* Subtle halftone sky weave inspired by social-preview.png */
+.lumi-dot-grid {
+  background-image: radial-gradient(
+    circle,
+    oklch(var(--accent-l-light) var(--accent-c-light) var(--accent-h) / 0.14) 1.35px,
+    transparent 1.35px
+  );
+  background-size: 26px 26px;
+  mask-image: radial-gradient(ellipse 85% 65% at 50% 24%, black 30%, transparent 100%);
+}
+
+[data-theme="dark"] .lumi-dot-grid {
+  background-image: radial-gradient(
+    circle,
+    oklch(var(--accent-l-dark) var(--accent-c-dark) var(--accent-h) / 0.14) 1.35px,
+    transparent 1.35px
+  );
+}
+
+/* Ambient floating light motes (GPU transform/opacity only) */
+.lumi-mote {
+  position: absolute;
+  border-radius: 999px;
+  pointer-events: none;
+  background: radial-gradient(circle, var(--mote) 0%, var(--mote-core) 45%, transparent 72%);
+  will-change: transform, opacity;
+  animation: lumi-float var(--dur, 12s) var(--motion-ease-in-out) infinite;
+  animation-delay: var(--delay, 0s);
+}
+
+@keyframes lumi-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translate3d(var(--dx, 10px), var(--dy, -18px), 0) scale(1.18);
+    opacity: 0.9;
+  }
+}
+
+/* Luminous editorial gradient text */
+.lumi-gradient-word {
+  background: linear-gradient(
+    115deg,
+    var(--accent) 0%,
+    oklch(62% 0.15 calc(var(--accent-h) - 18)) 52%,
+    var(--accent) 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+[data-theme="dark"] .lumi-gradient-word {
+  background: linear-gradient(
+    115deg,
+    oklch(92% 0.06 var(--accent-h)) 0%,
+    var(--accent) 55%,
+    oklch(82% 0.12 calc(var(--accent-h) + 18)) 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/* ================================================================
+   2. Frosted Glass Surfaces, Floating Capsule Nav & 3D Stage
+   ================================================================ */
+.lumi-floating-nav {
+  background-color: oklch(100% 0 0 / 0.74);
+  border: 1px solid oklch(20% 0.02 var(--accent-h) / 0.08);
+  box-shadow:
+    inset 0 1px 0 oklch(100% 0 0 / 0.8),
+    0 12px 32px -12px oklch(20% 0.04 var(--accent-h) / 0.16);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+}
+
+[data-theme="dark"] .lumi-floating-nav {
+  background-color: oklch(18% 0.026 var(--night-h) / 0.76);
+  border: 1px solid oklch(100% 0 0 / 0.1);
+  box-shadow:
+    inset 0 1px 0 oklch(100% 0 0 / 0.09),
+    0 16px 38px -12px oklch(0% 0 0 / 0.55);
+}
+
+.lumi-glass {
+  background-color: oklch(100% 0 0 / 0.72);
+  border: 1px solid oklch(20% 0.02 var(--accent-h) / 0.08);
+  box-shadow:
+    inset 0 1px 0 oklch(100% 0 0 / 0.75),
+    0 10px 30px -14px oklch(20% 0.03 var(--accent-h) / 0.14);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+[data-theme="dark"] .lumi-glass {
+  background-color: oklch(21% 0.026 var(--night-h) / 0.74);
+  border: 1px solid oklch(100% 0 0 / 0.09);
+  box-shadow:
+    inset 0 1px 0 oklch(100% 0 0 / 0.08),
+    0 14px 36px -14px oklch(0% 0 0 / 0.45);
+}
+
+.lumi-panel {
+  background-color: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-panel);
+  box-shadow: var(--shadow-raised);
+}
+
+.lumi-panel-soft {
+  background-color: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: var(--r-panel);
+}
+
+.lumi-bento-card {
+  position: relative;
+  background-color: var(--surface);
+  border: 1px solid oklch(20% 0.02 var(--accent-h) / 0.07);
+  border-radius: 24px;
+  box-shadow:
+    inset 0 1px 0 oklch(100% 0 0 / 0.8),
+    0 16px 40px -22px oklch(20% 0.04 var(--accent-h) / 0.16);
+  transition:
+    transform var(--motion-enter) var(--motion-ease-out),
+    box-shadow var(--motion-enter) var(--motion-ease-out),
+    border-color var(--motion-toggle) var(--motion-ease-out);
+}
+
+.lumi-bento-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(
+    420px circle at var(--mx, 50%) var(--my, 50%),
+    oklch(var(--accent-l-light) var(--accent-c-light) var(--accent-h) / 0.11) 0%,
+    transparent 65%
+  );
+  transition: opacity 260ms var(--motion-ease-out);
+}
+
+.lumi-bento-card:hover::before {
+  opacity: 1;
+}
+
+.lumi-bento-card:hover {
+  transform: translateY(-3px);
+  border-color: oklch(var(--accent-l-light) var(--accent-c-light) var(--accent-h) / 0.32);
+}
+
+[data-theme="dark"] .lumi-bento-card {
+  border-color: oklch(100% 0 0 / 0.08);
+  box-shadow:
+    inset 0 1px 0 oklch(100% 0 0 / 0.06),
+    0 20px 48px -22px oklch(0% 0 0 / 0.55);
+}
+
+[data-theme="dark"] .lumi-bento-card::before {
+  background: radial-gradient(
+    420px circle at var(--mx, 50%) var(--my, 50%),
+    oklch(var(--accent-l-dark) var(--accent-c-dark) var(--accent-h) / 0.14) 0%,
+    transparent 65%
+  );
+}
+
+[data-theme="dark"] .lumi-bento-card:hover {
+  border-color: oklch(var(--accent-l-dark) var(--accent-c-dark) var(--accent-h) / 0.36);
+}
+
+/* 3D Perspective Showcase Stage */
+.lumi-stage-perspective {
+  perspective: 1600px;
+}
+
+.lumi-3d-stage {
+  border-radius: 22px;
+  border: 1px solid oklch(20% 0.02 var(--accent-h) / 0.1);
+  box-shadow:
+    0 0 0 1px oklch(100% 0 0 / 0.5) inset,
+    0 32px 72px -24px oklch(16% 0.06 var(--accent-h) / 0.34);
+  background-color: var(--surface);
+  overflow: hidden;
+  transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition: transform 240ms var(--motion-ease-out);
+  will-change: transform;
+}
+
+[data-theme="dark"] .lumi-3d-stage {
+  border-color: oklch(100% 0 0 / 0.12);
+  box-shadow:
+    0 0 0 1px oklch(100% 0 0 / 0.08) inset,
+    0 36px 80px -22px oklch(0% 0 0 / 0.72);
+}
+
+.lumi-stage-glow {
+  background: radial-gradient(72% 62% at 50% 48%, var(--glow) 0%, transparent 74%);
+}
+
+/* Soft glass specular sheen gliding over the 3D window stage on pointer move */
+.lumi-stage-sheen {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 15;
+  opacity: 0;
+  background: radial-gradient(
+    520px circle at var(--sx, 50%) var(--sy, 35%),
+    oklch(100% 0 0 / 0.22) 0%,
+    transparent 62%
+  );
+  transition: opacity 280ms var(--motion-ease-out);
+}
+
+.lumi-3d-stage:hover .lumi-stage-sheen {
+  opacity: 1;
+}
+
+/* Ultra-thin top reading progress bar synced to adaptive accent */
+.lumi-scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2.5px;
+  z-index: 80;
+  transform-origin: 0 50%;
+  transform: scaleX(0);
+  background: linear-gradient(
+    90deg,
+    var(--accent) 0%,
+    oklch(72% 0.15 calc(var(--accent-h) - 22)) 100%
+  );
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* Interactive floating eco-pill feedback toast */
+.lumi-eco-toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  z-index: 70;
+  transform: translate(-50%, 16px) scale(0.96);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 220ms var(--motion-ease-out),
+    transform 260ms var(--motion-ease-out);
+}
+
+.lumi-eco-toast[data-visible="true"] {
+  opacity: 1;
+  transform: translate(-50%, 0) scale(1);
+}
+
+.lumi-window-frame {
+  border-radius: var(--r-dialog);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-dialog);
+  background-color: var(--surface);
+  overflow: hidden;
+}
+
+/* ================================================================
+   3. Controls, Pills, CTAs & Hairline Dividers
+   ================================================================ */
+.lumi-pill {
+  border-radius: var(--r-control);
+  transition:
+    transform var(--motion-press) var(--motion-ease-out),
+    opacity var(--motion-toggle) var(--motion-ease-out),
+    background-color var(--motion-toggle) var(--motion-ease-out),
+    border-color var(--motion-toggle) var(--motion-ease-out),
+    color var(--motion-toggle) var(--motion-ease-out);
+}
+
+.lumi-pill:active {
+  transform: scale(0.97);
+}
+
+.lumi-cta {
+  background-color: var(--accent);
+  color: var(--on-accent);
+  border-radius: var(--r-cta);
+  box-shadow: var(--shadow-cta);
+  transition:
+    transform var(--motion-press) var(--motion-ease-out),
+    background-color var(--motion-toggle) var(--motion-ease-out),
+    box-shadow var(--motion-toggle) var(--motion-ease-out);
+}
+
+.lumi-cta:hover {
+  background-color: var(--accent-hover);
+  transform: translateY(-2px);
+}
+
+.lumi-cta:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.lumi-hairline-accent {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    oklch(var(--accent-l-light) var(--accent-c-light) var(--accent-h) / 0.42) 32%,
+    oklch(var(--accent-l-light) var(--accent-c-light) var(--accent-h) / 0.28) 68%,
+    transparent 100%
+  );
+}
+
+[data-theme="dark"] .lumi-hairline-accent {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    oklch(var(--accent-l-dark) var(--accent-c-dark) var(--accent-h) / 0.42) 32%,
+    oklch(var(--accent-l-dark) var(--accent-c-dark) var(--accent-h) / 0.25) 68%,
+    transparent 100%
+  );
+}
+
+.lumi-tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ================================================================
+   4. Choreographed Scroll Reveals & Smooth Grid Accordion (<=400ms contract)
+   ================================================================ */
+html.lumi-js .lumi-reveal {
+  opacity: 0;
+  transform: translate3d(0, 18px, 0) scale(0.99);
+  transition:
+    opacity 320ms var(--motion-ease-out),
+    transform 360ms var(--motion-ease-out);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+html.lumi-js .lumi-reveal.is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
+}
+
+html[data-fx="lite"] .lumi-mote,
+html[data-fx="lite"] .lumi-aurora-orb {
+  animation: none;
+}
+
+html[data-fx="lite"].lumi-js .lumi-reveal {
+  transform: none;
+  transition: opacity 180ms var(--motion-ease-out);
+}
+
+/* Smooth CSS Grid accordion (no jerky jump) */
+.lumi-acc-body {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition:
+    grid-template-rows 280ms var(--motion-ease-out),
+    opacity 220ms var(--motion-ease-out);
+}
+
+.lumi-acc-item[data-open="true"] .lumi-acc-body {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.lumi-acc-inner {
+  overflow: hidden;
+}
+
+.lumi-acc-arrow {
+  transition: transform 240ms var(--motion-ease-out);
+}
+
+.lumi-acc-item[data-open="true"] .lumi-acc-arrow {
+  transform: rotate(90deg);
+}
+
+/* ================================================================
+   5. Playful Overlapping Tilted Community Cards
+   ================================================================ */
+.lumi-tilt-card {
+  background-color: var(--surface);
+  border: 1px solid oklch(20% 0.02 var(--accent-h) / 0.07);
+  border-radius: 24px;
+  box-shadow: 0 22px 48px -20px oklch(20% 0.04 var(--accent-h) / 0.22);
+  transform: rotate(var(--tilt, 0deg));
+  transition:
+    transform 320ms var(--motion-ease-out),
+    box-shadow 320ms var(--motion-ease-out),
+    border-color 200ms var(--motion-ease-out);
+}
+
+.lumi-tilt-card:hover {
+  transform: rotate(0deg) translateY(-8px) scale(1.02);
+  z-index: 20;
+  border-color: oklch(var(--accent-l-light) var(--accent-c-light) var(--accent-h) / 0.36);
+  box-shadow: 0 30px 64px -18px oklch(20% 0.06 var(--accent-h) / 0.28);
+}
+
+[data-theme="dark"] .lumi-tilt-card {
+  border-color: oklch(100% 0 0 / 0.09);
+  box-shadow: 0 24px 54px -20px oklch(0% 0 0 / 0.62);
+}
+
+[data-theme="dark"] .lumi-tilt-card:hover {
+  border-color: oklch(var(--accent-l-dark) var(--accent-c-dark) var(--accent-h) / 0.4);
+}
+
+/* ================================================================
+   6. Infinite Seamless Multi-Row Reverse Ecosystem Wall
+   ================================================================ */
+.lumi-marquee {
+  mask-image: linear-gradient(90deg, transparent 0%, black 7%, black 93%, transparent 100%);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 7%, black 93%, transparent 100%);
+}
+
+.lumi-marquee-track {
+  display: flex;
+  width: max-content;
+  gap: 0.75rem;
+  animation: lumi-marquee-scroll var(--marquee-dur, 44s) linear infinite;
+}
+
+.lumi-marquee-reverse {
+  animation-direction: reverse;
+}
+
+.lumi-marquee:hover .lumi-marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes lumi-marquee-scroll {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+/* Interactive Mini Switch for Live Homepage Widgets */
+.lumi-switch {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  width: 36px;
+  height: 20px;
+  border-radius: 999px;
+  background-color: var(--line);
+  padding: 2px;
+  transition: background-color 200ms var(--motion-ease-out);
+  flex-shrink: 0;
+}
+
+.lumi-switch[aria-checked="true"] {
+  background-color: var(--accent);
+}
+
+.lumi-switch-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 999px;
+  background-color: var(--surface);
+  box-shadow: 0 1px 3px oklch(0% 0 0 / 0.22);
+  transform: translateX(0);
+  transition: transform 220ms var(--motion-ease-out);
+}
+
+.lumi-switch[aria-checked="true"] .lumi-switch-thumb {
+  transform: translateX(16px);
+}
+
+/* Clean hidden scrollbar for mobile floating pill nav */
+.lumi-no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.lumi-no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Active showcase tab dot switches cleanly to button foreground */
+.lumi-tab-dot {
+  background: oklch(64% 0.16 var(--dot-hue, 245));
+}
+
+[data-showcase-tab][aria-selected="true"] .lumi-tab-dot {
+  background: currentColor;
+  opacity: 0.92;
+}
+
+/* Opaque, zero-blur moving marquee capsule (smooth even on software-rendered / older PCs) */
+.lumi-eco-pill {
+  background-color: var(--surface);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-raised);
+}
+
+/* Balanced line wrapping for CJK & English display titles */
+.lumi-balance {
+  text-wrap: balance;
+}
+
+/* ================================================================
+   7. Reduced Motion Respect
+   ================================================================ */
+@media (prefers-reduced-motion: reduce) {
+  .lumi-mote,
+  .lumi-aurora-orb,
+  .lumi-marquee-track {
+    animation: none;
+  }
+
+  .lumi-3d-stage,
+  .lumi-tilt-card,
+  html.lumi-js .lumi-reveal {
+    transform: none;
+    opacity: 1;
+    transition: none;
+  }
+}

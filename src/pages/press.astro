@@ -1,0 +1,17 @@
+---
+import PressPage from "../components/PressPage.astro";
+import { getDict } from "../data/i18n";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const t = getDict("en");
+---
+
+<BaseLayout
+  locale="en"
+  title={t.press.metaTitle}
+  description={t.press.metaDesc}
+  routePath="/press"
+  noindex={true}
+>
+  <PressPage locale="en" />
+</BaseLayout>

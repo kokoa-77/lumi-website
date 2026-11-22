@@ -1,0 +1,20 @@
+# Build output
+dist/
+.astro/
+
+# Dependencies
+node_modules/
+
+# Generated release & demo artifacts (built at CI time, never committed)
+public/download/
+public/demo-app/
+src/data/releases.generated.json
+
+# Logs & local caches
+npm-debug.log*
+pnpm-debug.log*
+.DS_Store
+Thumbs.db
+.env
+.env.*
+!.env.example

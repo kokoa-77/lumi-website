@@ -1,0 +1,16 @@
+---
+import ChangelogPage from "../../components/ChangelogPage.astro";
+import { getDict } from "../../data/i18n";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const t = getDict("zh");
+---
+
+<BaseLayout
+  locale="zh"
+  title={t.changelog.metaTitle}
+  description={t.changelog.metaDesc}
+  routePath="/changelog"
+>
+  <ChangelogPage locale="zh" />
+</BaseLayout>

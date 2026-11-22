@@ -1,0 +1,2324 @@
+---
+import { Picture } from "astro:assets";
+import enHomeDark from "../assets/screenshots/en/01-home-dark.png";
+import enHomeDarkBlue from "../assets/screenshots/en/01-home-dark-blue.png";
+import enHomeLight from "../assets/screenshots/en/01-home-light.png";
+import enSpotlightDark from "../assets/screenshots/en/01-spotlight-dark.png";
+import enSpotlightLight from "../assets/screenshots/en/01-spotlight-light.png";
+import enInstancesDark from "../assets/screenshots/en/02-instances-dark.png";
+import enInstancesLight from "../assets/screenshots/en/02-instances-light.png";
+import enDetailDark from "../assets/screenshots/en/03-detail-dark.png";
+import enDetailLight from "../assets/screenshots/en/03-detail-light.png";
+import enDiscoverDark from "../assets/screenshots/en/04-discover-dark.png";
+import enDiscoverLight from "../assets/screenshots/en/04-discover-light.png";
+import enSyncDark from "../assets/screenshots/en/05-sync-dark.png";
+import enSyncLight from "../assets/screenshots/en/05-sync-light.png";
+import zhHomeDark from "../assets/screenshots/zh/01-home-dark.png";
+import zhHomeDarkBlue from "../assets/screenshots/zh/01-home-dark-blue.png";
+import zhHomeLight from "../assets/screenshots/zh/01-home-light.png";
+import zhSpotlightDark from "../assets/screenshots/zh/01-spotlight-dark.png";
+import zhSpotlightLight from "../assets/screenshots/zh/01-spotlight-light.png";
+import zhInstancesDark from "../assets/screenshots/zh/02-instances-dark.png";
+import zhInstancesLight from "../assets/screenshots/zh/02-instances-light.png";
+import zhDetailDark from "../assets/screenshots/zh/03-detail-dark.png";
+import zhDetailLight from "../assets/screenshots/zh/03-detail-light.png";
+import zhDiscoverDark from "../assets/screenshots/zh/04-discover-dark.png";
+import zhDiscoverLight from "../assets/screenshots/zh/04-discover-light.png";
+import zhSyncDark from "../assets/screenshots/zh/05-sync-dark.png";
+import zhSyncLight from "../assets/screenshots/zh/05-sync-light.png";
+import { getDict } from "../data/i18n";
+import type { Locale } from "../data/site";
+import {
+  formatBytes,
+  formatDate,
+  getReleases,
+  LINKS,
+  localizedPath,
+  primaryDownloadHref,
+} from "../data/site";
+import SpotArt from "./SpotArt.astro";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const isZh = locale === "zh";
+const t = getDict(locale);
+const h = t.home;
+const d = t.download;
+const { latest } = getReleases();
+
+const shotHomeLight = isZh ? zhHomeLight : enHomeLight;
+const shotHomeDarkBlue = isZh ? zhHomeDarkBlue : enHomeDarkBlue;
+const shotHomeDark = isZh ? zhHomeDark : enHomeDark;
+const shotSpotlightLight = isZh ? zhSpotlightLight : enSpotlightLight;
+const shotSpotlightDark = isZh ? zhSpotlightDark : enSpotlightDark;
+const shotInstancesLight = isZh ? zhInstancesLight : enInstancesLight;
+const shotInstancesDark = isZh ? zhInstancesDark : enInstancesDark;
+const shotInstanceDetailLight = isZh ? zhDetailLight : enDetailLight;
+const shotInstanceDetailDark = isZh ? zhDetailDark : enDetailDark;
+const shotDiscoverLight = isZh ? zhDiscoverLight : enDiscoverLight;
+const shotDiscoverDark = isZh ? zhDiscoverDark : enDiscoverDark;
+const shotInstanceSyncLight = isZh ? zhSyncLight : enSyncLight;
+const shotInstanceSyncDark = isZh ? zhSyncDark : enSyncDark;
+
+const demoHref = localizedPath(locale, "/demo");
+const changelogHref = `${localizedPath(locale, "/changelog")}#${latest.anchor}`;
+const privacyHref = localizedPath(locale, "/privacy");
+
+const installerHref = primaryDownloadHref(latest.installer, latest.htmlUrl);
+const portableHref = primaryDownloadHref(latest.portable, latest.htmlUrl);
+const installerUsesSite = Boolean(latest.installer?.sitePath);
+const portableUsesSite = Boolean(latest.portable?.sitePath);
+const installerName = latest.installer?.name || "Lumi_0.6.0_x64-setup.exe";
+const portableName = latest.portable?.name || "Lumi_0.6.0_x64-portable.zip";
+const installerSize = latest.installer ? formatBytes(latest.installer.size) : "9.8 MB";
+const portableSize = latest.portable ? formatBytes(latest.portable.size) : "";
+const checksumsHref = latest.checksumsSitePath || latest.checksumsUrl;
+
+const kindLabel = t.releaseKind[latest.kind];
+const heroNote =
+  latest.kind === "prereview"
+    ? h.heroNotePrereview
+    : latest.kind === "beta"
+      ? h.heroNoteBeta
+      : h.heroNoteStable;
+
+const showcaseMedia = [
+  {
+    id: "home-light",
+    lightImg: shotHomeLight,
+    darkImg: shotHomeDarkBlue,
+    alt: h.showcases[0].label,
+  },
+  {
+    id: "instances",
+    lightImg: shotInstancesLight,
+    darkImg: shotInstancesDark,
+    alt: h.showcases[1].label,
+  },
+  {
+    id: "sync",
+    lightImg: shotInstanceSyncLight,
+    darkImg: shotInstanceSyncDark,
+    alt: h.showcases[2].label,
+  },
+  {
+    id: "home-dark",
+    lightImg: shotHomeDark,
+    darkImg: shotHomeDark,
+    alt: h.showcases[3].label,
+  },
+];
+
+const heroStats = isZh
+  ? [
+      {
+        value: installerSize || "9.8 MB",
+        label: "原生安装包体积",
+        sub: "Rust + Tauri 2 瞬开，告别臃肿卡顿",
+      },
+      { value: "0 遥测", label: "纯本机 · 零广告", sub: "不埋点、不弹窗、不上传用户习惯" },
+      { value: "1 键直达", label: "Quick Play 进服", sub: "游戏启动后可自动释放界面内存" },
+      { value: "只读关联", label: "无缝兼容旧启动器", sub: "关联 PCL2 / HMCL / 官方目录，零风险" },
+    ]
+  : [
+      {
+        value: installerSize || "9.8 MB",
+        label: "Native Installer",
+        sub: "Rust + Tauri 2 instant cold start",
+      },
+      {
+        value: "0 Telemetry",
+        label: "Local-First & Ad-Free",
+        sub: "Zero trackers, popups, or cloud lock-in",
+      },
+      {
+        value: "1-Click Play",
+        label: "Direct Quick Play",
+        sub: "Frees WebView memory while you play",
+      },
+      {
+        value: "Read-Only",
+        label: "Safe Migration",
+        sub: "Links PCL2 / HMCL / Official untouched",
+      },
+    ];
+
+const motes = [
+  { top: "7%", left: "9%", size: 12, dur: "11s", delay: "-1s", dx: "12px", dy: "-16px" },
+  { top: "17%", left: "23%", size: 7, dur: "14s", delay: "-4s", dx: "-10px", dy: "-14px" },
+  { top: "11%", left: "75%", size: 14, dur: "13s", delay: "-2s", dx: "-14px", dy: "-20px" },
+  { top: "24%", left: "89%", size: 9, dur: "10s", delay: "-5s", dx: "8px", dy: "-16px" },
+  { top: "36%", left: "5%", size: 8, dur: "15s", delay: "-3s", dx: "14px", dy: "-12px" },
+  { top: "41%", left: "93%", size: 11, dur: "12s", delay: "-6s", dx: "-12px", dy: "-18px" },
+  { top: "54%", left: "13%", size: 6, dur: "16s", delay: "-2s", dx: "10px", dy: "-14px" },
+  { top: "58%", left: "84%", size: 10, dur: "11s", delay: "-7s", dx: "-8px", dy: "-15px" },
+  { top: "26%", left: "48%", size: 6, dur: "13s", delay: "-3s", dx: "9px", dy: "-12px" },
+  { top: "15%", left: "38%", size: 8, dur: "12s", delay: "-8s", dx: "-9px", dy: "-16px" },
+  { top: "48%", left: "32%", size: 7, dur: "15s", delay: "-4s", dx: "11px", dy: "-10px" },
+  { top: "45%", left: "68%", size: 9, dur: "14s", delay: "-1s", dx: "-10px", dy: "-16px" },
+];
+
+const discoverPresets = isZh
+  ? [
+      {
+        id: "sodium",
+        tab: "Sodium · 钠",
+        badge: "Modrinth + CurseForge 双源去重",
+        title: "Sodium 0.6.6 · 1.21.1 NeoForge",
+        detail: "Modrinth 2.55 亿+ 下载 · 自动锁定当前实例版本，无需手动翻页筛选 · 一键直装",
+      },
+      {
+        id: "create",
+        tab: "Create · 前置补齐",
+        badge: "前置依赖自动预览",
+        title: "机械动力 Create + Flywheel 前置",
+        detail: "自动检测并列出缺失的 Flywheel 渲染前置库，一次确认全部补齐",
+      },
+      {
+        id: "claim",
+        tab: "受限模组认领",
+        badge: "尊重作者分发规则",
+        title: "打开官方页 → 自动监听下载目录 → SHA-256 哈希自动认领",
+        detail: "绝不绕过 CurseForge 作者限制，下载完成后自动识别归位进当前实例",
+      },
+    ]
+  : [
+      {
+        id: "sodium",
+        tab: "Sodium",
+        badge: "Modrinth + CurseForge Deduplicated",
+        title: "Sodium 0.6.6 · 1.21.1 NeoForge",
+        detail:
+          "255M+ downloads on Modrinth · Locked to your instance loader & version · 1-click install",
+      },
+      {
+        id: "create",
+        tab: "Auto Deps",
+        badge: "Dependency Preview",
+        title: "Create + Flywheel Library",
+        detail:
+          "Automatically detects required libraries and installs everything in one confirmation",
+      },
+      {
+        id: "claim",
+        tab: "Creator-Safe Claim",
+        badge: "Respecting Authors",
+        title: "Official Page → Downloads Watch → SHA-256 Auto-Match",
+        detail: "Never bypasses CurseForge distribution flags — matches downloaded jars by hash",
+      },
+    ];
+
+const ecoRow1 = [
+  {
+    name: isZh ? "Sodium · 钠" : "Sodium",
+    tag: isZh ? "性能" : "Perf",
+    hue: 155,
+    tip: isZh
+      ? "在 Lumi 发现页可直接一键安装并自动检测更新 Sodium"
+      : "1-click install & auto-update Sodium inside Lumi Discover",
+  },
+  {
+    name: "Iris Shaders",
+    tag: isZh ? "光影" : "Shaders",
+    hue: 255,
+    tip: isZh
+      ? "自动配对对应版本的 Sodium，装完即可导入各类光影包"
+      : "Pairs automatically with matching Sodium builds",
+  },
+  {
+    name: isZh ? "Create · 机械动力" : "Create",
+    tag: isZh ? "科技" : "Tech",
+    hue: 52,
+    tip: isZh
+      ? "安装时自动预览并补齐所需前置库，不漏文件"
+      : "Preview and auto-install required dependencies together",
+  },
+  {
+    name: "Jade",
+    tag: "HUD",
+    hue: 145,
+    tip: isZh
+      ? "双平台自动去重，不会搜出一堆重复条目"
+      : "Deduplicated across Modrinth and CurseForge",
+  },
+  {
+    name: isZh ? "Waystones · 传送石碑" : "Waystones",
+    tag: isZh ? "探索" : "Travel",
+    hue: 235,
+    tip: isZh
+      ? "支持中文名直接检索，自动映射英文官方项目"
+      : "Instant cross-platform search with version locking",
+  },
+  {
+    name: "EMI / JEI",
+    tag: isZh ? "配方" : "Recipes",
+    hue: 280,
+    tip: isZh
+      ? "可在实例内容页随时一键开关、锁定版本或升降级"
+      : "Toggle, pin versions, or downgrade safely anytime",
+  },
+  {
+    name: "AppleSkin",
+    tag: "HUD",
+    hue: 25,
+    tip: isZh
+      ? "拖动本地 .jar 进窗口也能自动识别元数据与更新"
+      : "Drag-and-drop local .jar files directly into any instance",
+  },
+  {
+    name: "Simple Voice Chat",
+    tag: isZh ? "联机" : "Social",
+    hue: 210,
+    tip: isZh
+      ? "搭配首页多人服直连，一键进服开麦畅玩"
+      : "Pairs with Home Quick Play for instant server joins",
+  },
+  {
+    name: "Xaero's Minimap",
+    tag: isZh ? "地图" : "Map",
+    hue: 165,
+    tip: isZh
+      ? "升级出问题？改动历史里点一下立刻退回上一版本"
+      : "Hit a bug after updating? One click reverts via Change History",
+  },
+  {
+    name: "Distant Horizons",
+    tag: "LOD",
+    hue: 245,
+    tip: isZh
+      ? "启动前自动预检 Java 21 与推荐内存，大型视距更稳"
+      : "Local preflight checks Java 21 & memory before launch",
+  },
+  {
+    name: isZh ? "Lithium · 锂" : "Lithium",
+    tag: isZh ? "优化" : "Perf",
+    hue: 35,
+    tip: isZh
+      ? "支持按客户端 / 服务端环境筛选，找优化模组极快"
+      : "Filter cleanly by client/server environment & categories",
+  },
+  {
+    name: isZh ? "Farmer's Delight · 农夫乐事" : "Farmer's Delight",
+    tag: isZh ? "农耕" : "Food",
+    hue: 85,
+    tip: isZh
+      ? "支持收藏夹跨实例复用，常装模组一秒找回"
+      : "Bookmark favorite mods and install across instances fast",
+  },
+];
+
+const ecoRow2 = [
+  {
+    name: "Fabric",
+    tag: isZh ? "加载器" : "Loader",
+    hue: 68,
+    tip: isZh
+      ? "新建实例自动拉取最新稳定版 Fabric，支持后续一键切换版本"
+      : "Auto-fetches latest Fabric with easy in-place upgrades",
+  },
+  {
+    name: "NeoForge",
+    tag: isZh ? "加载器" : "Loader",
+    hue: 40,
+    tip: isZh
+      ? "原生完整支持 NeoForge 1.20.4 – 1.21+ 安装与模组筛选"
+      : "First-class NeoForge support with automatic mod filtering",
+  },
+  {
+    name: "Forge",
+    tag: isZh ? "加载器" : "Loader",
+    hue: 235,
+    tip: isZh
+      ? "支持经典与新版 Forge 实例，自动匹配对应 Java 版本"
+      : "Supports classic & modern Forge with automatic Java matching",
+  },
+  {
+    name: "Quilt",
+    tag: isZh ? "加载器" : "Loader",
+    hue: 295,
+    tip: isZh
+      ? "原生识别 Quilt 加载器与兼容模组筛选"
+      : "Native Quilt loader provisioning and filtering",
+  },
+  {
+    name: "Complementary Unbound",
+    tag: isZh ? "光影包" : "Shader",
+    hue: 220,
+    tip: isZh
+      ? "开启「通用光影同步」后，同盘硬链接共享到所有实例 0 额外占用"
+      : "Share across all instances via zero-copy local hard links",
+  },
+  {
+    name: "BSL Shaders",
+    tag: isZh ? "光影包" : "Shader",
+    hue: 55,
+    tip: isZh
+      ? "在发现页「光影包」分区直接检索安装，免手动找文件夹"
+      : "Install directly from Discover → Shaders with zero manual copying",
+  },
+  {
+    name: "Solas Shaders",
+    tag: isZh ? "光影包" : "Shader",
+    hue: 265,
+    tip: isZh
+      ? "搭配 Lumi 自动去 HUD 封面功能，把绝美风景定格在首页"
+      : "Pairs beautifully with Lumi's HUD-free auto world covers",
+  },
+  {
+    name: "Cobblemon",
+    tag: isZh ? "整合包" : "Modpack",
+    hue: 18,
+    tip: isZh
+      ? "支持一键从 Modrinth / CurseForge 拉取整包并自动创建独立实例"
+      : "One-click modpack install into a clean isolated instance",
+  },
+  {
+    name: "All the Mods 10",
+    tag: isZh ? "整合包" : "Modpack",
+    hue: 278,
+    tip: isZh
+      ? "大型整合包游玩时开启「释放界面到托盘」，省出宝贵内存"
+      : "Release UI to tray during heavy modpacks to save RAM",
+  },
+  {
+    name: "Fabulously Optimized",
+    tag: isZh ? "整合包" : "Modpack",
+    hue: 155,
+    tip: isZh
+      ? "整合包更新自动走增量差异，绝不覆盖你的自定义按键与存档"
+      : "Clean updates without wiping your worlds or settings",
+  },
+  {
+    name: ".mrpack",
+    tag: isZh ? "双击直装" : "1-Click",
+    hue: 148,
+    tip: isZh
+      ? "安装版自动注册 .mrpack 关联，双击整合包文件即可导入"
+      : "Installer registers .mrpack association for double-click import",
+  },
+  {
+    name: "CurseForge Packs",
+    tag: isZh ? "合规导入" : "Creator-Safe",
+    hue: 38,
+    tip: isZh
+      ? "严格遵守作者分发规则，受限文件自动按 SHA-256 哈希认领"
+      : "Creator-compliant CurseForge import with SHA-256 auto-claim",
+  },
+];
+
+const ecoRow3 = isZh
+  ? [
+      {
+        name: "Windows 11 原生云母 Mica",
+        tag: "质感",
+        hue: 245,
+        tip: "原生调用系统 DWM Mica 材质，同时提供纯净实色与流畅模式",
+      },
+      {
+        name: "老电脑一键流畅模式",
+        tag: "轻快",
+        hue: 155,
+        tip: "低配电脑自动识别并关闭高消耗动效，依然丝滑跟手",
+      },
+      {
+        name: "Modrinth + CurseForge 双源合搜",
+        tag: "资源",
+        hue: 148,
+        tip: "一次搜索同时覆盖两大平台并自动合并同名条目",
+      },
+      {
+        name: "BMCLAPI / MCIM 镜像加速",
+        tag: "国内",
+        hue: 215,
+        tip: "公开游戏文件可选镜像加速，正版登录始终直连微软官方",
+      },
+      {
+        name: "只读关联 PCL2 / HMCL / 官方",
+        tag: "迁移",
+        hue: 268,
+        tip: "在「设置 → 游戏」直接关联原目录，绝不改动或删除旧启动器文件",
+      },
+      {
+        name: "自动匹配 Java 8 / 17 / 21 / 25",
+        tag: "免折腾",
+        hue: 48,
+        tip: "在「设置 → Java」自动检测本机 Java 或一键安装推荐版本（含新版所需的 Java 25）",
+      },
+      {
+        name: "全套纯 2D 柔光矢量视觉",
+        tag: "美学",
+        hue: 350,
+        tip: "全套手写纯 2D 柔光矢量图标与场景背景，随实例主色与昼夜实时融合",
+      },
+      {
+        name: "GPL-3.0 开源 · 零遥测",
+        tag: "透明",
+        hue: 165,
+        tip: "前后端全部代码公开可审计，不收集任何隐私或遥测数据",
+      },
+    ]
+  : [
+      {
+        name: "Native Windows 11 Mica",
+        tag: "Craft",
+        hue: 245,
+        tip: "Real DWM Mica translucency with solid & Lite modes included",
+      },
+      {
+        name: "One-Click Lite Mode",
+        tag: "Fast",
+        hue: 155,
+        tip: "Auto-detects lower-spec hardware and trims heavy animations",
+      },
+      {
+        name: "Modrinth + CurseForge Unified",
+        tag: "Discover",
+        hue: 148,
+        tip: "One search spans both ecosystems with smart deduplication",
+      },
+      {
+        name: "Optional Mirror Acceleration",
+        tag: "Speed",
+        hue: 215,
+        tip: "Optional mirrors for public assets; auth always hits Microsoft directly",
+      },
+      {
+        name: "Read-Only Link PCL / HMCL / Official",
+        tag: "Migrate",
+        hue: 268,
+        tip: "Play existing installations in-place with zero altered files",
+      },
+      {
+        name: "Auto Java 8 / 17 / 21 / 25 Matching",
+        tag: "Zero Setup",
+        hue: 48,
+        tip: "Detects local runtimes or installs the recommended Mojang Java (including Java 25) in Settings → Java",
+      },
+      {
+        name: "Pure-2D Adaptive Vector Visuals",
+        tag: "Design",
+        hue: 350,
+        tip: "Hand-crafted pure-2D luminous vectors and scenes that adapt to every hue",
+      },
+      {
+        name: "GPL-3.0 · Zero Telemetry",
+        tag: "Trust",
+        hue: 165,
+        tip: "100% open-source Rust & React codebase with zero tracking",
+      },
+    ];
+
+const interactiveSyncItems = isZh
+  ? [
+      { id: "options", label: "游戏设置 options.txt", detail: "9 大分类键位音量", on: true },
+      { id: "servers", label: "多人服务器列表", detail: "NBT 无损去重", on: true },
+      { id: "rp", label: "通用资源包", detail: "同盘硬链接 0 占用", on: true },
+      { id: "shaders", label: "通用光影包", detail: "独立整合包可排除", on: false },
+    ]
+  : [
+      { id: "options", label: "Game Settings (options.txt)", detail: "9 vanilla tabs", on: true },
+      { id: "servers", label: "Multiplayer Servers", detail: "Lossless NBT merge", on: true },
+      { id: "rp", label: "Shared Resource Packs", detail: "Zero-copy hard links", on: true },
+      { id: "shaders", label: "Shared Shaders", detail: "Per-instance opt-out", on: false },
+    ];
+---
+
+<!-- Top ultra-thin luminous scroll progress line -->
+<div id="lumi-scroll-progress" class="lumi-scroll-progress" aria-hidden="true"></div>
+
+<!-- Interactive bottom micro-toast for ecosystem capsules -->
+<div
+  id="lumi-eco-toast"
+  role="status"
+  aria-live="polite"
+  data-visible="false"
+  class="lumi-eco-toast lumi-glass lumi-pill max-w-[90vw] px-4 py-2 text-xs font-semibold text-[var(--fg)] shadow-lg"
+>
+</div>
+
+<!-- =================================================================
+     1. CINEMATIC SKY-LIGHT HERO + DIRECT DOWNLOAD + COLOR-LOCKED 3D STAGE
+     ================================================================= -->
+<section class="lumi-sky -mt-[68px] overflow-x-clip pb-16 pt-28 sm:pb-24 sm:pt-32">
+  <div class="lumi-aurora-orb lumi-aurora-a" aria-hidden="true"></div>
+  <div class="lumi-aurora-orb lumi-aurora-b" aria-hidden="true"></div>
+  <div class="lumi-dot-grid pointer-events-none absolute inset-0" aria-hidden="true"></div>
+  <div class="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+    {
+      motes.map((m) => (
+        <span
+          class="lumi-mote"
+          style={`top:${m.top};left:${m.left};width:${m.size}px;height:${m.size}px;--dur:${m.dur};--delay:${m.delay};--dx:${m.dx};--dy:${m.dy};`}
+        />
+      ))
+    }
+  </div>
+
+  <div class="relative mx-auto max-w-6xl px-4 sm:px-6">
+    <div class="mx-auto max-w-3xl text-center">
+      <!-- Status pill row -->
+      <div class="inline-flex flex-wrap items-center justify-center gap-2">
+        <span
+          class="lumi-glass lumi-pill inline-flex items-center gap-2 px-3.5 py-1 text-xs font-medium text-[var(--fg-muted)]"
+        >
+          <span class="h-2 w-2 rounded-full bg-[var(--accent)]"></span>
+          {h.heroBadge}
+        </span>
+        <a
+          href={changelogHref}
+          class="lumi-glass lumi-pill lumi-tabular inline-flex items-center gap-1.5 px-3 py-1 text-xs font-semibold text-[var(--accent)] no-underline hover:opacity-90"
+        >
+          {latest.tag} · {kindLabel} ↗
+        </a>
+      </div>
+
+      <!-- Editorial Display Headline -->
+      <h1
+        class="mt-7 text-balance text-4xl font-black tracking-[-0.035em] text-[var(--fg)] sm:text-6xl lg:text-[4.25rem] lg:leading-[1.08]"
+      >
+        {
+          isZh ? (
+            <>
+              点亮你的世界
+              <br />
+              <span class="lumi-gradient-word">打开就有游戏可以点</span>
+            </>
+          ) : (
+            <>
+              Open the launcher.
+              <br />
+              <span class="lumi-gradient-word">Jump straight into your world.</span>
+            </>
+          )
+        }
+      </h1>
+
+      <p
+        class="mx-auto mt-6 max-w-2xl text-balance text-base leading-relaxed text-[var(--fg-muted)] sm:text-lg"
+      >
+        {h.heroSubtitle}
+      </p>
+
+      <!-- Desktop Primary CTA: Auto-switches during prereview (Demo + Beta Group) vs beta/stable (Direct Download + Demo) -->
+      <div class="mt-9 hidden flex-wrap items-center justify-center gap-3.5 md:flex">
+        {
+          latest.kind === "prereview" ? (
+            <>
+              <a
+                href={demoHref}
+                class="lumi-cta inline-flex items-center justify-center gap-2.5 px-7 py-3.5 text-sm font-semibold no-underline sm:px-8 sm:py-4 sm:text-base"
+              >
+                <span class="relative flex h-2.5 w-2.5">
+                  <span
+                    class="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--on-accent)] opacity-65"
+                  />
+                  <span class="relative inline-flex h-2.5 w-2.5 rounded-full bg-[var(--on-accent)]" />
+                </span>
+                <span>{isZh ? "在浏览器里试玩" : "Try Live in Browser"}</span>
+              </a>
+
+              <a
+                href={isZh ? LINKS.qqGroup : LINKS.discord}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="lumi-glass lumi-pill inline-flex items-center gap-2 px-6 py-3.5 text-sm font-semibold text-[var(--fg)] no-underline hover:bg-[var(--surface)] sm:py-4 sm:text-base"
+              >
+                <span class="h-2 w-2 rounded-full bg-[var(--accent)]" />
+                <span>{isZh ? "加入内测 QQ 群" : "Join Beta Discord"} ↗</span>
+              </a>
+            </>
+          ) : (
+            <>
+              <a
+                href={installerHref}
+                download={installerName}
+                data-direct-download={installerName}
+                class="lumi-cta lumi-tabular inline-flex items-center justify-center gap-2.5 px-7 py-3.5 text-sm font-semibold no-underline sm:px-8 sm:py-4 sm:text-base"
+              >
+                <svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path
+                    d="M12 4v11m0 0 4.5-4.5M12 15l-4.5-4.5M5 19h14"
+                    stroke="currentColor"
+                    stroke-width="2.1"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                <span class="flex flex-wrap items-center justify-center gap-x-2">
+                  <span>{isZh ? "立即下载 Windows 版" : "Download for Windows"}</span>
+                  {
+                    installerSize && (
+                      <span class="text-xs font-medium sm:text-sm">
+                        {latest.tag} · {installerSize}
+                      </span>
+                    )
+                  }
+                </span>
+              </a>
+
+              <a
+                href={demoHref}
+                class="lumi-glass lumi-pill inline-flex items-center gap-2.5 px-6 py-3.5 text-sm font-semibold text-[var(--fg)] no-underline hover:bg-[var(--surface)] sm:py-4 sm:text-base"
+              >
+                <span class="relative flex h-2.5 w-2.5">
+                  <span
+                    class="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--accent)] opacity-65"
+                  />
+                  <span class="relative inline-flex h-2.5 w-2.5 rounded-full bg-[var(--accent)]" />
+                </span>
+                <span>{isZh ? "在浏览器里试玩" : "Try Live in Browser"}</span>
+              </a>
+            </>
+          )
+        }
+      </div>
+
+      <!-- Mobile Primary CTA: Copy Clean Link for PC + Fallback Select Box + Join QQ Group / Discord -->
+      <div class="mt-8 flex flex-col items-center justify-center gap-3 md:hidden">
+        <button
+          type="button"
+          id="lumi-mobile-copy-link"
+          data-copied-label={isZh ? "已复制网址，发到电脑打开吧" : "Link copied — open on your PC"}
+          class="lumi-cta inline-flex w-full max-w-xs cursor-pointer items-center justify-center gap-2 px-6 py-3.5 text-sm font-semibold"
+        >
+          <svg class="h-4.5 w-4.5 shrink-0" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <rect x="9" y="9" width="11" height="11" rx="2.5" stroke="currentColor" stroke-width="2" />
+            <path
+              d="M5 15H4.5A2.5 2.5 0 0 1 2 12.5v-8A2.5 2.5 0 0 1 4.5 2h8A2.5 2.5 0 0 1 15 4.5V5"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            />
+          </svg>
+          <span>{isZh ? "复制链接，到电脑上打开" : "Copy link to open on PC"}</span>
+        </button>
+
+        <!-- Bilibili / in-app WebView fallback when clipboard API is blocked -->
+        <div
+          id="lumi-mobile-copy-fallback"
+          hidden
+          class="w-full max-w-xs rounded-2xl border border-[var(--line)] bg-[var(--surface)] p-3 text-left text-xs shadow-sm"
+        >
+          <p class="font-semibold text-[var(--fg)]">
+            {isZh ? "自动复制受限，请长按下方网址复制：" : "Clipboard unavailable — press & hold to copy:"}
+          </p>
+          <input
+            id="lumi-mobile-copy-input"
+            type="text"
+            readonly
+            aria-label={isZh ? "官网链接" : "Website URL"}
+            class="mt-1.5 w-full rounded-xl border border-[var(--line)] bg-[var(--surface-2)] px-3 py-1.5 font-mono text-[11px] text-[var(--fg)] select-all"
+          />
+        </div>
+
+        <a
+          href={isZh ? LINKS.qqGroup : LINKS.discord}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="lumi-glass lumi-pill inline-flex w-full max-w-xs items-center justify-center gap-2 px-6 py-3 text-sm font-semibold text-[var(--fg)] no-underline hover:bg-[var(--surface)]"
+        >
+          <span class="h-2 w-2 rounded-full bg-[var(--accent)]"></span>
+          <span>{isZh ? "加入官方 QQ 群" : "Join Discord Community"} ↗</span>
+        </a>
+      </div>
+
+      <div
+        class="mt-4 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-xs text-[var(--fg-muted)]"
+      >
+        <span>{heroNote}</span>
+        {
+          latest.kind === "prereview" && (
+            <a
+              href={installerHref}
+              download={installerName}
+              data-direct-download={installerName}
+              class="hidden font-semibold text-[var(--accent)] no-underline hover:underline md:inline"
+            >
+              {isZh
+                ? `下载预审安装版 (${latest.tag} · ${installerSize})`
+                : `Download pre-review (${latest.tag} · ${installerSize})`}
+            </a>
+          )
+        }
+        <a
+          href="#download"
+          class="font-semibold text-[var(--accent)] no-underline hover:underline"
+        >
+          {isZh ? "便携压缩包与安装说明 ↓" : "Portable .zip & install guide ↓"}
+        </a>
+      </div>
+    </div>
+
+    <!-- Interactive 3D Color-Locked Adaptive Stage: Light & Dark synchronized -->
+    <div id="preview" class="mt-14 sm:mt-16">
+      <div class="mb-5 flex flex-col items-center justify-between gap-4 sm:flex-row">
+        <div
+          role="tablist"
+          aria-label={h.previewTitle}
+          class="lumi-glass inline-flex shrink-0 flex-wrap items-center justify-center gap-1 rounded-full p-1.5"
+        >
+          {
+            h.showcases.map((scene, idx) => (
+              <button
+                type="button"
+                role="tab"
+                data-showcase-tab={scene.id}
+                data-caption={scene.caption}
+                data-caption-dark={scene.captionDark ?? scene.caption}
+                data-hue={scene.hue}
+                data-light-l={scene.lightL}
+                data-light-c={scene.lightC}
+                data-dark-l={scene.darkL}
+                data-dark-c={scene.darkC}
+                aria-selected={idx === 0 ? "true" : "false"}
+                class:list={[
+                  "lumi-pill inline-flex cursor-pointer items-center gap-2 px-3.5 py-1.5 text-xs font-semibold sm:px-4 sm:text-sm",
+                  idx === 0
+                    ? "bg-[var(--accent)] text-[var(--on-accent)]"
+                    : "text-[var(--fg-muted)] hover:bg-[var(--surface-hover)] hover:text-[var(--fg)]",
+                ]}
+              >
+                <span
+                  class="lumi-tab-dot h-2.5 w-2.5 rounded-full ring-1 ring-white/50"
+                  style={`--dot-hue: ${scene.hue}`}
+                  aria-hidden="true"
+                />
+                <span class="[html[data-theme='dark']_&]:hidden">{scene.label}</span>
+                <span class="hidden [html[data-theme='dark']_&]:inline">
+                  {scene.labelDark ?? scene.label}
+                </span>
+              </button>
+            ))
+          }
+        </div>
+
+        <p id="lumi-showcase-caption" class="text-center text-xs text-[var(--fg-muted)] sm:text-right sm:text-sm">
+          {h.showcases[0].caption}
+        </p>
+      </div>
+
+      <div class="lumi-stage-perspective relative">
+        <div
+          class="lumi-stage-glow pointer-events-none absolute -inset-8 -z-10 rounded-[36px]"
+          aria-hidden="true"
+        >
+        </div>
+
+        <div id="lumi-3d-stage" class="lumi-3d-stage relative">
+          <div class="lumi-stage-sheen" aria-hidden="true"></div>
+          <div class="relative aspect-[32/19] w-full bg-[var(--surface-2)]">
+            {
+              showcaseMedia.map((media, idx) => (
+                <div
+                  data-showcase-panel={media.id}
+                  class:list={[
+                    "absolute inset-0 transition-opacity duration-300",
+                    idx === 0 ? "opacity-100" : "pointer-events-none opacity-0",
+                  ]}
+                >
+                  <Picture
+                    src={media.lightImg}
+                    alt={media.alt}
+                    widths={[640, 1024, 1440, 1920, 2560]}
+                    sizes="(max-width: 768px) 100vw, 1152px"
+                    formats={["avif", "webp"]}
+                    fallbackFormat="webp"
+                    loading={idx === 0 ? "eager" : "lazy"}
+                    fetchpriority={idx === 0 ? "high" : "auto"}
+                    class:list={[
+                      "h-full w-full object-contain",
+                      media.darkImg !== media.lightImg && "[html[data-theme='dark']_&]:hidden",
+                    ]}
+                  />
+                  {media.darkImg !== media.lightImg && (
+                    <Picture
+                      src={media.darkImg}
+                      alt={`${media.alt} (Dark)`}
+                      widths={[640, 1024, 1440, 1920, 2560]}
+                      sizes="(max-width: 768px) 100vw, 1152px"
+                      formats={["avif", "webp"]}
+                      fallbackFormat="webp"
+                      loading="lazy"
+                      class="hidden h-full w-full object-contain [html[data-theme='dark']_&]:block"
+                    />
+                  )}
+                </div>
+              ))
+            }
+          </div>
+        </div>
+
+        <!-- Clean ribbon BELOW stage — ZERO obstruction over Lumi's Continue button! -->
+        <div class="mt-4 flex flex-wrap items-center justify-between gap-3 px-1 text-xs text-[var(--fg-muted)]">
+          <span class="inline-flex items-center gap-2">
+            <span class="h-2 w-2 shrink-0 rounded-full bg-[var(--accent)]"></span>
+            <span class="[html[data-theme='dark']_&]:hidden">
+              {
+                isZh
+                  ? "点击上方「浅色微光首页 / 浅色实例库 / 本机跨实例同步 / 暗夜落日模式」标签，整站光晕与启动器画面同步变色"
+                  : "Click the Light World Home / Library / Instance Sync / Night Glow tabs above to shift page & UI palette together"
+              }
+            </span>
+            <span class="hidden [html[data-theme='dark']_&]:inline">
+              {
+                isZh
+                  ? "点击上方「深色世界首页 / 深色实例库 / 本机跨实例同步 / 暗夜落日模式」标签，整站光晕与启动器画面同步变色"
+                  : "Click the Dark World Home / Library / Instance Sync / Sunset Glow tabs above to shift page & UI palette together"
+              }
+            </span>
+          </span>
+          <a
+            href={demoHref}
+            class="lumi-glass lumi-pill hidden items-center gap-2 px-4 py-1.5 text-xs font-semibold text-[var(--fg)] no-underline hover:bg-[var(--surface)] hover:text-[var(--accent)] md:inline-flex"
+          >
+            <span class="h-2 w-2 rounded-full bg-[var(--accent)]"></span>
+            {isZh ? "想亲手点一遍？进入浏览器实时试玩 →" : "Click around yourself → Launch Live Demo"}
+          </a>
+        </div>
+      </div>
+
+      <!-- 4 High-Impact Core Strength Highlights (2x2 compact grid on mobile, 4-col on desktop) -->
+      <div class="mt-10 grid grid-cols-2 gap-3 sm:mt-12 sm:gap-3.5 lg:grid-cols-4">
+        {
+          heroStats.map((stat) => (
+            <div class="lumi-bento-card flex flex-col justify-between p-4 sm:p-5">
+              <p class="lumi-tabular text-xl font-black tracking-tight text-[var(--accent)] sm:text-3xl">
+                {stat.value}
+              </p>
+              <div class="mt-2 sm:mt-2.5">
+                <p class="text-xs font-bold text-[var(--fg)] sm:text-sm">{stat.label}</p>
+                <p class="mt-1 text-[11px] leading-relaxed text-[var(--fg-muted)] sm:text-xs">
+                  {stat.sub}
+                </p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================================================================
+     2. SPOTLIGHT 01 (LIGHT-FIRST + DAY/NIGHT FLIP) + ALL-INTERACTIVE BENTO
+     ================================================================= -->
+<section id="features" class="mx-auto max-w-6xl scroll-mt-24 px-4 py-16 sm:px-6 sm:py-24">
+  <!-- Spotlight 01: Distinct Live Multiplayer Server + World Switcher Showcase (Zero duplicate of Hero!) -->
+  <div class="lumi-reveal">
+    <div class="mx-auto max-w-2xl text-center">
+      <p class="text-xs font-bold tracking-[0.16em] text-[var(--accent)] uppercase">
+        {isZh ? "01 · 直达你的世界与多人服" : "01 · STRAIGHT TO YOUR WORLDS & SERVERS"}
+      </p>
+      <h2
+        class="lumi-balance mt-3 text-3xl font-black tracking-[-0.03em] text-[var(--fg)] sm:text-5xl"
+      >
+        {
+          isZh ? (
+            <>
+              从双击图标到<span class="inline-block">站在世界里，</span>
+              <span class="inline-block">点一下就够</span>
+            </>
+          ) : (
+            "One click from desktop to spawn"
+          )
+        }
+      </h2>
+      <p class="mt-4 text-balance text-sm leading-relaxed text-[var(--fg-muted)] sm:text-base">
+        {
+          isZh
+            ? "打开即见你最近游玩的世界或常用多人服务器，支持一键切服并实时探测在线人数与延迟；智能去 HUD 自动封面保留最近 5 张，随时锁定最满意的一张。"
+            : "Jump directly into your latest singleplayer world or favorite multiplayer server with live player counts and latency, plus HUD-free auto world covers."
+        }
+      </p>
+    </div>
+
+    <div class="lumi-bento-card mt-10 overflow-hidden p-2 sm:p-3">
+      <div class="relative overflow-hidden rounded-[18px] bg-[var(--surface-2)]">
+        <div class="relative aspect-[32/19] w-full">
+          <div data-spot-theme="light" class="absolute inset-0 transition-opacity duration-300 opacity-100">
+            <Picture
+              src={shotSpotlightLight}
+              alt={isZh ? "Lumi 浅色多人服务器直达与世界切换列表" : "Lumi Light Multiplayer Server & World Switcher"}
+              widths={[640, 1024, 1440, 1920, 2560]}
+              sizes="(max-width: 1024px) 100vw, 1120px"
+              formats={["avif", "webp"]}
+              fallbackFormat="webp"
+              loading="lazy"
+              class="h-full w-full object-contain"
+            />
+          </div>
+          <div data-spot-theme="dark" class="pointer-events-none absolute inset-0 transition-opacity duration-300 opacity-0">
+            <Picture
+              src={shotSpotlightDark}
+              alt={isZh ? "Lumi 深色多人服务器直达与世界切换列表" : "Lumi Dark Multiplayer Server & World Switcher"}
+              widths={[640, 1024, 1440, 1920, 2560]}
+              sizes="(max-width: 1024px) 100vw, 1120px"
+              formats={["avif", "webp"]}
+              fallbackFormat="webp"
+              loading="lazy"
+              class="h-full w-full object-contain"
+            />
+          </div>
+        </div>
+
+        <!-- Live Light/Night flip pill inside Spotlight -->
+        <div class="lumi-glass absolute right-3 top-3 inline-flex items-center gap-1 rounded-full p-1 text-xs">
+          <button
+            type="button"
+            data-spot-toggle="light"
+            aria-pressed="true"
+            class="lumi-pill cursor-pointer bg-[var(--accent)] px-3 py-1 font-semibold text-[var(--on-accent)]"
+          >
+            {isZh ? "浅色白天" : "Daylight"}
+          </button>
+          <button
+            type="button"
+            data-spot-toggle="dark"
+            aria-pressed="false"
+            class="lumi-pill cursor-pointer px-3 py-1 font-semibold text-[var(--fg-muted)] hover:text-[var(--fg)]"
+          >
+            {isZh ? "深色夜空" : "Night"}
+          </button>
+        </div>
+      </div>
+
+      <div class="grid gap-3 p-4 text-xs sm:grid-cols-3 sm:p-5 sm:text-sm">
+        <div class="rounded-2xl bg-[var(--surface-2)] px-4 py-3">
+          <p class="font-bold text-[var(--fg)]">
+            {isZh ? "单人世界 + 多人服首页直达" : "Worlds & Multiplayer Quick Play"}
+          </p>
+          <p class="mt-1 text-xs text-[var(--fg-muted)]">
+            {isZh ? "实时探测服务器在线人数与延迟，省去层层菜单。" : "Live player counts and ping right on the home canvas."}
+          </p>
+        </div>
+        <div class="rounded-2xl bg-[var(--surface-2)] px-4 py-3">
+          <p class="font-bold text-[var(--fg)]">
+            {isZh ? "智能去 HUD 自动封面" : "HUD-Free Auto World Covers"}
+          </p>
+          <p class="mt-1 text-xs text-[var(--fg-muted)]">
+            {isZh ? "保留最近 5 张自动封面，可随时锁定你最满意的一张。" : "Keeps 5 recent shots per world with one-click cover locking."}
+          </p>
+        </div>
+        <div class="rounded-2xl bg-[var(--surface-2)] px-4 py-3">
+          <p class="font-bold text-[var(--fg)]">
+            {isZh ? "游戏运行时释放界面" : "Release UI While Playing"}
+          </p>
+          <p class="mt-1 text-xs text-[var(--fg-muted)]">
+            {isZh ? "自动收进托盘释放 WebView 内存，退出自动回焦。" : "Frees WebView memory to tray and refocuses on exit."}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Asymmetric All-Interactive Bento Grid (7+5 / 5+7) -->
+  <div class="mt-8 grid gap-6 lg:grid-cols-12">
+    <!-- Bento 1 (7 col): Never Break + LIVE CLICKABLE ROLLBACK MICRO-WIDGET -->
+    <article class="lumi-bento-card lumi-reveal flex flex-col justify-between overflow-hidden p-6 sm:p-8 lg:col-span-7">
+      <div>
+        <div class="flex items-start justify-between gap-4">
+          <div>
+            <p class="text-xs font-bold tracking-[0.14em] text-[var(--accent)] uppercase">
+              {isZh ? "02 · 永不玩坏" : "02 · BUILT NOT TO BREAK"}
+            </p>
+            <h3 class="mt-2 text-2xl font-extrabold tracking-tight text-[var(--fg)] sm:text-3xl">
+              {isZh ? "大胆装模组，装坏了一键回滚" : "Mod fearlessly. Undo mistakes in one click."}
+            </h3>
+          </div>
+          <SpotArt kind="rollback" class="hidden h-16 w-16 shrink-0 sm:grid" />
+        </div>
+        <p class="mt-3 text-sm leading-relaxed text-[var(--fg-muted)]">
+          {
+            isZh
+              ? "启动前本地预检提前拦下缺前置、重复 modId、错加载器与 Java 冲突；每次改动自动留快照，点下方按钮亲自试一次「一键回滚」："
+              : "Fast local preflight catches missing dependencies and loader mismatches before launch. Try a live one-click snapshot rollback below:"
+          }
+        </p>
+
+        <!-- Live Clickable Rollback Micro-Widget -->
+        <div
+          id="lumi-rollback-widget"
+          data-state="broken"
+          class="mt-4 rounded-2xl border border-[var(--line)] bg-[var(--surface-2)] p-3.5 text-xs transition-colors"
+        >
+          <div class="flex flex-wrap items-center justify-between gap-3">
+            <div class="min-w-0 flex-1 space-y-1">
+              <div class="flex items-center gap-2">
+                <span
+                  data-rb-dot
+                  class="inline-block h-2 w-2 rounded-full bg-[var(--warning)] transition-colors"
+                ></span>
+                <p data-rb-title class="font-bold text-[var(--fg)]">
+                  {isZh ? "检测到启动前改动（2 项）· 新装光影与前置冲突" : "2 recent changes detected · Mod version conflict"}
+                </p>
+              </div>
+              <p data-rb-detail class="lumi-tabular text-[11px] text-[var(--fg-muted)]">
+                + Iris Shaders 1.8.0 · ↑ Sodium 0.6.5 → 0.6.6
+              </p>
+            </div>
+            <button
+              type="button"
+              id="lumi-rollback-btn"
+              data-label-revert={isZh ? "一键回到改动前" : "Revert to healthy"}
+              data-label-reset={isZh ? "再试一次" : "Simulate again"}
+              data-title-ok={isZh ? "已恢复至 14:20 健康快照 · 可直接启动游戏" : "Restored healthy 14:20 snapshot · Ready to launch"}
+              data-detail-ok={isZh ? "已自动撤回 2 项改动 · 原文件安全留在本地内容库" : "Reverted 2 changes cleanly · Files kept safely in local vault"}
+              data-title-broken={isZh ? "检测到启动前改动（2 项）· 新装光影与前置冲突" : "2 recent changes detected · Mod version conflict"}
+              data-detail-broken="+ Iris Shaders 1.8.0 · ↑ Sodium 0.6.5 → 0.6.6"
+              class="lumi-pill cursor-pointer bg-[var(--accent)] px-3.5 py-1.5 text-xs font-semibold text-[var(--on-accent)] hover:opacity-90"
+            >
+              {isZh ? "一键回到改动前" : "Revert to healthy"}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-5 overflow-hidden rounded-2xl border border-[var(--line)]">
+        <Picture
+          src={shotInstanceDetailLight}
+          alt={isZh ? "实例详情与改动回滚" : "Instance Detail & Rollback"}
+          widths={[640, 1024, 1440, 1920]}
+          sizes="(max-width: 1024px) 100vw, 640px"
+          formats={["avif", "webp"]}
+          fallbackFormat="webp"
+          loading="lazy"
+          class="block h-auto w-full [html[data-theme='dark']_&]:hidden"
+        />
+        <Picture
+          src={shotInstanceDetailDark}
+          alt={isZh ? "实例详情与改动回滚（深色）" : "Instance Detail & Rollback (Dark)"}
+          widths={[640, 1024, 1440, 1920]}
+          sizes="(max-width: 1024px) 100vw, 640px"
+          formats={["avif", "webp"]}
+          fallbackFormat="webp"
+          loading="lazy"
+          class="hidden h-auto w-full [html[data-theme='dark']_&]:block"
+        />
+      </div>
+    </article>
+
+    <!-- Bento 2 (5 col): Modrinth & CurseForge + LIVE CLICKABLE DISCOVER WIDGET -->
+    <article
+      class="lumi-bento-card lumi-reveal flex flex-col justify-between overflow-hidden p-6 sm:p-8 lg:col-span-5"
+      style="--reveal-delay: 80ms"
+    >
+      <div>
+        <div class="flex items-start justify-between gap-3">
+          <div>
+            <p class="text-xs font-bold tracking-[0.14em] text-[var(--accent)] uppercase">
+              {isZh ? "03 · 双平台搜装" : "03 · UNIFIED DISCOVERY"}
+            </p>
+            <h3 class="mt-2 text-2xl font-extrabold tracking-tight text-[var(--fg)]">
+              {isZh ? "Modrinth & CurseForge 一站搜装，尊重作者" : "Browse both platforms, respecting creators"}
+            </h3>
+          </div>
+          <SpotArt kind="empty-search" class="hidden h-14 w-14 shrink-0 sm:grid" />
+        </div>
+        <p class="mt-3 text-sm leading-relaxed text-[var(--fg-muted)]">
+          {
+            isZh
+              ? "统一检索并自动补齐前置；遇到 CurseForge 受限文件直达官方页按哈希自动认领，绝不绕过作者规则。点下面 3 个场景看看："
+              : "Unified discovery with dependency preview and SHA-256 hash matching for restricted CurseForge files. Click to preview:"
+          }
+        </p>
+
+        <!-- Live Clickable Discover Scenario Switcher (eliminates blank gap!) -->
+        <div class="mt-4 space-y-2.5">
+          <div class="flex flex-wrap gap-1.5" role="tablist" aria-label="Discover scenarios">
+            {
+              discoverPresets.map((preset, idx) => (
+                <button
+                  type="button"
+                  role="tab"
+                  data-disc-tab={preset.id}
+                  data-disc-badge={preset.badge}
+                  data-disc-title={preset.title}
+                  data-disc-detail={preset.detail}
+                  aria-selected={idx === 0 ? "true" : "false"}
+                  class:list={[
+                    "lumi-pill cursor-pointer px-3 py-1 text-[11px] font-semibold",
+                    idx === 0
+                      ? "bg-[var(--accent)] text-[var(--on-accent)]"
+                      : "border border-[var(--line)] bg-[var(--surface-2)] text-[var(--fg-muted)] hover:text-[var(--fg)]",
+                  ]}
+                >
+                  {preset.tab}
+                </button>
+              ))
+            }
+          </div>
+          <div class="rounded-2xl border border-[var(--line)] bg-[var(--surface-2)] p-3 text-xs">
+            <span
+              id="lumi-disc-badge"
+              class="lumi-pill inline-block bg-[var(--accent-soft)] px-2.5 py-0.5 text-[10px] font-bold text-[var(--accent)]"
+            >
+              {discoverPresets[0].badge}
+            </span>
+            <p id="lumi-disc-title" class="mt-1.5 font-bold text-[var(--fg)]">
+              {discoverPresets[0].title}
+            </p>
+            <p id="lumi-disc-detail" class="mt-0.5 text-[11px] leading-relaxed text-[var(--fg-muted)]">
+              {discoverPresets[0].detail}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-5 overflow-hidden rounded-2xl border border-[var(--line)]">
+        <Picture
+          src={shotDiscoverLight}
+          alt={isZh ? "统一资源发现页" : "Unified Discover"}
+          widths={[640, 1024, 1440, 1920]}
+          sizes="(max-width: 1024px) 100vw, 480px"
+          formats={["avif", "webp"]}
+          fallbackFormat="webp"
+          loading="lazy"
+          class="block h-auto w-full [html[data-theme='dark']_&]:hidden"
+        />
+        <Picture
+          src={shotDiscoverDark}
+          alt={isZh ? "统一资源发现页（深色）" : "Unified Discover (Dark)"}
+          widths={[640, 1024, 1440, 1920]}
+          sizes="(max-width: 1024px) 100vw, 480px"
+          formats={["avif", "webp"]}
+          fallbackFormat="webp"
+          loading="lazy"
+          class="hidden h-auto w-full [html[data-theme='dark']_&]:block"
+        />
+      </div>
+    </article>
+
+    <!-- Bento 3 (5 col): Rust + Security + REAL SessionPipe Inspector (self-contained, no blank gap) -->
+    <article
+      class="lumi-bento-card lumi-reveal flex flex-col gap-4 p-6 sm:p-8 lg:col-span-5"
+      style="--reveal-delay: 40ms"
+    >
+      <div>
+        <p class="text-xs font-bold tracking-[0.14em] text-[var(--accent)] uppercase">
+          {isZh ? "04 · 硬核安全底座" : "04 · RUST & ZERO TELEMETRY"}
+        </p>
+        <h3 class="mt-2 text-2xl font-extrabold tracking-tight text-[var(--fg)]">
+          {isZh ? "凭据隔离到进程管道，全代码可审计" : "Auditable down to the process pipe"}
+        </h3>
+        <p class="mt-2.5 text-sm leading-relaxed text-[var(--fg-muted)]">
+          {
+            isZh
+              ? "自研 Rust 核心 + Tauri 2，零遥测零广告；可选国内镜像加速公开游戏文件，账号认证始终直连微软与 Mojang 官方。"
+              : "Self-developed Rust core with Tauri 2 — zero telemetry, zero ads, and direct official auth endpoints."
+          }
+        </p>
+      </div>
+
+      <!-- Real Lumi SessionPipe & Log Redaction Inspector (Strictly describes Lumi only) -->
+      <div class="rounded-2xl border border-[var(--line)] bg-[var(--surface-2)] p-3.5 text-xs">
+        <div class="flex flex-wrap items-center justify-between gap-2">
+          <span class="font-bold text-[var(--fg)]">
+            {isZh ? "Lumi 启动隔离实景" : "Lumi Launch Isolation"}
+          </span>
+          <button
+            type="button"
+            id="lumi-redact-btn"
+            data-mode="proc"
+            data-label-proc={isZh ? "查看匿名管道 & 脱敏" : "Inspect stdin & logs"}
+            data-label-pipe={isZh ? "返回进程命令行视角" : "Back to process argv"}
+            data-cmd-proc="javaw.exe -Xmx4G -cp %TEMP%\\lumi-game-xxxx;<cp> com.lumilauncher.bootstrap.SessionPipe"
+            data-cmd-pipe="stdin pipe → [mainClass, ...gameArgs] → shutdown() // one-shot handoff"
+            data-log-proc={isZh ? "[进程列表视角] 命令行中完全不含 --accessToken 或任何游戏参数" : "[Task Manager / argv] Zero --accessToken or game arguments exposed"}
+            data-log-pipe={isZh ? "[本地日志脱敏] User: <redacted> · Bearer: <redacted> · Token: <redacted>" : "[Local log redaction] User: <redacted> · Bearer: <redacted> · Token: <redacted>"}
+            class="lumi-pill cursor-pointer bg-[var(--accent)] px-2.5 py-1 text-[11px] font-semibold text-[var(--on-accent)] hover:opacity-90"
+          >
+            {isZh ? "查看匿名管道 & 脱敏" : "Inspect stdin & logs"}
+          </button>
+        </div>
+        <code
+          id="lumi-redact-cmd"
+          class="mt-2.5 block overflow-x-auto rounded-xl bg-[var(--surface)] px-3 py-2 text-[11px] leading-relaxed text-[var(--accent)]"
+        >
+          javaw.exe -Xmx4G -cp %TEMP%\lumi-game-xxxx;&lt;cp&gt; com.lumilauncher.bootstrap.SessionPipe
+        </code>
+        <p id="lumi-redact-log" class="mt-2 font-mono text-[10.5px] leading-relaxed text-[var(--fg-muted)]">
+          {
+            isZh
+              ? "[进程列表视角] 命令行中完全不含 --accessToken 或任何游戏参数"
+              : "[Task Manager / argv] Zero --accessToken or game arguments exposed"
+          }
+        </p>
+      </div>
+
+      <div class="grid flex-1 content-between gap-2.5 text-xs">
+        <div class="rounded-2xl bg-[var(--surface-2)] p-3.5">
+          <p class="font-bold text-[var(--fg)]">
+            {isZh ? "Windows 凭据管理器隔离" : "Windows Credential Manager"}
+          </p>
+          <p class="mt-1 leading-relaxed text-[var(--fg-muted)]">
+            {isZh ? "OAuth 2.0 PKCE 刷新令牌按账号存入系统凭据库，绝不明文落地 JSON。" : "Per-account OAuth 2.0 PKCE refresh tokens stored in OS vault, never plaintext JSON."}
+          </p>
+        </div>
+        <div class="rounded-2xl bg-[var(--surface-2)] p-3.5">
+          <p class="font-bold text-[var(--fg)]">
+            {isZh ? "Java stdin 管道零命令行泄密" : "Java stdin Session Pipe"}
+          </p>
+          <p class="mt-1 leading-relaxed text-[var(--fg-muted)]">
+            {
+              isZh
+                ? "所有游戏参数与会话令牌经一次性标准输入管道交给 SessionPipe 引导类，交付完毕立即关闭管道。"
+                : "Game arguments and session tokens stream once over stdin to SessionPipe and close immediately after handoff."
+            }
+          </p>
+        </div>
+        <div class="rounded-2xl bg-[var(--surface-2)] p-3.5">
+          <p class="font-bold text-[var(--fg)]">
+            {isZh ? "全链路自动脱敏 + 签名自动更新" : "Auto-Redaction & Signed Updates"}
+          </p>
+          <p class="mt-1 leading-relaxed text-[var(--fg-muted)]">
+            {
+              isZh
+                ? "本地日志与二次确认上传的 mclo.gs 自动脱敏为 <redacted>；前端零直接文件系统权限，更新包强制密码学验签。"
+                : "Logs and opt-in mclo.gs shares auto-redact secrets; updates verify cryptographic signatures before install."
+            }
+          </p>
+        </div>
+        <div class="flex flex-wrap gap-1.5 pt-0.5 text-[11px] font-medium text-[var(--fg-muted)]">
+          <span class="lumi-pill bg-[var(--surface-2)] px-2.5 py-1">Tauri 2 + Rust</span>
+          <span class="lumi-pill bg-[var(--surface-2)] px-2.5 py-1">
+            {isZh ? "0 前端文件权限" : "0 Frontend FS Access"}
+          </span>
+          <span class="lumi-pill bg-[var(--surface-2)] px-2.5 py-1">
+            {isZh ? "6 端点网络诊断" : "6-Endpoint Net Check"}
+          </span>
+          <span class="lumi-pill bg-[var(--surface-2)] px-2.5 py-1">GPL-3.0</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- Bento 4 (7 col): Local Cross-Instance Sync + LIVE CLICKABLE SWITCH WIDGET -->
+    <article
+      class="lumi-bento-card lumi-reveal flex flex-col justify-between overflow-hidden p-6 sm:p-8 lg:col-span-7"
+      style="--reveal-delay: 100ms"
+    >
+      <div>
+        <div class="flex flex-wrap items-center justify-between gap-2">
+          <p class="text-xs font-bold tracking-[0.14em] text-[var(--accent)] uppercase">
+            {isZh ? "05 · 纯本机跨实例同步" : "05 · LOCAL CROSS-INSTANCE SYNC"}
+          </p>
+          <span
+            id="lumi-sync-counter"
+            data-tpl-zh="已选 {n}/4 项 · 纯本机 0 KB 上传云端"
+            data-tpl-en="{n}/4 enabled · 0 KB sent to cloud"
+            class="lumi-tabular lumi-pill bg-[var(--accent-soft)] px-3 py-0.5 text-[11px] font-semibold text-[var(--accent)]"
+          >
+            {isZh ? "已选 3/4 项 · 纯本机 0 KB 上传云端" : "3/4 enabled · 0 KB sent to cloud"}
+          </span>
+        </div>
+        <h3 class="mt-2 text-2xl font-extrabold tracking-tight text-[var(--fg)] sm:text-3xl">
+          {isZh ? "改一次键位和音量，所有实例都顺手" : "Configure once. Stay comfortable everywhere."}
+        </h3>
+        <p class="mt-3 text-sm leading-relaxed text-[var(--fg-muted)]">
+          {
+            isZh
+              ? "纯本机磁盘无损合并，零云端、不绑账号；支持按项自由拨动开关，也可给独立整合包单独排除："
+              : "100% local lossless merging with zero cloud servers. Toggle each category freely below — individual modpacks can always opt out:"
+          }
+        </p>
+
+        <!-- Live Interactive Sync Switch Grid -->
+        <div class="mt-4 grid gap-2 sm:grid-cols-2">
+          {
+            interactiveSyncItems.map((item) => (
+              <button
+                type="button"
+                role="switch"
+                data-sync-toggle={item.id}
+                aria-checked={item.on ? "true" : "false"}
+                class="flex cursor-pointer items-center justify-between gap-3 rounded-2xl border border-[var(--line)] bg-[var(--surface-2)] px-3.5 py-2.5 text-left transition-colors hover:border-[var(--accent)]"
+              >
+                <span class="min-w-0">
+                  <span class="block truncate text-xs font-bold text-[var(--fg)]">{item.label}</span>
+                  <span class="block truncate text-[11px] text-[var(--fg-muted)]">{item.detail}</span>
+                </span>
+                <span class="lumi-switch" aria-checked={item.on ? "true" : "false"} aria-hidden="true">
+                  <span class="lumi-switch-thumb" />
+                </span>
+              </button>
+            ))
+          }
+        </div>
+      </div>
+
+      <div class="mt-5 overflow-hidden rounded-2xl border border-[var(--line)]">
+        <Picture
+          src={shotInstanceSyncLight}
+          alt={isZh ? "纯本机跨实例同步设置" : "Local Cross-Instance Sync"}
+          widths={[640, 1024, 1440, 1920]}
+          sizes="(max-width: 1024px) 100vw, 640px"
+          formats={["avif", "webp"]}
+          fallbackFormat="webp"
+          loading="lazy"
+          class="block h-auto w-full [html[data-theme='dark']_&]:hidden"
+        />
+        <Picture
+          src={shotInstanceSyncDark}
+          alt={isZh ? "纯本机跨实例同步设置（深色）" : "Local Cross-Instance Sync (Dark)"}
+          widths={[640, 1024, 1440, 1920]}
+          sizes="(max-width: 1024px) 100vw, 640px"
+          formats={["avif", "webp"]}
+          fallbackFormat="webp"
+          loading="lazy"
+          class="hidden h-auto w-full [html[data-theme='dark']_&]:block"
+        />
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- =================================================================
+     3. 3-ROW REVERSE-SCROLLING CLICKABLE ECOSYSTEM WALL
+     ================================================================= -->
+<section class="lumi-reveal overflow-x-clip py-16 sm:py-22">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6">
+    <div class="flex flex-col justify-between gap-4 md:flex-row md:items-end">
+      <div>
+        <p class="text-xs font-bold tracking-[0.16em] text-[var(--accent)] uppercase">
+          {isZh ? "06 · 生态全兼容" : "06 · FULL ECOSYSTEM"}
+        </p>
+        <h2 class="mt-2 text-3xl font-black tracking-[-0.03em] text-[var(--fg)] sm:text-4xl">
+          {isZh ? "从纯净原版到大型整合包，开箱即顺手" : "From vanilla worlds to massive modpacks"}
+        </h2>
+      </div>
+      <p class="max-w-md text-sm leading-relaxed text-[var(--fg-muted)]">
+        {
+          isZh
+            ? "原生支持 Fabric、NeoForge、Forge、Quilt 与 .mrpack，悬停可暂停、点击任意胶囊可查看 Lumi 的专属支持细节。"
+            : "Native Fabric, NeoForge, Forge, Quilt, and .mrpack support — hover to pause or click any pill to see how Lumi handles it."
+        }
+      </p>
+    </div>
+  </div>
+
+  <div class="mt-10 space-y-3">
+    <!-- Row 1: Popular Mods (left) -->
+    <div class="lumi-marquee overflow-hidden py-1">
+      <div class="lumi-marquee-track" style="--marquee-dur: 46s">
+        {
+          [...ecoRow1, ...ecoRow1].map((item, idx) => (
+            <button
+              type="button"
+              aria-hidden={idx >= ecoRow1.length ? "true" : undefined}
+              tabindex={idx >= ecoRow1.length ? -1 : undefined}
+              data-eco-tip={`${item.name} — ${item.tip}`}
+              class="lumi-eco-pill lumi-pill inline-flex shrink-0 cursor-pointer items-center gap-2.5 px-4 py-2 text-xs font-semibold text-[var(--fg)] hover:-translate-y-0.5 hover:border-[var(--accent)] sm:text-sm"
+            >
+              <span
+                class="h-2.5 w-2.5 shrink-0 rounded-full"
+                style={`background: oklch(64% 0.16 ${item.hue})`}
+                aria-hidden="true"
+              />
+              <span>{item.name}</span>
+              <span class="rounded-full bg-[var(--surface-2)] px-2 py-0.5 text-[10px] font-medium text-[var(--fg-muted)]">
+                {item.tag}
+              </span>
+            </button>
+          ))
+        }
+      </div>
+    </div>
+
+    <!-- Row 2: Loaders, Shaders & Modpacks (right / reverse) -->
+    <div class="lumi-marquee overflow-hidden py-1">
+      <div class="lumi-marquee-track lumi-marquee-reverse" style="--marquee-dur: 52s">
+        {
+          [...ecoRow2, ...ecoRow2].map((item, idx) => (
+            <button
+              type="button"
+              aria-hidden={idx >= ecoRow2.length ? "true" : undefined}
+              tabindex={idx >= ecoRow2.length ? -1 : undefined}
+              data-eco-tip={`${item.name} — ${item.tip}`}
+              class="lumi-eco-pill lumi-pill inline-flex shrink-0 cursor-pointer items-center gap-2.5 px-4 py-2 text-xs font-semibold text-[var(--fg)] hover:-translate-y-0.5 hover:border-[var(--accent)] sm:text-sm"
+            >
+              <span
+                class="h-2.5 w-2.5 shrink-0 rounded-full"
+                style={`background: oklch(64% 0.16 ${item.hue})`}
+                aria-hidden="true"
+              />
+              <span>{item.name}</span>
+              <span class="rounded-full bg-[var(--accent-soft)] px-2 py-0.5 text-[10px] font-semibold text-[var(--accent)]">
+                {item.tag}
+              </span>
+            </button>
+          ))
+        }
+      </div>
+    </div>
+
+    <!-- Row 3: Lumi Craft & Platform Highlights (left, calmer speed) -->
+    <div class="lumi-marquee overflow-hidden py-1">
+      <div class="lumi-marquee-track" style="--marquee-dur: 58s">
+        {
+          [...ecoRow3, ...ecoRow3].map((item, idx) => (
+            <button
+              type="button"
+              aria-hidden={idx >= ecoRow3.length ? "true" : undefined}
+              tabindex={idx >= ecoRow3.length ? -1 : undefined}
+              data-eco-tip={`${item.name} — ${item.tip}`}
+              class="lumi-pill inline-flex shrink-0 cursor-pointer items-center gap-2.5 border border-[var(--line)] bg-[var(--surface)] px-4 py-2 text-xs font-semibold text-[var(--fg-muted)] hover:-translate-y-0.5 hover:border-[var(--accent)] sm:text-sm"
+            >
+              <span
+                class="h-2 w-2 shrink-0 rounded-full"
+                style={`background: oklch(64% 0.16 ${item.hue})`}
+                aria-hidden="true"
+              />
+              <span class="text-[var(--fg)]">{item.name}</span>
+              <span class="text-[10px] font-medium text-[var(--fg-muted)]">{item.tag}</span>
+            </button>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================================================================
+     4. EFFORTLESS MIGRATION VISUAL BRIDGE (#migration)
+     ================================================================= -->
+<section id="migration" class="lumi-reveal mx-auto max-w-6xl scroll-mt-24 px-4 py-16 sm:px-6 sm:py-24">
+  <div class="mx-auto max-w-2xl text-center">
+    <p class="text-xs font-bold tracking-[0.16em] text-[var(--accent)] uppercase">
+      {h.migrationEyebrow}
+    </p>
+    <h2 class="mt-2 text-balance text-3xl font-black tracking-[-0.03em] text-[var(--fg)] sm:text-4xl">
+      {h.migrationTitle}
+    </h2>
+    <p class="mt-3 text-balance text-sm text-[var(--fg-muted)] sm:text-base">
+      {h.migrationSubtitle}
+    </p>
+  </div>
+
+  <div class="mt-12 grid items-center gap-6 lg:grid-cols-11">
+    <!-- Left: Read-only Link -->
+    <div class="lumi-bento-card p-6 sm:p-7 lg:col-span-4">
+      <span class="lumi-pill inline-block bg-[var(--accent-soft)] px-3 py-1 text-xs font-bold text-[var(--accent)]">
+        {h.migrationLinkTitle}
+      </span>
+      <p class="mt-3.5 text-sm leading-relaxed text-[var(--fg-muted)]">{h.migrationLinkDesc}</p>
+      <div class="mt-5 flex flex-wrap gap-2">
+        {
+          h.migrationLinkList.map((name) => (
+            <span class="lumi-pill bg-[var(--surface-2)] px-3.5 py-1.5 text-xs font-semibold text-[var(--fg)]">
+              {name}
+            </span>
+          ))
+        }
+      </div>
+    </div>
+
+    <!-- Center: Glowing Lumi Hub -->
+    <div class="flex flex-col items-center justify-center py-4 lg:col-span-3">
+      <div class="relative flex items-center justify-center">
+        <div
+          class="lumi-stage-glow pointer-events-none absolute h-36 w-36 rounded-full"
+          aria-hidden="true"
+        >
+        </div>
+        <div
+          class="lumi-glass relative flex h-24 w-24 items-center justify-center rounded-3xl p-4 shadow-xl"
+        >
+          <img src="/favicon.svg" alt="Lumi" width="64" height="64" class="h-16 w-16 rounded-2xl" />
+        </div>
+      </div>
+      <p class="mt-4 max-w-[220px] text-center text-xs font-semibold leading-relaxed text-[var(--fg)]">
+        {isZh ? "只读关联 · 绝不删改原目录" : "Read-only link · Zero altered files"}
+      </p>
+      <p class="mt-1 text-center text-[11px] text-[var(--fg-muted)]">
+        {isZh ? "支持与旧启动器长期双持共存" : "Runs cleanly side by side"}
+      </p>
+    </div>
+
+    <!-- Right: Clean Isolated Import -->
+    <div class="lumi-bento-card p-6 sm:p-7 lg:col-span-4">
+      <span class="lumi-pill inline-block bg-[var(--accent-soft)] px-3 py-1 text-xs font-bold text-[var(--accent)]">
+        {h.migrationImportTitle}
+      </span>
+      <p class="mt-3.5 text-sm leading-relaxed text-[var(--fg-muted)]">{h.migrationImportDesc}</p>
+      <div class="mt-5 flex flex-wrap gap-2">
+        {
+          h.migrationImportList.map((name) => (
+            <span class="lumi-pill bg-[var(--surface-2)] px-3.5 py-1.5 text-xs font-semibold text-[var(--fg)]">
+              {name}
+            </span>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================================================================
+     5. CLEAN PLAYER-FRIENDLY INLINE DOWNLOAD SECTION (#download)
+     ================================================================= -->
+<section id="download" class="lumi-reveal relative scroll-mt-24 py-20 sm:py-28">
+  <div class="mx-auto max-w-4xl px-4 text-center sm:px-6">
+    <p class="text-xs font-bold tracking-[0.16em] text-[var(--accent)] uppercase">
+      {isZh ? "下载选项" : "DOWNLOAD"}
+    </p>
+    <h2 class="mt-3 text-4xl font-black tracking-[-0.035em] text-[var(--fg)] sm:text-5xl">
+      {d.title}
+    </h2>
+    <p class="mt-3 text-sm text-[var(--fg-muted)] sm:text-base">{d.subtitle}</p>
+
+    <!-- Release Channel Pill -->
+    <div class="mt-7 flex flex-col items-center gap-2">
+      <div
+        class="lumi-glass lumi-pill lumi-tabular inline-flex items-center gap-2.5 px-5 py-2 text-xs font-semibold text-[var(--fg)] sm:text-sm"
+      >
+        <span>{latest.tag}</span>
+        <span class="opacity-30">|</span>
+        <span class="text-[var(--accent)]">{kindLabel}</span>
+        <span class="opacity-30">|</span>
+        <span class="font-normal text-[var(--fg-muted)]">{formatDate(latest.publishedAt, locale)}</span>
+      </div>
+      {
+        latest.kind === "prereview" && (
+          <p class="mt-2 max-w-xl text-xs leading-relaxed text-[var(--warning)]">
+            {d.prereviewNoticeBody}
+          </p>
+        )
+      }
+    </div>
+
+    <!-- Clean Open 2-Column Split with Hairline Divider -->
+    <div
+      class="mt-12 grid divide-y divide-[var(--line)] sm:grid-cols-2 sm:divide-x sm:divide-y-0"
+    >
+      <!-- Installer Column -->
+      <div class="flex flex-col items-center px-6 py-8 sm:py-4">
+        <svg class="h-10 w-10 text-[var(--fg)]" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M3 5.5 10.5 4.4v7.1H3V5.5Zm8.7-1.3L21 3v8.5h-9.3V4.2ZM3 12.6h7.5v7.1L3 18.6v-6Zm8.7 0H21V21l-9.3-1.3v-7.1Z" />
+        </svg>
+        <h3 class="mt-4 text-2xl font-bold text-[var(--fg)]">{d.installerTitle}</h3>
+        <p class="lumi-tabular mt-1.5 text-xs text-[var(--fg-muted)]">
+          {installerName} · {installerSize}
+        </p>
+
+        <a
+          href={installerHref}
+          download={installerName}
+          data-direct-download={installerName}
+          class="mt-5 inline-flex items-center gap-2 text-sm font-bold text-[var(--accent)] no-underline transition-opacity hover:opacity-80 sm:text-base"
+        >
+          <svg class="h-4.5 w-4.5" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path
+              d="M12 4v11m0 0 4.5-4.5M12 15l-4.5-4.5M5 19h14"
+              stroke="currentColor"
+              stroke-width="2.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+          {isZh ? "下载安装程序（推荐）" : "Download Installer (Recommended)"}
+        </a>
+
+        <p class="mt-2 text-xs text-[var(--fg-muted)]">
+          {isZh ? "支持签名自动更新与 .mrpack 整合包关联" : "Signed auto-updates & .mrpack file association"}
+        </p>
+
+        {
+          latest.installer && installerUsesSite && (
+            <a
+              href={latest.installer.githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="mt-2 text-[11px] text-[var(--fg-muted)] underline decoration-[var(--line)] underline-offset-4 hover:text-[var(--fg)]"
+            >
+              {d.btnFallbackGithub} ↗
+            </a>
+          )
+        }
+      </div>
+
+      <!-- Portable Column -->
+      <div class="flex flex-col items-center px-6 py-8 sm:py-4">
+        <svg class="h-10 w-10 text-[var(--fg)]" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path
+            d="M4 7.5A2.5 2.5 0 0 1 6.5 5h4l2 2h5A2.5 2.5 0 0 1 20 9.5v7A2.5 2.5 0 0 1 17.5 19h-11A2.5 2.5 0 0 1 4 16.5v-9Z"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linejoin="round"
+          />
+          <path d="M12 10v5m0 0 2.5-2.5M12 15l-2.5-2.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        <h3 class="mt-4 text-2xl font-bold text-[var(--fg)]">{d.portableTitle}</h3>
+        <p class="lumi-tabular mt-1.5 text-xs text-[var(--fg-muted)]">
+          {portableName} · {portableSize}
+        </p>
+
+        <a
+          href={portableHref}
+          download={portableName}
+          class="mt-5 inline-flex items-center gap-2 text-sm font-bold text-[var(--accent)] no-underline transition-opacity hover:opacity-80 sm:text-base"
+        >
+          <svg class="h-4.5 w-4.5" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path
+              d="M12 4v11m0 0 4.5-4.5M12 15l-4.5-4.5M5 19h14"
+              stroke="currentColor"
+              stroke-width="2.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+          {isZh ? "下载便携压缩包" : "Download Portable .zip"}
+        </a>
+
+        <p class="mt-2 text-xs text-[var(--fg-muted)]">
+          {isZh ? "绿色免安装，数据独立存放在 LumiData/" : "Extract & run · stores data beside Lumi.exe"}
+        </p>
+
+        {
+          latest.portable && portableUsesSite && (
+            <a
+              href={latest.portable.githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="mt-2 text-[11px] text-[var(--fg-muted)] underline decoration-[var(--line)] underline-offset-4 hover:text-[var(--fg)]"
+            >
+              {d.btnFallbackGithub} ↗
+            </a>
+          )
+        }
+      </div>
+    </div>
+
+    <!-- Helpful 2-Step SmartScreen Drawer Only -->
+    <div class="mx-auto mt-10 max-w-2xl text-left">
+      <div
+        id="smartscreen"
+        class="lumi-acc-item rounded-2xl bg-[var(--surface)] px-5 py-3.5 shadow-xs"
+        data-open="false"
+      >
+        <button
+          type="button"
+          data-acc-trigger
+          aria-expanded="false"
+          class="flex w-full cursor-pointer items-center justify-between gap-3 text-left text-xs font-semibold text-[var(--fg)] sm:text-sm"
+        >
+          <span class="flex items-center gap-2.5">
+            <span class="lumi-acc-arrow inline-block text-[10px] text-[var(--accent)]">▶</span>
+            {d.smartScreenTitle}
+          </span>
+          <span class="text-[11px] font-normal text-[var(--fg-muted)]">
+            {isZh ? "两步图解" : "2-step guide"}
+          </span>
+        </button>
+
+        <div class="lumi-acc-body">
+          <div class="lumi-acc-inner">
+            <div class="mt-3.5 grid items-center gap-5 border-t border-[var(--line)] pt-4 sm:grid-cols-12">
+              <div class="sm:col-span-6">
+                <svg
+                  viewBox="0 0 540 310"
+                  class="w-full rounded-xl border border-[var(--line)] shadow-sm"
+                  role="img"
+                  aria-label={d.smartScreenTitle}
+                >
+                  <rect width="540" height="310" rx="10" fill="#005A9E" />
+                  <rect x="0" y="0" width="540" height="36" fill="#004578" />
+                  <text x="20" y="23" fill="#DCEEFF" font-size="13" font-family="system-ui, sans-serif">
+                    Microsoft Defender SmartScreen
+                  </text>
+                  <text x="28" y="78" fill="#FFFFFF" font-size="22" font-weight="700" font-family="system-ui, sans-serif">
+                    {isZh ? "Windows 已保护你的电脑" : "Windows protected your PC"}
+                  </text>
+                  <text x="28" y="110" fill="#E3F2FD" font-size="13" font-family="system-ui, sans-serif">
+                    {isZh
+                      ? "Microsoft Defender SmartScreen 阻止了无法识别的应用启动。"
+                      : "Microsoft Defender SmartScreen prevented an unrecognized app."}
+                  </text>
+                  <rect x="22" y="128" width="104" height="30" rx="6" fill="#FFFFFF" fill-opacity="0.16" stroke="#FFD54F" stroke-width="2" />
+                  <text x="34" y="148" fill="#FFFFFF" font-size="14" font-weight="700" text-decoration="underline" font-family="system-ui, sans-serif">
+                    {isZh ? "更多信息" : "More info"}
+                  </text>
+                  <circle cx="144" cy="143" r="12" fill="#FFD54F" />
+                  <text x="144" y="148" text-anchor="middle" fill="#1B2A4A" font-size="13" font-weight="800" font-family="system-ui, sans-serif">1</text>
+                  <text x="28" y="186" fill="#CFE8FF" font-size="12" font-family="monospace">
+                    {isZh ? `应用: ${installerName}` : `App: ${installerName}`}
+                  </text>
+                  <text x="28" y="206" fill="#CFE8FF" font-size="12" font-family="system-ui, sans-serif">
+                    {isZh ? "发布者: 未知发布者" : "Publisher: Unknown publisher"}
+                  </text>
+                  <rect x="230" y="246" width="136" height="38" rx="4" fill="#FFFFFF" fill-opacity="0.22" stroke="#FFD54F" stroke-width="2.2" />
+                  <text x="298" y="270" text-anchor="middle" fill="#FFFFFF" font-size="14" font-weight="700" font-family="system-ui, sans-serif">
+                    {isZh ? "仍要运行" : "Run anyway"}
+                  </text>
+                  <circle cx="212" cy="265" r="12" fill="#FFD54F" />
+                  <text x="212" y="270" text-anchor="middle" fill="#1B2A4A" font-size="13" font-weight="800" font-family="system-ui, sans-serif">2</text>
+                  <rect x="382" y="246" width="130" height="38" rx="4" fill="#FFFFFF" fill-opacity="0.1" stroke="#FFFFFF" stroke-opacity="0.45" />
+                  <text x="447" y="270" text-anchor="middle" fill="#DCEEFF" font-size="14" font-family="system-ui, sans-serif">
+                    {isZh ? "不运行" : "Don't run"}
+                  </text>
+                </svg>
+              </div>
+              <div class="space-y-2.5 text-xs leading-relaxed text-[var(--fg-muted)] sm:col-span-6">
+                <p class="font-semibold text-[var(--fg)]">{d.smartScreenStep1}</p>
+                <p class="font-semibold text-[var(--fg)]">{d.smartScreenStep2}</p>
+                <p>{d.smartScreenWhyBody}</p>
+                <a
+                  href={LINKS.issues}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-block font-semibold text-[var(--accent)] hover:underline"
+                >
+                  {d.smartScreenFalsePositive} ↗
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="mt-9 text-xs leading-relaxed text-[var(--fg-muted)]">
+      {isZh ? "Lumi 基于 " : "Lumi is free software under "}
+      <a href={LINKS.license} target="_blank" rel="noopener noreferrer" class="underline underline-offset-4 hover:text-[var(--fg)]">
+        GPL-3.0-only
+      </a>
+      {isZh ? " 开源免费 · 仅支持 Windows 10/11 (x64) 与正版 Microsoft 账户 · " : " · Windows 10/11 (x64) + official Microsoft account · "}
+      <a href={LINKS.releases} target="_blank" rel="noopener noreferrer" class="underline underline-offset-4 hover:text-[var(--fg)]">
+        {isZh ? "历史版本" : "All Releases"}
+      </a>
+      {" · "}
+      <a href={privacyHref} class="underline underline-offset-4 hover:text-[var(--fg)]">
+        {t.nav.privacy}
+      </a>
+      {" · "}
+      <a href={checksumsHref} target="_blank" rel="noopener noreferrer" class="underline underline-offset-4 hover:text-[var(--fg)]">
+        {isZh ? "校验清单" : "Checksums"}
+      </a>
+    </p>
+  </div>
+</section>
+
+<!-- =================================================================
+     6. ASYMMETRIC STICKY-LEFT EDITORIAL FAQ (#faq)
+     ================================================================= -->
+<section id="faq" class="lumi-reveal mx-auto max-w-6xl scroll-mt-24 px-4 py-16 sm:px-6 sm:py-24">
+  <div class="grid gap-10 lg:grid-cols-12 lg:gap-12">
+    <div class="lg:col-span-4">
+      <div class="lg:sticky lg:top-28">
+        <p class="text-xs font-bold tracking-[0.16em] text-[var(--accent)] uppercase">
+          {isZh ? "常见问题" : "FAQ"}
+        </p>
+        <h2
+          class="lumi-balance mt-3 text-3xl font-black tracking-[-0.03em] text-[var(--fg)] sm:text-4xl lg:leading-[1.15]"
+        >
+          {
+            isZh ? (
+              <>
+                关于 Lumi，
+                <span class="inline-block">你需要了解的一切</span>
+              </>
+            ) : (
+              "Everything you should know about Lumi"
+            )
+          }
+        </h2>
+        <p class="mt-3 text-sm leading-relaxed text-[var(--fg-muted)]">
+          {h.faqSubtitle}
+        </p>
+      </div>
+    </div>
+
+    <div class="space-y-3 lg:col-span-8">
+      {
+        h.faqs.map((item, idx) => (
+          <div
+            class="lumi-acc-item rounded-2xl bg-[var(--surface)] px-5 py-4 shadow-xs transition-colors hover:bg-[var(--overlay)]"
+            data-open={idx === 0 ? "true" : "false"}
+          >
+            <button
+              type="button"
+              data-acc-trigger
+              aria-expanded={idx === 0 ? "true" : "false"}
+              class="flex w-full cursor-pointer items-center gap-3 text-left text-sm font-bold text-[var(--fg)] sm:text-[15px]"
+            >
+              <span class="lumi-acc-arrow inline-block shrink-0 text-[10px] text-[var(--accent)]">
+                ▶
+              </span>
+              <span>{item.q}</span>
+            </button>
+            <div class="lumi-acc-body">
+              <div class="lumi-acc-inner">
+                <p class="pt-3 pl-5 text-sm leading-relaxed text-[var(--fg-muted)]">{item.a}</p>
+              </div>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<!-- =================================================================
+     7. PLAYFUL OVERLAPPING TILTED-CARDS COMMUNITY SECTION (#community)
+     ================================================================= -->
+<section id="community" class="lumi-reveal mx-auto max-w-6xl scroll-mt-24 px-4 py-16 sm:px-6 sm:py-24">
+  <div class="grid items-center gap-12 lg:grid-cols-12">
+    <div class="lg:col-span-5">
+      <p class="text-xs font-bold tracking-[0.16em] text-[var(--accent)] uppercase">
+        {isZh ? "社区" : "COMMUNITY"}
+      </p>
+      <h2 class="mt-3 text-3xl font-black tracking-[-0.03em] text-[var(--fg)] sm:text-5xl">
+        {isZh ? "加入我们的社区" : "Join the Lumi Community"}
+      </h2>
+      <p class="mt-4 text-sm leading-relaxed text-[var(--fg-muted)] sm:text-base">
+        {h.communitySubtitle}
+      </p>
+
+      <div class="mt-6 flex flex-wrap gap-2.5">
+        <a
+          href={LINKS.bilibili}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="lumi-glass lumi-pill inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold text-[var(--fg)] no-underline hover:bg-[var(--surface)]"
+        >
+          <span>{isZh ? "开发者 B 站" : "Developer Bilibili"}</span>
+          <span aria-hidden="true">↗</span>
+        </a>
+        <a
+          href={LINKS.discussions}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="lumi-glass lumi-pill inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold text-[var(--fg)] no-underline hover:bg-[var(--surface)]"
+        >
+          <span>GitHub Discussions</span>
+          <span aria-hidden="true">↗</span>
+        </a>
+        <a
+          href={LINKS.afdian}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="lumi-glass lumi-pill inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold text-[var(--fg)] no-underline hover:bg-[var(--surface)]"
+        >
+          <span>{isZh ? "爱发电赞助" : "Sponsor on Afdian"}</span>
+          <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Overlapping tactile tilted community cards -->
+    <div class="grid gap-4 sm:grid-cols-3 sm:gap-0 lg:col-span-7">
+      <div
+        class="lumi-tilt-card relative z-10 flex flex-col justify-between p-6"
+        style="--tilt: -2.6deg"
+      >
+        <div>
+          <div class="flex h-11 w-11 items-center justify-center rounded-2xl bg-[var(--accent-soft)] text-[var(--accent)]">
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12 2.5c-3.8 0-6.5 2.7-6.5 6.8 0 .9-.7 2.2-1.4 3.4-.5.9-.3 1.8.4 1.9.5.1 1-.4 1.4-1 .2 1.2.8 2.4 1.7 3.2-.9.5-1.5 1.1-1.5 1.7 0 .8 1.2 1.3 2.8 1.3 1.1 0 2.1-.3 2.7-.8h.8c.6.5 1.6.8 2.7.8 1.6 0 2.8-.5 2.8-1.3 0-.6-.6-1.2-1.5-1.7.9-.8 1.5-2 1.7-3.2.4.6.9 1.1 1.4 1 .7-.1.9-1 .4-1.9-.7-1.2-1.4-2.5-1.4-3.4 0-4.1-2.7-6.8-6.5-6.8Z" />
+            </svg>
+          </div>
+          <h3 class="mt-4 text-base font-bold text-[var(--fg)]">
+            {isZh ? "官方 QQ 群" : "Official QQ Group"}
+          </h3>
+          <p class="mt-1.5 text-xs leading-relaxed text-[var(--fg-muted)]">
+            {isZh ? "与玩家实时交流反馈、获取内测动态与排错帮助。" : "Chinese player chat, feedback, and beta test notices."}
+          </p>
+        </div>
+        <div class="mt-5">
+          <a
+            href={LINKS.qqGroup}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="lumi-pill inline-flex items-center gap-1.5 border border-[var(--line)] bg-[var(--surface-2)] px-4 py-2 text-xs font-semibold text-[var(--fg)] no-underline hover:border-[var(--accent)] hover:text-[var(--accent)]"
+          >
+            {isZh ? "加入 1 群" : "Join Group"} ↗
+          </a>
+        </div>
+      </div>
+
+      <div
+        class="lumi-tilt-card relative z-20 flex flex-col justify-between p-6 sm:-ml-3 sm:mt-4"
+        style="--tilt: 2.2deg"
+      >
+        <div>
+          <div class="flex h-11 w-11 items-center justify-center rounded-2xl bg-[var(--accent-soft)] text-[var(--accent)]">
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path
+                d="M9.5 4.5 7.5 19.5M16.5 4.5l-2 15M4.5 9.5h15M3.5 14.5h15"
+                stroke="currentColor"
+                stroke-width="2.1"
+                stroke-linecap="round"
+              />
+            </svg>
+          </div>
+          <h3 class="mt-4 text-base font-bold text-[var(--fg)]">
+            {isZh ? "QQ 频道" : "QQ Channel"}
+          </h3>
+          <p class="mt-1.5 text-xs leading-relaxed text-[var(--fg-muted)]">
+            {isZh ? "第一时间获取版本公告、长期问答帖与精选活动。" : "Release announcements, pinned guides, and topic threads."}
+          </p>
+        </div>
+        <div class="mt-5">
+          <a
+            href={LINKS.qqChannel}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="lumi-pill inline-flex items-center gap-1.5 border border-[var(--line)] bg-[var(--surface-2)] px-4 py-2 text-xs font-semibold text-[var(--fg)] no-underline hover:border-[var(--accent)] hover:text-[var(--accent)]"
+          >
+            {isZh ? "加入频道" : "Open Channel"} ↗
+          </a>
+        </div>
+      </div>
+
+      <div
+        class="lumi-tilt-card relative z-10 flex flex-col justify-between p-6 sm:-ml-3 sm:-mt-2"
+        style="--tilt: -1.6deg"
+      >
+        <div>
+          <div class="flex h-11 w-11 items-center justify-center rounded-2xl bg-[var(--accent-soft)] text-[var(--accent)]">
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M19.5 5.4a15.7 15.7 0 0 0-3.9-1.2l-.2.4a13.5 13.5 0 0 1 3.4 1.3 11.4 11.4 0 0 0-13.6 0 13.5 13.5 0 0 1 3.4-1.3l-.2-.4a15.7 15.7 0 0 0-3.9 1.2C2.2 8.9 1.5 12.3 1.9 15.7a15.8 15.8 0 0 0 4.8 2.4l1-1.6a10 10 0 0 1-1.6-.8l.4-.3a11.3 11.3 0 0 0 11 0l.4.3a10 10 0 0 1-1.6.8l1 1.6a15.8 15.8 0 0 0 4.8-2.4c.5-3.9-.8-7.3-2.6-10.3ZM8.9 13.7c-.9 0-1.6-.8-1.6-1.8s.7-1.8 1.6-1.8 1.6.8 1.6 1.8-.7 1.8-1.6 1.8Zm6.2 0c-.9 0-1.6-.8-1.6-1.8s.7-1.8 1.6-1.8 1.6.8 1.6 1.8-.7 1.8-1.6 1.8Z" />
+            </svg>
+          </div>
+          <h3 class="mt-4 text-base font-bold text-[var(--fg)]">Discord</h3>
+          <p class="mt-1.5 text-xs leading-relaxed text-[var(--fg-muted)]">
+            {isZh ? "中英双语分区、求助论坛、作品展示与国际社区。" : "Bilingual server with help forums, ideas, and showcases."}
+          </p>
+        </div>
+        <div class="mt-5">
+          <a
+            href={LINKS.discord}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="lumi-pill inline-flex items-center gap-1.5 border border-[var(--line)] bg-[var(--surface-2)] px-4 py-2 text-xs font-semibold text-[var(--fg)] no-underline hover:border-[var(--accent)] hover:text-[var(--accent)]"
+          >
+            {isZh ? "加入服务器" : "Join Discord"} ↗
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Lean interactive runtime (~4 KiB gzip): Color-locked stage + 3D sheen + All 4 Bento widgets + Eco toast + Scroll bar -->
+<script is:inline>
+  (() => {
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const fine = window.matchMedia("(pointer: fine)").matches;
+
+    // 1. Top luminous scroll progress bar
+    const progressBar = document.getElementById("lumi-scroll-progress");
+    if (progressBar) {
+      let ticking = false;
+      const updateBar = () => {
+        const doc = document.documentElement;
+        const max = doc.scrollHeight - window.innerHeight;
+        const ratio = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
+        progressBar.style.transform = `scaleX(${ratio.toFixed(4)})`;
+        ticking = false;
+      };
+      window.addEventListener(
+        "scroll",
+        () => {
+          if (!ticking) {
+            ticking = true;
+            requestAnimationFrame(updateBar);
+          }
+        },
+        { passive: true },
+      );
+      updateBar();
+    }
+
+    // 2. Adaptive color-locked showcase tabs (syncs caption & spotlight smoothly across light/dark)
+    const tabs = Array.from(document.querySelectorAll("[data-showcase-tab]"));
+    const panels = Array.from(document.querySelectorAll("[data-showcase-panel]"));
+    const captionEl = document.getElementById("lumi-showcase-caption");
+    const syncActiveCaption = () => {
+      if (!captionEl) return;
+      const activeTab = tabs.find((t) => t.getAttribute("aria-selected") === "true") || tabs[0];
+      if (!activeTab) return;
+      const isDark = document.documentElement.dataset.theme === "dark";
+      captionEl.textContent = isDark
+        ? activeTab.dataset.captionDark || activeTab.dataset.caption || ""
+        : activeTab.dataset.caption || "";
+    };
+    for (const tab of tabs) {
+      tab.addEventListener("click", () => {
+        const id = tab.getAttribute("data-showcase-tab");
+        const root = document.documentElement;
+        if (tab.dataset.hue) root.style.setProperty("--accent-h", tab.dataset.hue);
+        if (tab.dataset.lightL) root.style.setProperty("--accent-l-light", tab.dataset.lightL);
+        if (tab.dataset.lightC) root.style.setProperty("--accent-c-light", tab.dataset.lightC);
+        if (tab.dataset.darkL) root.style.setProperty("--accent-l-dark", tab.dataset.darkL);
+        if (tab.dataset.darkC) root.style.setProperty("--accent-c-dark", tab.dataset.darkC);
+
+        for (const btn of tabs) {
+          const active = btn === tab;
+          btn.setAttribute("aria-selected", active ? "true" : "false");
+          btn.classList.toggle("bg-[var(--accent)]", active);
+          btn.classList.toggle("text-[var(--on-accent)]", active);
+          btn.classList.toggle("text-[var(--fg-muted)]", !active);
+        }
+        for (const panel of panels) {
+          const show = panel.getAttribute("data-showcase-panel") === id;
+          panel.classList.toggle("opacity-100", show);
+          panel.classList.toggle("opacity-0", !show);
+          panel.classList.toggle("pointer-events-none", !show);
+        }
+        syncActiveCaption();
+      });
+    }
+
+    // 3. Spotlight 01 Day/Night inline preview toggle (follows page theme automatically + allows manual flip)
+    const spotBtns = Array.from(document.querySelectorAll("[data-spot-toggle]"));
+    const spotPanels = Array.from(document.querySelectorAll("[data-spot-theme]"));
+    const applySpotTheme = (target) => {
+      for (const b of spotBtns) {
+        const on = b.getAttribute("data-spot-toggle") === target;
+        b.setAttribute("aria-pressed", on ? "true" : "false");
+        b.classList.toggle("bg-[var(--accent)]", on);
+        b.classList.toggle("text-[var(--on-accent)]", on);
+        b.classList.toggle("text-[var(--fg-muted)]", !on);
+      }
+      for (const p of spotPanels) {
+        const show = p.getAttribute("data-spot-theme") === target;
+        p.classList.toggle("opacity-100", show);
+        p.classList.toggle("opacity-0", !show);
+        p.classList.toggle("pointer-events-none", !show);
+      }
+    };
+    for (const btn of spotBtns) {
+      btn.addEventListener("click", () => {
+        const target = btn.getAttribute("data-spot-toggle");
+        if (target) applySpotTheme(target);
+      });
+    }
+    const syncThemeAwarePreviews = () => {
+      const mode = document.documentElement.dataset.theme === "dark" ? "dark" : "light";
+      applySpotTheme(mode);
+      syncActiveCaption();
+    };
+    syncThemeAwarePreviews();
+    new MutationObserver(syncThemeAwarePreviews).observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["data-theme"],
+    });
+
+    // 3b. Mobile Hero "Copy clean link to open on PC" with Bilibili/in-app WebView fallback
+    const mobileCopyBtn = document.getElementById("lumi-mobile-copy-link");
+    const mobileFallback = document.getElementById("lumi-mobile-copy-fallback");
+    const mobileInput = document.getElementById("lumi-mobile-copy-input");
+    if (mobileCopyBtn) {
+      const span = mobileCopyBtn.querySelector("span");
+      const origLabel = span?.textContent || "";
+      mobileCopyBtn.addEventListener("click", async () => {
+        const cleanUrl = `${window.location.origin}${window.location.pathname}`;
+        let ok = false;
+        try {
+          if (navigator.clipboard?.writeText) {
+            await navigator.clipboard.writeText(cleanUrl);
+            ok = true;
+          }
+        } catch {
+          ok = false;
+        }
+        if (!ok) {
+          try {
+            const ta = document.createElement("textarea");
+            ta.value = cleanUrl;
+            ta.setAttribute("readonly", "");
+            ta.style.position = "fixed";
+            ta.style.opacity = "0";
+            document.body.appendChild(ta);
+            ta.select();
+            ok = document.execCommand("copy");
+            ta.remove();
+          } catch {
+            ok = false;
+          }
+        }
+        if (ok) {
+          if (mobileFallback) mobileFallback.hidden = true;
+          if (span) span.textContent = mobileCopyBtn.dataset.copiedLabel || "Copied";
+          window.setTimeout(() => {
+            if (span) span.textContent = origLabel;
+          }, 2400);
+        } else if (mobileFallback && mobileInput) {
+          mobileInput.value = cleanUrl;
+          mobileFallback.hidden = false;
+          mobileInput.focus();
+          mobileInput.select();
+        }
+      });
+    }
+
+    // 4. Pointer-driven 3D tilt + specular glass sheen + bento cursor spotlight glow
+    const stage = document.getElementById("lumi-3d-stage");
+    if (stage && !reduced && fine) {
+      stage.addEventListener("pointermove", (e) => {
+        const r = stage.getBoundingClientRect();
+        const rxPct = (e.clientX - r.left) / r.width;
+        const ryPct = (e.clientY - r.top) / r.height;
+        stage.style.setProperty("--ry", `${((rxPct - 0.5) * 4.5).toFixed(2)}deg`);
+        stage.style.setProperty("--rx", `${(-(ryPct - 0.5) * 3.5).toFixed(2)}deg`);
+        stage.style.setProperty("--sx", `${(rxPct * 100).toFixed(1)}%`);
+        stage.style.setProperty("--sy", `${(ryPct * 100).toFixed(1)}%`);
+      });
+      stage.addEventListener("pointerleave", () => {
+        stage.style.setProperty("--ry", "0deg");
+        stage.style.setProperty("--rx", "0deg");
+      });
+    }
+
+    if (!reduced && fine) {
+      for (const card of document.querySelectorAll(".lumi-bento-card")) {
+        card.addEventListener("pointermove", (e) => {
+          const r = card.getBoundingClientRect();
+          card.style.setProperty("--mx", `${(e.clientX - r.left).toFixed(0)}px`);
+          card.style.setProperty("--my", `${(e.clientY - r.top).toFixed(0)}px`);
+        });
+      }
+    }
+
+    // 5. Bento 02 Live Rollback Widget
+    const rbBox = document.getElementById("lumi-rollback-widget");
+    const rbBtn = document.getElementById("lumi-rollback-btn");
+    if (rbBox && rbBtn) {
+      const rbDot = rbBox.querySelector("[data-rb-dot]");
+      const rbTitle = rbBox.querySelector("[data-rb-title]");
+      const rbDetail = rbBox.querySelector("[data-rb-detail]");
+      rbBtn.addEventListener("click", () => {
+        const isBroken = rbBox.dataset.state === "broken";
+        rbBox.dataset.state = isBroken ? "ok" : "broken";
+        if (rbTitle) rbTitle.textContent = isBroken ? rbBtn.dataset.titleOk || "" : rbBtn.dataset.titleBroken || "";
+        if (rbDetail) rbDetail.textContent = isBroken ? rbBtn.dataset.detailOk || "" : rbBtn.dataset.detailBroken || "";
+        rbBtn.textContent = isBroken ? rbBtn.dataset.labelReset || "" : rbBtn.dataset.labelRevert || "";
+        if (rbDot) {
+          rbDot.classList.toggle("bg-[var(--warning)]", !isBroken);
+          rbDot.classList.toggle("bg-[var(--accent)]", isBroken);
+        }
+        rbBtn.classList.toggle("bg-[var(--accent)]", !isBroken);
+        rbBtn.classList.toggle("text-[var(--on-accent)]", !isBroken);
+        rbBtn.classList.toggle("bg-[var(--surface)]", isBroken);
+        rbBtn.classList.toggle("text-[var(--fg)]", isBroken);
+        rbBtn.classList.toggle("border", isBroken);
+        rbBtn.classList.toggle("border-[var(--line)]", isBroken);
+      });
+    }
+
+    // 6. Bento 03 Live Discover Scenario Widget
+    const discTabs = Array.from(document.querySelectorAll("[data-disc-tab]"));
+    const discBadge = document.getElementById("lumi-disc-badge");
+    const discTitle = document.getElementById("lumi-disc-title");
+    const discDetail = document.getElementById("lumi-disc-detail");
+    for (const tab of discTabs) {
+      tab.addEventListener("click", () => {
+        for (const t of discTabs) {
+          const on = t === tab;
+          t.setAttribute("aria-selected", on ? "true" : "false");
+          t.classList.toggle("bg-[var(--accent)]", on);
+          t.classList.toggle("text-[var(--on-accent)]", on);
+          t.classList.toggle("border", !on);
+          t.classList.toggle("border-[var(--line)]", !on);
+          t.classList.toggle("bg-[var(--surface-2)]", !on);
+          t.classList.toggle("text-[var(--fg-muted)]", !on);
+        }
+        if (discBadge && tab.dataset.discBadge) discBadge.textContent = tab.dataset.discBadge;
+        if (discTitle && tab.dataset.discTitle) discTitle.textContent = tab.dataset.discTitle;
+        if (discDetail && tab.dataset.discDetail) discDetail.textContent = tab.dataset.discDetail;
+      });
+    }
+
+    // 7. Bento 04 Real Lumi SessionPipe & Log Redaction Inspector
+    const redactBtn = document.getElementById("lumi-redact-btn");
+    const redactCmd = document.getElementById("lumi-redact-cmd");
+    const redactLog = document.getElementById("lumi-redact-log");
+    if (redactBtn && redactCmd && redactLog) {
+      redactBtn.addEventListener("click", () => {
+        const nextPipe = redactBtn.dataset.mode === "proc";
+        redactBtn.dataset.mode = nextPipe ? "pipe" : "proc";
+        redactBtn.textContent = nextPipe ? redactBtn.dataset.labelPipe || "" : redactBtn.dataset.labelProc || "";
+        redactCmd.textContent = nextPipe ? redactBtn.dataset.cmdPipe || "" : redactBtn.dataset.cmdProc || "";
+        redactLog.textContent = nextPipe ? redactBtn.dataset.logPipe || "" : redactBtn.dataset.logProc || "";
+      });
+    }
+
+    // 8. Bento 05 Live Cross-Instance Sync Switch Widget
+    const syncSwitches = Array.from(document.querySelectorAll("[data-sync-toggle]"));
+    const syncCounter = document.getElementById("lumi-sync-counter");
+    if (syncSwitches.length > 0) {
+      const isZhDoc = document.documentElement.lang.startsWith("zh");
+      const updateSyncCounter = () => {
+        const n = syncSwitches.filter((b) => b.getAttribute("aria-checked") === "true").length;
+        if (syncCounter) {
+          const tpl = isZhDoc ? syncCounter.dataset.tplZh : syncCounter.dataset.tplEn;
+          if (tpl) syncCounter.textContent = tpl.replace("{n}", String(n));
+        }
+      };
+      for (const sw of syncSwitches) {
+        sw.addEventListener("click", () => {
+          const next = sw.getAttribute("aria-checked") !== "true";
+          sw.setAttribute("aria-checked", next ? "true" : "false");
+          const track = sw.querySelector(".lumi-switch");
+          if (track) track.setAttribute("aria-checked", next ? "true" : "false");
+          updateSyncCounter();
+        });
+      }
+    }
+
+    // 9. Clickable Ecosystem Wall Toast Feedback
+    const ecoToast = document.getElementById("lumi-eco-toast");
+    let toastTimer = 0;
+    if (ecoToast) {
+      for (const pill of document.querySelectorAll("[data-eco-tip]")) {
+        pill.addEventListener("click", () => {
+          const tip = pill.getAttribute("data-eco-tip");
+          if (!tip) return;
+          ecoToast.textContent = tip;
+          ecoToast.dataset.visible = "true";
+          window.clearTimeout(toastTimer);
+          toastTimer = window.setTimeout(() => {
+            ecoToast.dataset.visible = "false";
+          }, 3200);
+        });
+      }
+    }
+
+    // 10. Choreographed scroll reveals + instant hash-jump reveal
+    const reveals = Array.from(document.querySelectorAll(".lumi-reveal"));
+    const revealAll = () => {
+      for (const el of reveals) el.classList.add("is-visible");
+    };
+    if (reveals.length > 0 && "IntersectionObserver" in window && !reduced) {
+      const io = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+              io.unobserve(entry.target);
+            }
+          }
+        },
+        { threshold: 0.06, rootMargin: "0px 0px -30px 0px" },
+      );
+      for (const el of reveals) io.observe(el);
+      if (window.location.hash) revealAll();
+      window.addEventListener("hashchange", revealAll);
+    } else {
+      revealAll();
+    }
+
+    // 11. Smooth CSS Grid Accordions (FAQ + SmartScreen drawer)
+    for (const trigger of document.querySelectorAll("[data-acc-trigger]")) {
+      trigger.addEventListener("click", () => {
+        const item = trigger.closest(".lumi-acc-item");
+        if (!item) return;
+        const next = item.getAttribute("data-open") !== "true";
+        item.setAttribute("data-open", next ? "true" : "false");
+        trigger.setAttribute("aria-expanded", next ? "true" : "false");
+      });
+    }
+  })();
+</script>

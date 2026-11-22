@@ -1,0 +1,34 @@
+{
+  "name": "lumi-website",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@12.18.0",
+  "scripts": {
+    "dev": "astro dev",
+    "sync:release": "node scripts/sync-release.mjs",
+    "sync:tokens": "node scripts/sync-tokens.mjs",
+    "build:demo": "node scripts/build-demo.mjs",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check:astro": "astro check",
+    "lint": "biome check .",
+    "format": "biome check --write .",
+    "check:budget": "node scripts/check-budget.mjs",
+    "check": "pnpm run lint && pnpm run check:astro && pnpm run build && pnpm run check:budget"
+  },
+  "dependencies": {
+    "@astrojs/rss": "^4.0.17",
+    "@astrojs/sitemap": "^3.7.2",
+    "@tailwindcss/vite": "^4.3.5",
+    "astro": "^7.4.13",
+    "sharp": "^0.34.2",
+    "tailwindcss": "^4.3.5"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.8",
+    "@biomejs/biome": "^2.4.12",
+    "typescript": "^5.9.3",
+    "wrangler": "^4.166.0"
+  }
+}
