@@ -1,6 +1,6 @@
 import rss from "@astrojs/rss";
 import type { APIContext } from "astro";
-import { getReleases } from "../data/site";
+import { getReleases, localizeRelease } from "../data/site";
 
 export function GET(context: APIContext) {
   const { releases } = getReleases();
@@ -12,11 +12,14 @@ export function GET(context: APIContext) {
     site,
     // 链接本身已经带斜杠，再让库补一个会补到 #锚点后面
     trailingSlash: false,
-    items: releases.map((r) => ({
-      title: r.name,
-      pubDate: new Date(r.publishedAt),
-      description: r.body.slice(0, 280),
-      link: `/changelog/#${r.anchor}`,
-    })),
+    items: releases.map((r) => {
+      const localized = localizeRelease(r, "en");
+      return {
+        title: localized.name,
+        pubDate: new Date(r.publishedAt),
+        description: localized.body.slice(0, 280),
+        link: `/changelog/#${r.anchor}`,
+      };
+    }),
   });
 }

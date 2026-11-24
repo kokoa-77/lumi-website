@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-24T02:27:39.523Z",
+  "generatedAt": "2026-11-24T02:39:17.370Z",
   "repo": "kokoa-77/LumiLauncher",
   "latest": {
     "tag": "v0.6.3-prereview",
@@ -9,7 +9,7 @@
     "prerelease": true,
     "publishedAt": "2026-11-24T02:20:54Z",
     "htmlUrl": "https://github.com/kokoa-77/LumiLauncher/releases/tag/v0.6.3-prereview",
-    "body": "",
+    "body": "Pre-review build for source verification and Mojang AppID allowlist review (`732fc771-cf09-4ec5-b899-ee92fd012d57`).\r\n\r\n> **Note:** Clicking **Sign in** launches the official Microsoft OAuth 2.0 + PKCE flow in your system browser and stops at the expected `403` Minecraft Services gate until Mojang approves Lumi's AppID. You can already explore instances, worlds, Modrinth/CurseForge discovery, and settings.\r\n>\r\n> NOT AN OFFICIAL MINECRAFT PRODUCT. NOT APPROVED BY OR ASSOCIATED WITH MOJANG OR MICROSOFT.\r\n\r\n### What's Changed\r\n- Configured official pre-review builds with Lumi's Microsoft Entra public client ID (`732fc771-cf09-4ec5-b899-ee92fd012d57`) so the official Microsoft sign-in redirect can be verified directly.\r\n- Set default Minecraft file and metadata download sources to official Mojang endpoints first.\r\n- Removed retired legacy account shims and updated English task progress labels.\r\n- Added public maintainer contact (`lumilauncher@outlook.com`) across documentation.\r\n\r\n### Verification\r\nVerify downloaded files against `SHA256SUMS.txt`:\r\n`Get-FileHash .\\LumiLauncher_0.6.3_x64-setup.exe -Algorithm SHA256`",
     "anchor": "v0-6-3-prereview",
     "checksumsUrl": "https://github.com/kokoa-77/LumiLauncher/releases/download/v0.6.3-prereview/SHA256SUMS.txt",
     "checksumsSitePath": null,
@@ -37,7 +37,7 @@
       "prerelease": true,
       "publishedAt": "2026-11-24T02:20:54Z",
       "htmlUrl": "https://github.com/kokoa-77/LumiLauncher/releases/tag/v0.6.3-prereview",
-      "body": "",
+      "body": "Pre-review build for source verification and Mojang AppID allowlist review (`732fc771-cf09-4ec5-b899-ee92fd012d57`).\r\n\r\n> **Note:** Clicking **Sign in** launches the official Microsoft OAuth 2.0 + PKCE flow in your system browser and stops at the expected `403` Minecraft Services gate until Mojang approves Lumi's AppID. You can already explore instances, worlds, Modrinth/CurseForge discovery, and settings.\r\n>\r\n> NOT AN OFFICIAL MINECRAFT PRODUCT. NOT APPROVED BY OR ASSOCIATED WITH MOJANG OR MICROSOFT.\r\n\r\n### What's Changed\r\n- Configured official pre-review builds with Lumi's Microsoft Entra public client ID (`732fc771-cf09-4ec5-b899-ee92fd012d57`) so the official Microsoft sign-in redirect can be verified directly.\r\n- Set default Minecraft file and metadata download sources to official Mojang endpoints first.\r\n- Removed retired legacy account shims and updated English task progress labels.\r\n- Added public maintainer contact (`lumilauncher@outlook.com`) across documentation.\r\n\r\n### Verification\r\nVerify downloaded files against `SHA256SUMS.txt`:\r\n`Get-FileHash .\\LumiLauncher_0.6.3_x64-setup.exe -Algorithm SHA256`",
       "anchor": "v0-6-3-prereview",
       "assets": [
         {

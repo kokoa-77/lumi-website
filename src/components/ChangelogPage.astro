@@ -1,7 +1,7 @@
 ---
 import { getDict } from "../data/i18n";
 import type { Locale } from "../data/site";
-import { formatBytes, formatDate, getReleases, localizedPath } from "../data/site";
+import { formatBytes, formatDate, getReleases, localizedPath, localizeRelease } from "../data/site";
 
 interface Props {
   locale: Locale;
@@ -14,59 +14,49 @@ const { releases } = getReleases();
 const rssHref = locale === "zh" ? "/zh/rss.xml" : "/rss.xml";
 const downloadHref = `${localizedPath(locale, "/")}#download`;
 
-const zhReleaseOverrides: Record<string, { name: string; body: string }> = {
-  "v0.6.2-prereview": {
-    name: "Lumi Launcher v0.6.2（预审构建）",
-    body: [
-      "面向源码核验与 Mojang AppID 审核的预审更新构建。启动器本身的功能与 v0.6.1 相同，本次更新的是官网在线试玩使用的演示数据。",
-      "> 说明：在 Mojang 批准 Lumi 的 AppID 之前，本预审构建默认关闭 Microsoft 登录入口。你仍可以体验完整界面、管理实例与世界存档、浏览 Modrinth / CurseForge 并检查各项设置。",
-      "### 本次更新",
-      "- 演示世界的封面换成未经修改的真实游戏截图（截图时隐藏了界面元素）。",
-      "- 演示用的实例、服务器与图标换成原创示意内容，不再使用其他整合包的名称和标志。",
-      "- 演示数据中的下载量调整为与实际相符的量级。",
-      "### 文件校验",
-      "- 请对照该版本附带的 SHA256SUMS.txt 核验安装包与便携版完整性。",
-    ].join("\n"),
-  },
-  "v0.6.1-prereview": {
-    name: "Lumi Launcher v0.6.1（预审构建）",
-    body: [
-      "面向源码核验与 Mojang AppID 审核的预审更新构建，全套视觉插画升级为原创纯 2D 柔光矢量体系。",
-      "> 说明：在 Mojang 批准 Lumi 的 AppID 之前，本预审构建默认关闭 Microsoft 登录入口。你仍可以体验完整界面、管理实例与世界存档、浏览 Modrinth / CurseForge 并检查各项设置。",
-      "### 本次更新",
-      "- 全套 17 处视觉资源（6 枚状态插画、6 套自适应界面场景与 Windows 安装程序夜空背景）统一升级为原创纯 2D 柔光矢量视觉，支持昼夜与实例主色实时响应。",
-      "- 优化演示预览内置双语数据与无 HUD 世界封面，并保持首页打包体积低于 250 KiB 预算。",
-      "### 文件校验",
-      "- 请对照该版本附带的 SHA256SUMS.txt 核验安装包与便携版完整性。",
-    ].join("\n"),
-  },
-  "v0.6.0-prereview": {
-    name: "Lumi Launcher v0.6.0（预审构建）",
-    body: [
-      "面向源码核验与 Mojang AppID 审核的公开预审构建。",
-      "> 说明：在 Mojang 批准 Lumi 的 AppID 之前，本预审构建默认关闭 Microsoft 登录入口。你仍可以体验完整界面、管理实例与世界存档、浏览 Modrinth / CurseForge 并检查各项设置。",
-      "> 文件已下架：这个版本的安装版和便携版已经删除，请下载最新的预审构建。",
-    ].join("\n"),
-  },
-};
+type InlinePart = { code: boolean; value: string };
+
+function splitInlineCode(text: string): InlinePart[] {
+  const parts: InlinePart[] = [];
+  const regex = /`([^`]+)`/g;
+  let last = 0;
+  for (const match of text.matchAll(regex)) {
+    const idx = match.index ?? 0;
+    if (idx > last) {
+      parts.push({ code: false, value: text.slice(last, idx) });
+    }
+    parts.push({ code: true, value: match[1] ?? "" });
+    last = idx + match[0].length;
+  }
+  if (last < text.length) {
+    parts.push({ code: false, value: text.slice(last) });
+  }
+  return parts.length > 0 ? parts : [{ code: false, value: text }];
+}
 
 function renderReleaseLines(
   body: string,
-): Array<{ type: "h3" | "quote" | "li" | "p"; text: string }> {
-  const blocks: Array<{ type: "h3" | "quote" | "li" | "p"; text: string }> = [];
+): Array<{ type: "h3" | "quote" | "li" | "p"; parts: InlinePart[] }> {
+  const blocks: Array<{ type: "h3" | "quote" | "li" | "p"; parts: InlinePart[] }> = [];
   for (const raw of body.split(/\r?\n/)) {
     const line = raw.trim();
-    if (!line || line === ">") continue;
+    if (!line || line === ">" || line === "---") continue;
     if (line.startsWith("### ")) {
-      blocks.push({ type: "h3", text: line.slice(4).trim() });
+      blocks.push({ type: "h3", parts: splitInlineCode(line.slice(4).trim()) });
     } else if (line.startsWith("## ")) {
-      blocks.push({ type: "h3", text: line.slice(3).trim() });
+      blocks.push({ type: "h3", parts: splitInlineCode(line.slice(3).trim()) });
     } else if (line.startsWith("> ")) {
-      blocks.push({ type: "quote", text: line.slice(2).replace(/\*\*/g, "").trim() });
+      blocks.push({
+        type: "quote",
+        parts: splitInlineCode(line.slice(2).replace(/\*\*/g, "").trim()),
+      });
     } else if (line.startsWith("- ") || line.startsWith("* ")) {
-      blocks.push({ type: "li", text: line.slice(2).replace(/\*\*/g, "").trim() });
+      blocks.push({
+        type: "li",
+        parts: splitInlineCode(line.slice(2).replace(/\*\*/g, "").trim()),
+      });
     } else {
-      blocks.push({ type: "p", text: line.replace(/\*\*/g, "").trim() });
+      blocks.push({ type: "p", parts: splitInlineCode(line.replace(/\*\*/g, "").trim()) });
     }
   }
   return blocks;
@@ -99,9 +89,9 @@ function renderReleaseLines(
 <section class="mx-auto max-w-4xl space-y-6 px-4 py-10 sm:px-6">
   {
     releases.map((rel, idx) => {
-      const zhOverride = locale === "zh" ? zhReleaseOverrides[rel.tag] : undefined;
-      const displayName = zhOverride?.name ?? rel.name;
-      const blocks = renderReleaseLines(zhOverride?.body ?? rel.body);
+      const localized = localizeRelease(rel, locale);
+      const displayName = localized.name;
+      const blocks = renderReleaseLines(localized.body);
       const kindLabel = t.releaseKind[rel.kind];
       return (
         <article id={rel.anchor} class="lumi-panel scroll-mt-24 p-6 sm:p-8">
@@ -158,13 +148,22 @@ function renderReleaseLines(
               <p>{c.emptyNotice}</p>
             ) : (
               blocks.map((b) => {
+                const content = b.parts.map((part) =>
+                  part.code ? (
+                    <code class="rounded bg-[var(--surface-2)] px-1.5 py-0.5 font-mono text-xs text-[var(--fg)]">
+                      {part.value}
+                    </code>
+                  ) : (
+                    part.value
+                  ),
+                );
                 if (b.type === "h3") {
-                  return <h3 class="pt-2 text-sm font-bold text-[var(--fg)]">{b.text}</h3>;
+                  return <h3 class="pt-2 text-sm font-bold text-[var(--fg)]">{content}</h3>;
                 }
                 if (b.type === "quote") {
                   return (
                     <blockquote class="border-l-2 border-[var(--accent)] pl-3.5 text-xs leading-relaxed text-[var(--fg-muted)] sm:text-sm">
-                      {b.text}
+                      {content}
                     </blockquote>
                   );
                 }
@@ -172,11 +171,11 @@ function renderReleaseLines(
                   return (
                     <p class="flex items-start gap-2 pl-1">
                       <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--accent)]" />
-                      <span>{b.text}</span>
+                      <span>{content}</span>
                     </p>
                   );
                 }
-                return <p>{b.text}</p>;
+                return <p>{content}</p>;
               })
             )}
           </div>
