@@ -1,101 +1,61 @@
 {
-  "generatedAt": "2026-11-22T15:27:48.596Z",
+  "generatedAt": "2026-11-24T02:27:39.523Z",
   "repo": "kokoa-77/LumiLauncher",
   "latest": {
-    "tag": "v0.6.2-prereview",
-    "version": "0.6.2-prereview",
-    "name": "Lumi Launcher v0.6.2 (Pre-review Build)",
+    "tag": "v0.6.3-prereview",
+    "version": "0.6.3-prereview",
+    "name": "Lumi Launcher v0.6.3 (Pre-review Build)",
     "kind": "prereview",
     "prerelease": true,
-    "publishedAt": "2026-11-22T13:03:14Z",
-    "htmlUrl": "https://github.com/kokoa-77/LumiLauncher/releases/tag/v0.6.2-prereview",
-    "body": "Public pre-review update for source verification and Mojang AppID review. The launcher behaves the same as v0.6.1; this build refreshes the demo data behind the live browser demo on the official website.\r\n\r\n> **Note:** Microsoft sign-in is intentionally disabled in this pre-review build until Mojang approves Lumi's AppID. You can still inspect the launcher UI, manage instances/saves, browse Modrinth/CurseForge, and verify ownership-gate behavior.\r\n>\r\n> NOT AN OFFICIAL MINECRAFT PRODUCT. NOT APPROVED BY OR ASSOCIATED WITH MOJANG OR MICROSOFT.\r\n\r\n### What's Changed\r\n- The demo world cover is now an unedited in-game screenshot (taken with the HUD hidden).\r\n- Demo instances, servers and icons are now original placeholders instead of third-party modpack names and logos.\r\n- Demo download counts are toned down to realistic figures.\r\n\r\n### Verification\r\nPlease verify file integrity against `SHA256SUMS.txt`.",
-    "anchor": "v0-6-2-prereview",
-    "checksumsUrl": "https://github.com/kokoa-77/LumiLauncher/releases/download/v0.6.2-prereview/SHA256SUMS.txt",
+    "publishedAt": "2026-11-24T02:20:54Z",
+    "htmlUrl": "https://github.com/kokoa-77/LumiLauncher/releases/tag/v0.6.3-prereview",
+    "body": "",
+    "anchor": "v0-6-3-prereview",
+    "checksumsUrl": "https://github.com/kokoa-77/LumiLauncher/releases/download/v0.6.3-prereview/SHA256SUMS.txt",
     "checksumsSitePath": null,
     "installer": {
-      "name": "Lumi_0.6.2_x64-setup.exe",
-      "size": 10083771,
-      "sha256": "b9b19d93645ead5e8e7a2a77d5886c65e939b609b4a14a008c5958b3469a04f1",
-      "githubUrl": "https://github.com/kokoa-77/LumiLauncher/releases/download/v0.6.2-prereview/Lumi_0.6.2_x64-setup.exe",
+      "name": "LumiLauncher_0.6.3_x64-setup.exe",
+      "size": 10077688,
+      "sha256": "41798365e628c39e47b47e7996ccc5164304f45fa8790c77e7a2054f1478d751",
+      "githubUrl": "https://github.com/kokoa-77/LumiLauncher/releases/download/v0.6.3-prereview/LumiLauncher_0.6.3_x64-setup.exe",
       "sitePath": null
     },
     "portable": {
-      "name": "Lumi_0.6.2_x64-portable.zip",
-      "size": 14481544,
-      "sha256": "aef10b19881b0a39e9e1ca0c2f9bd0ff143cc5ac45d90d8c3057c7affeba7789",
-      "githubUrl": "https://github.com/kokoa-77/LumiLauncher/releases/download/v0.6.2-prereview/Lumi_0.6.2_x64-portable.zip",
+      "name": "LumiLauncher_0.6.3_x64-portable.zip",
+      "size": 14480100,
+      "sha256": "718125e54a031f3ec2d8d4d3f8ca44638ec6063bc3c0c0ae277908f3380173e8",
+      "githubUrl": "https://github.com/kokoa-77/LumiLauncher/releases/download/v0.6.3-prereview/LumiLauncher_0.6.3_x64-portable.zip",
       "sitePath": null
     }
   },
   "releases": [
     {
-      "tag": "v0.6.2-prereview",
-      "version": "0.6.2-prereview",
-      "name": "Lumi Launcher v0.6.2 (Pre-review Build)",
+      "tag": "v0.6.3-prereview",
+      "version": "0.6.3-prereview",
+      "name": "Lumi Launcher v0.6.3 (Pre-review Build)",
       "kind": "prereview",
       "prerelease": true,
-      "publishedAt": "2026-11-22T13:03:14Z",
-      "htmlUrl": "https://github.com/kokoa-77/LumiLauncher/releases/tag/v0.6.2-prereview",
-      "body": "Public pre-review update for source verification and Mojang AppID review. The launcher behaves the same as v0.6.1; this build refreshes the demo data behind the live browser demo on the official website.\r\n\r\n> **Note:** Microsoft sign-in is intentionally disabled in this pre-review build until Mojang approves Lumi's AppID. You can still inspect the launcher UI, manage instances/saves, browse Modrinth/CurseForge, and verify ownership-gate behavior.\r\n>\r\n> NOT AN OFFICIAL MINECRAFT PRODUCT. NOT APPROVED BY OR ASSOCIATED WITH MOJANG OR MICROSOFT.\r\n\r\n### What's Changed\r\n- The demo world cover is now an unedited in-game screenshot (taken with the HUD hidden).\r\n- Demo instances, servers and icons are now original placeholders instead of third-party modpack names and logos.\r\n- Demo download counts are toned down to realistic figures.\r\n\r\n### Verification\r\nPlease verify file integrity against `SHA256SUMS.txt`.",
-      "anchor": "v0-6-2-prereview",
+      "publishedAt": "2026-11-24T02:20:54Z",
+      "htmlUrl": "https://github.com/kokoa-77/LumiLauncher/releases/tag/v0.6.3-prereview",
+      "body": "",
+      "anchor": "v0-6-3-prereview",
       "assets": [
         {
-          "name": "Lumi_0.6.2_x64-portable.zip",
-          "size": 14481544,
-          "githubUrl": "https://github.com/kokoa-77/LumiLauncher/releases/download/v0.6.2-prereview/Lumi_0.6.2_x64-portable.zip"
+          "name": "LumiLauncher_0.6.3_x64-portable.zip",
+          "size": 14480100,
+          "githubUrl": "https://github.com/kokoa-77/LumiLauncher/releases/download/v0.6.3-prereview/LumiLauncher_0.6.3_x64-portable.zip"
         },
         {
-          "name": "Lumi_0.6.2_x64-setup.exe",
-          "size": 10083771,
-          "githubUrl": "https://github.com/kokoa-77/LumiLauncher/releases/download/v0.6.2-prereview/Lumi_0.6.2_x64-setup.exe"
+          "name": "LumiLauncher_0.6.3_x64-setup.exe",
+          "size": 10077688,
+          "githubUrl": "https://github.com/kokoa-77/LumiLauncher/releases/download/v0.6.3-prereview/LumiLauncher_0.6.3_x64-setup.exe"
         },
         {
           "name": "SHA256SUMS.txt",
-          "size": 185,
-          "githubUrl": "https://github.com/kokoa-77/LumiLauncher/releases/download/v0.6.2-prereview/SHA256SUMS.txt"
+          "size": 201,
+          "githubUrl": "https://github.com/kokoa-77/LumiLauncher/releases/download/v0.6.3-prereview/SHA256SUMS.txt"
         }
       ]
-    },
-    {
-      "tag": "v0.6.1-prereview",
-      "version": "0.6.1-prereview",
-      "name": "Lumi Launcher v0.6.1 (Pre-review Build)",
-      "kind": "prereview",
-      "prerelease": true,
-      "publishedAt": "2026-11-22T05:30:19Z",
-      "htmlUrl": "https://github.com/kokoa-77/LumiLauncher/releases/tag/v0.6.1-prereview",
-      "body": "Public pre-review update for source verification and Mojang AppID review, refreshing all 17 visual assets to original pure-2D vector artwork.\r\n\r\n> **Note:** Microsoft sign-in is intentionally disabled in this pre-review build until Mojang approves Lumi's AppID. You can still inspect the launcher UI, manage instances/saves, browse Modrinth/CurseForge, and verify ownership-gate behavior.\r\n>\r\n> NOT AN OFFICIAL MINECRAFT PRODUCT. NOT APPROVED BY OR ASSOCIATED WITH MOJANG OR MICROSOFT.\r\n\r\n### What's Changed\r\n- Replaced all 17 visual assets (6 status spot illustrations, 6 adaptive interface scenes, and the Windows installer backdrop) with original pure-2D vector artwork responsive to light/dark themes and per-world accent colors.\r\n- Updated interactive preview fixtures with HUD-free world cover artwork and native bilingual demo data.\r\n\r\n### Verification\r\nPlease verify file integrity against `SHA256SUMS.txt`.",
-      "anchor": "v0-6-1-prereview",
-      "assets": [
-        {
-          "name": "Lumi_0.6.1_x64-portable.zip",
-          "size": 14484136,
-          "githubUrl": "https://github.com/kokoa-77/LumiLauncher/releases/download/v0.6.1-prereview/Lumi_0.6.1_x64-portable.zip"
-        },
-        {
-          "name": "Lumi_0.6.1_x64-setup.exe",
-          "size": 10077675,
-          "githubUrl": "https://github.com/kokoa-77/LumiLauncher/releases/download/v0.6.1-prereview/Lumi_0.6.1_x64-setup.exe"
-        },
-        {
-          "name": "SHA256SUMS.txt",
-          "size": 185,
-          "githubUrl": "https://github.com/kokoa-77/LumiLauncher/releases/download/v0.6.1-prereview/SHA256SUMS.txt"
-        }
-      ]
-    },
-    {
-      "tag": "v0.6.0-prereview",
-      "version": "0.6.0-prereview",
-      "name": "Lumi Launcher v0.6.0 (Pre-review Build)",
-      "kind": "prereview",
-      "prerelease": true,
-      "publishedAt": "2026-11-21T00:47:27Z",
-      "htmlUrl": "https://github.com/kokoa-77/LumiLauncher/releases/tag/v0.6.0-prereview",
-      "body": "Public pre-review build for source verification and Mojang AppID review.\r\n\r\n> **Note:** Microsoft sign-in is intentionally disabled in this pre-review build until Mojang approves Lumi's AppID. You can still inspect the launcher UI, manage instances/saves, browse Modrinth/CurseForge, and verify ownership-gate behavior.\r\n>\r\n> Lumi is an independent third-party launcher and is NOT an official Minecraft product, nor approved by or associated with Mojang Studios or Microsoft.\r\n\r\n> **Files withdrawn:** The installer and portable package of this build have been removed. Please download the latest pre-review build instead.",
-      "anchor": "v0-6-0-prereview",
-      "assets": []
     }
   ]
 }

@@ -23,7 +23,7 @@ const shotInstancesLight = isZh ? zhInstancesLight : enInstancesLight;
 const shotInstancesDark = isZh ? zhInstancesDark : enInstancesDark;
 const { latest } = getReleases();
 const installerHref = primaryDownloadHref(latest.installer, latest.htmlUrl);
-const installerName = latest.installer?.name || "Lumi_0.6.3_x64-setup.exe";
+const installerName = latest.installer?.name || "LumiLauncher_0.6.3_x64-setup.exe";
 const langParam = isZh ? "zh-CN" : "en";
 const onboardingSrc = `/demo-app/?lang=${langParam}&theme=light&onboarding=1`;
 const homeSrc = `/demo-app/?lang=${langParam}&theme=light`;
