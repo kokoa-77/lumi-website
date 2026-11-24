@@ -134,6 +134,21 @@ export function localizedPath(locale: Locale, subPath: string): string {
 }
 
 const ZH_RELEASE_OVERRIDES: Record<string, { name: string; body: string }> = {
+  "v0.6.4-prereview": {
+    name: "Lumi Launcher v0.6.4（预审构建）",
+    body: [
+      "面向源码核验与 Mojang AppID 白名单审核的预审构建（客户端 ID：`732fc771-cf09-4ec5-b899-ee92fd012d57`）。",
+      "> 说明：点击「登录」会正常拉起系统浏览器的官方 Microsoft OAuth 2.0 + PKCE 授权流程，并在 Mojang 批准 Lumi 的 AppID 白名单前按预期停在 Minecraft Services 的 `403` 校验门禁。在此期间你已可完整体验界面、管理实例与存档、浏览 Modrinth 并检查各项设置。",
+      "> 非 Minecraft 官方产品。未经 Mojang 或 Microsoft 批准，也不与 Mojang 或 Microsoft 关联。",
+      "### 本次更新",
+      "- 游戏本体、加载器、Java 运行时与模组平台全链路改为直连官方源（Mojang、各加载器官方仓库、Modrinth、CurseForge），移除所有硬编码的第三方镜像源。",
+      "- 网络连通性诊断精简为探测 Microsoft 登录、Minecraft 官方、Modrinth 与 CurseForge 四个核心官方端点。",
+      "- 官方预审构建包含 Lumi 的 Microsoft Entra 公共客户端 ID（`732fc771-cf09-4ec5-b899-ee92fd012d57`）与公开联系邮箱（`lumilauncher@outlook.com`）。",
+      "### 文件校验",
+      "下载后请对照同页面的 `SHA256SUMS.txt` 核验文件完整性：",
+      "`Get-FileHash .\\LumiLauncher_0.6.4_x64-setup.exe -Algorithm SHA256`",
+    ].join("\n"),
+  },
   "v0.6.3-prereview": {
     name: "Lumi Launcher v0.6.3（预审构建）",
     body: [

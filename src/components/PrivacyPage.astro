@@ -75,12 +75,11 @@ const isZh = locale === "zh";
           <h2 class="text-xl font-bold text-[var(--fg)]">3. 外部网络连接说明</h2>
           <p>Lumi 仅在你使用对应功能时连接必要的外部服务（请求头 User-Agent 为 <code>LumiLauncher/&lt;版本号&gt;</code>）：</p>
           <ul class="list-disc space-y-2 pl-5">
-            <li><strong class="text-[var(--fg)]">Microsoft / Xbox Live / Mojang 官方服务</strong>：用于系统浏览器 OAuth 2.0 授权码 + PKCE 登录、Java 版游玩权核验、官方档案读取与官方游戏资产下载。账号认证的请求不经过任何第三方镜像。</li>
-            <li><strong class="text-[var(--fg)]">模组加载器官方源</strong>（Fabric、Quilt、Forge、NeoForge）：用于列出加载器版本并下载加载器文件。</li>
-            <li><strong class="text-[var(--fg)]">Modrinth 与 CurseForge</strong>：用于搜索、安装与更新模组、整合包、材质包、光影、地图与服务器。</li>
-            <li><strong class="text-[var(--fg)]">可选社区下载镜像（BMCLAPI / MCIM）</strong>：Minecraft 游戏文件与元数据默认优先从 Mojang 官方源下载；仅在官方源连接失败，或你在「内容与下载」中主动改为「自动 / 优先镜像」时才使用镜像。个人 API Key 和账号认证请求绝不发给镜像。</li>
-            <li><strong class="text-[var(--fg)]">DNS over HTTPS（默认开启）</strong>：海外官方源通过 Cloudflare（<code>1.1.1.1</code>）、国内镜像通过阿里公共 DNS（<code>223.5.5.5</code>）解析下载源域名，不可用时自动回退系统 DNS，可在设置中关闭。</li>
-            <li><strong class="text-[var(--fg)]">下载测速与 Minecraft 服务器列表查询</strong>：仅在手动将下载源改为「自动」时短暂测速官方源与 BMCLAPI；向首页或列表里的服务器发送标准状态查询以显示在线人数与延迟。</li>
+            <li><strong class="text-[var(--fg)]">Microsoft / Xbox Live / Mojang 官方服务</strong>：用于系统浏览器 OAuth 2.0 授权码 + PKCE 登录、Java 版游玩权核验、官方档案读取与官方游戏资产下载。</li>
+            <li><strong class="text-[var(--fg)]">模组加载器官方源</strong>（Fabric、Quilt、Forge、NeoForge）：用于直接从各项目官方仓库列出加载器版本并下载加载器文件。</li>
+            <li><strong class="text-[var(--fg)]">Modrinth 与 CurseForge</strong>：直接通过官方平台接口搜索、安装与更新模组、整合包、材质包、光影、地图与服务器。</li>
+            <li><strong class="text-[var(--fg)]">DNS over HTTPS（默认开启）</strong>：通过 Cloudflare（<code>1.1.1.1</code>）与阿里公共 DNS（<code>223.5.5.5</code>）的 HTTPS 接口解析下载源域名，不可用时自动回退系统 DNS，可在设置中关闭。</li>
+            <li><strong class="text-[var(--fg)]">连通性检测与 Minecraft 服务器列表查询</strong>：仅在手动点击网络诊断时向官方认证、游戏源与模组平台发送不带凭据的轻量探测；向首页或列表里的服务器发送标准状态查询以显示在线人数与延迟。</li>
             <li><strong class="text-[var(--fg)]">可选手动日志分享（<code>mclo.gs</code>）</strong>：不会自动上传，只有在你手动点击并再次确认后，才会先脱敏再上传。</li>
             <li><strong class="text-[var(--fg)]">GitHub Releases（检查更新）</strong>：安装版每次启动拉取一次轻量的 <code>latest.json</code> 检查更新；便携版不检查更新。</li>
             <li><strong class="text-[var(--fg)]">本机 Discord 活动状态（可选，默认关闭）</strong>：仅通过本机命名管道（<code>\\.\pipe\discord-ipc-*</code>）与本机 Discord 客户端通信。</li>
@@ -174,12 +173,11 @@ const isZh = locale === "zh";
           <h2 class="text-xl font-bold text-[var(--fg)]">3. External Network Connections</h2>
           <p>Lumi connects only to external services required by features you initiate (identifying itself with User-Agent <code>LumiLauncher/&lt;version&gt;</code>):</p>
           <ul class="list-disc space-y-2 pl-5">
-            <li><strong class="text-[var(--fg)]">Microsoft / Xbox Live / Mojang Official Services</strong>: Used for OAuth 2.0 Authorization Code + PKCE sign-in, Java Edition play entitlement verification, profile lookup, and official asset/runtime downloads. Sign-in traffic does not go through download mirrors.</li>
-            <li><strong class="text-[var(--fg)]">Mod loader sources</strong> (Fabric, Quilt, Forge, NeoForge): To list and install loader files.</li>
-            <li><strong class="text-[var(--fg)]">Modrinth &amp; CurseForge</strong>: To browse, install, and update mods, modpacks, shaders, resource packs, worlds, and servers.</li>
-            <li><strong class="text-[var(--fg)]">Optional Download Mirrors (BMCLAPI / MCIM)</strong>: Minecraft game files and metadata use official Mojang sources first by default; mirrors are used only as fallback on failure or if you switch settings to Auto / Mirror. Personal API keys and authentication requests are never sent to mirrors.</li>
-            <li><strong class="text-[var(--fg)]">DNS-over-HTTPS (on by default)</strong>: Resolves download source domains via Cloudflare (<code>1.1.1.1</code>) or AliDNS (<code>223.5.5.5</code> for mainland mirrors), falling back to system DNS automatically. Can be turned off in Settings.</li>
-            <li><strong class="text-[var(--fg)]">Download speed test &amp; Minecraft server pings</strong>: Brief mirror speed check only when switched to Auto mode; standard server list status pings to servers you display.</li>
+            <li><strong class="text-[var(--fg)]">Microsoft / Xbox Live / Mojang Official Services</strong>: Used for OAuth 2.0 Authorization Code + PKCE sign-in, Java Edition play entitlement verification, profile lookup, and official asset/runtime downloads.</li>
+            <li><strong class="text-[var(--fg)]">Mod loader sources</strong> (Fabric, Quilt, Forge, NeoForge): To list and install loader files directly from each project's official repository.</li>
+            <li><strong class="text-[var(--fg)]">Modrinth &amp; CurseForge</strong>: To browse, install, and update mods, modpacks, shaders, resource packs, worlds, and servers directly from official platform endpoints.</li>
+            <li><strong class="text-[var(--fg)]">DNS-over-HTTPS (on by default)</strong>: Resolves download source domains via Cloudflare (<code>1.1.1.1</code>) and AliDNS (<code>223.5.5.5</code>), falling back to system DNS automatically. Can be turned off in Settings.</li>
+            <li><strong class="text-[var(--fg)]">Connectivity diagnostics &amp; Minecraft server pings</strong>: Lightweight credential-free reachability checks to official endpoints only when you click Run check; standard server list status pings to servers you display.</li>
             <li><strong class="text-[var(--fg)]">Optional Manual Log Sharing (<code>mclo.gs</code>)</strong>: Triggered only after clicking upload and confirming a second dialog, with automatic secret redaction beforehand.</li>
             <li><strong class="text-[var(--fg)]">GitHub Releases (Updates)</strong>: Installed builds fetch the small <code>latest.json</code> once at startup; portable builds do not check for updates.</li>
             <li><strong class="text-[var(--fg)]">Local Discord IPC (Optional, Off by Default)</strong>: Communicates only over the local Windows named pipe (<code>\\.\pipe\discord-ipc-*</code>).</li>

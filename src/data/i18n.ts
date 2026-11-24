@@ -343,9 +343,9 @@ const EN: Dict = {
       {
         id: "fast-clean",
         eyebrow: "06 · Self-Developed Rust Core",
-        title: "Official sources first, mirrors optional",
+        title: "Direct official sources, verified end to end",
         description:
-          "The core is written in Rust and built with Tauri 2. Downloads come from official sources by default, with optional BMCLAPI / MCIM community mirrors, and sign-in always goes straight to Microsoft and Mojang.",
+          "The core is written in Rust and built with Tauri 2. Every game file, loader, mod, and sign-in request connects directly to official Microsoft, Mojang, Modrinth, and CurseForge endpoints.",
         bullets: [
           "Concurrent resumable downloads with cryptographic hash verification and optional DoH / HTTP·SOCKS5 proxy",
           "Detects installed Java or downloads official runtimes, with memory allocation suggestions",
@@ -733,11 +733,11 @@ const ZH: Dict = {
       {
         id: "fast-clean",
         eyebrow: "06 · 自研 Rust 核心",
-        title: "下载走官方源，镜像只是备选",
+        title: "全链路直连官方源，逐文件哈希校验",
         description:
-          "核心用 Rust 自研，基于 Tauri 2 构建。下载默认走官方源，可以选用 BMCLAPI / MCIM 社区镜像加速；账号登录始终直连 Microsoft 和 Mojang 的官方接口。",
+          "核心用 Rust 自研，基于 Tauri 2 构建。游戏本体、加载器、模组与账号登录全部直连 Microsoft、Mojang、Modrinth 和 CurseForge 官方接口。",
         bullets: [
-          "并发断点续传、哈希校验、默认 DoH 解析，支持系统 / 直连 / HTTP·SOCKS5 代理与 6 端点一键网络诊断",
+          "并发断点续传、哈希校验、默认 DoH 解析，支持系统 / 直连 / HTTP·SOCKS5 代理与官方端点一键网络诊断",
           "自动扫描电脑上的 Java 或一键安装 Mojang 官方 Java，附带内存分配建议",
           "存储空间分析、清理没有实例在用的游戏版本，以及导出 / 导入偏好设置（不含账号信息）",
         ],
