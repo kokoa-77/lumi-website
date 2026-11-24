@@ -69,6 +69,8 @@ export const LINKS = {
   qqChannel: "https://pd.qq.com/s/Nr15r3slq",
   bilibili: "https://space.bilibili.com/25681030",
   afdian: "https://afdian.com/a/lumilauncher",
+  email: "lumilauncher@outlook.com",
+  mailto: "mailto:lumilauncher@outlook.com",
   microsoftConsent: "https://account.live.com/consent/Manage",
   pressKitTag: "https://github.com/kokoa-77/LumiLauncher/releases",
 } as const;

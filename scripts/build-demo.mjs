@@ -46,7 +46,20 @@ const demoPolishPlugin = {
       .replace("</head>", bootShim + "\\n</head>");
   },
   transform(code, id) {
-    if (id.replace(/\\\\/g, "/").endsWith("/src/dev/preview.tsx")) {
+    const normalizedId = id.replace(/\\\\/g, "/");
+    if (normalizedId.endsWith("/src/locales/en.json")) {
+      return code
+        .replace('"label": "Microsoft",', '"label": "UI Demo",')
+        .replace('"signIn": "Sign in to play Minecraft",', '"signIn": "Enter UI Demo (no sign-in)",')
+        .replace('"waiting": "Waiting for you to sign in…",', '"waiting": "Loading UI Demo…",');
+    }
+    if (normalizedId.endsWith("/src/locales/zh-CN.json")) {
+      return code
+        .replace('"label": "Microsoft",', '"label": "界面演示",')
+        .replace('"signIn": "登录正版 Minecraft",', '"signIn": "进入界面演示（不执行登录）",')
+        .replace('"waiting": "正在等待浏览器完成登录……",', '"waiting": "正在载入界面演示……",');
+    }
+    if (normalizedId.endsWith("/src/dev/preview.tsx")) {
       if (code.includes("__LUMI_DEMO_NATIVE__")) {
         return null;
       }

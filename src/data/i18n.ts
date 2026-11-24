@@ -207,7 +207,7 @@ const EN: Dict = {
     ctaDownload: "Download for Windows",
     ctaGitHub: "Source on GitHub",
     heroNotePrereview:
-      "Pre-review build for Mojang AppID verification — Microsoft sign-in activates once approved.",
+      "Pre-review build for Mojang AppID verification (Client ID 732fc771-cf09-4ec5-b899-ee92fd012d57) — opens official Microsoft OAuth in your browser; full gameplay unlocks once approved.",
     heroNoteBeta:
       "Public beta for Windows 10/11 (x64). Requires a legitimate Minecraft: Java Edition Microsoft account.",
     heroNoteStable:
@@ -458,7 +458,7 @@ const EN: Dict = {
     publishedLabel: "Published",
     prereviewNoticeTitle: "Current release is a Pre-review Build",
     prereviewNoticeBody:
-      "Microsoft sign-in is intentionally disabled in this pre-review build while Mojang reviews Lumi's AppID. You can still explore the interface, manage instances and saves, browse Modrinth/CurseForge, and inspect settings. A playable build will follow once approval lands.",
+      "This pre-review build includes Lumi's Microsoft Entra public client ID (732fc771-cf09-4ec5-b899-ee92fd012d57) and launches the official Microsoft OAuth 2.0 + PKCE flow in your system browser. Until Mojang adds the AppID to the Minecraft Services allowlist, sign-in stops at the expected 403 gate — you can already explore the interface, manage instances and saves, and browse Modrinth/CurseForge.",
     installerTitle: "Windows Installer",
     installerBadge: "Recommended · Auto-updates",
     installerDesc:
@@ -599,7 +599,7 @@ const ZH: Dict = {
     ctaDownload: "下载 Windows 版",
     ctaGitHub: "查看 GitHub 源码",
     heroNotePrereview:
-      "当前为 Mojang AppID 审核预审包：Microsoft 正版登录入口暂未开放，仍可体验界面、实例与资源发现。",
+      "当前为 Mojang AppID 审核预审包（客户端 ID 732fc771-cf09-4ec5-b899-ee92fd012d57）：已支持拉起系统浏览器官方 Microsoft 授权，待白名单获批后即可进入游戏。",
     heroNoteBeta:
       "公开测试版 · 适用于 Windows 10/11（64 位），需拥有 Minecraft Java 版的 Microsoft 正版账户。",
     heroNoteStable:
@@ -830,7 +830,7 @@ const ZH: Dict = {
     publishedLabel: "发布日期",
     prereviewNoticeTitle: "当前版本为 Mojang 审核预审构建",
     prereviewNoticeBody:
-      "在 Mojang 通过 Lumi 的 AppID 白名单审核前，本预审构建默认关闭 Microsoft 登录入口。你仍可以体验界面、管理实例与存档、浏览 Modrinth / CurseForge 并检查设置；审核通过后会发布可以正常登录游玩的公开测试版。",
+      "本预审构建已内置 Lumi 的 Microsoft Entra 公共客户端 ID（732fc771-cf09-4ec5-b899-ee92fd012d57），点击登录可正常拉起系统浏览器的官方 Microsoft OAuth 2.0 + PKCE 授权页；在 Mojang 通过白名单审核前会按预期停在 403 门禁，期间你仍可完整体验界面、管理实例与存档并浏览 Modrinth / CurseForge。",
     installerTitle: "安装版（推荐）",
     installerBadge: "推荐 · 带签名自动更新",
     installerDesc:

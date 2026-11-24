@@ -26,6 +26,7 @@ const footerLinks = [
     ext: true,
   },
   { label: isZh ? "爱发电" : "Afdian", href: LINKS.afdian, ext: true },
+  { label: isZh ? "联系邮箱" : "Contact", href: LINKS.mailto, ext: false },
   { label: "GitHub", href: LINKS.github, ext: true },
 ];
 ---
@@ -52,9 +53,15 @@ const footerLinks = [
         <p>
           {
             isZh
-              ? "基于 Tauri 2、自研 Rust 核心与 React 19 构建"
-              : "Built with Tauri 2, Rust, and React 19"
+              ? "基于 Tauri 2、自研 Rust 核心与 React 19 构建 · 联系邮箱："
+              : "Built with Tauri 2, Rust, and React 19 · Contact: "
           }
+          <a
+            href={LINKS.mailto}
+            class="underline decoration-[var(--line)] underline-offset-4 hover:text-[var(--accent)]"
+          >
+            {LINKS.email}
+          </a>
         </p>
       </div>
 

@@ -78,9 +78,9 @@ const isZh = locale === "zh";
             <li><strong class="text-[var(--fg)]">Microsoft / Xbox Live / Mojang 官方服务</strong>：用于系统浏览器 OAuth 2.0 授权码 + PKCE 登录、Java 版游玩权核验、官方档案读取与官方游戏资产下载。账号认证的请求不经过任何第三方镜像。</li>
             <li><strong class="text-[var(--fg)]">模组加载器官方源</strong>（Fabric、Quilt、Forge、NeoForge）：用于列出加载器版本并下载加载器文件。</li>
             <li><strong class="text-[var(--fg)]">Modrinth 与 CurseForge</strong>：用于搜索、安装与更新模组、整合包、材质包、光影、地图与服务器。</li>
-            <li><strong class="text-[var(--fg)]">可选社区下载镜像（BMCLAPI / MCIM）</strong>：按你在「内容与下载」中的设置加速公开游戏文件或公开模组元数据；个人 API Key 和账号认证请求不会发给镜像。</li>
+            <li><strong class="text-[var(--fg)]">可选社区下载镜像（BMCLAPI / MCIM）</strong>：Minecraft 游戏文件与元数据默认优先从 Mojang 官方源下载；仅在官方源连接失败，或你在「内容与下载」中主动改为「自动 / 优先镜像」时才使用镜像。个人 API Key 和账号认证请求绝不发给镜像。</li>
             <li><strong class="text-[var(--fg)]">DNS over HTTPS（默认开启）</strong>：海外官方源通过 Cloudflare（<code>1.1.1.1</code>）、国内镜像通过阿里公共 DNS（<code>223.5.5.5</code>）解析下载源域名，不可用时自动回退系统 DNS，可在设置中关闭。</li>
-            <li><strong class="text-[var(--fg)]">下载测速与 Minecraft 服务器列表查询</strong>：下载源设为「自动」时短暂测速官方源与 BMCLAPI；向首页或列表里的服务器发送标准状态查询以显示在线人数与延迟。</li>
+            <li><strong class="text-[var(--fg)]">下载测速与 Minecraft 服务器列表查询</strong>：仅在手动将下载源改为「自动」时短暂测速官方源与 BMCLAPI；向首页或列表里的服务器发送标准状态查询以显示在线人数与延迟。</li>
             <li><strong class="text-[var(--fg)]">可选手动日志分享（<code>mclo.gs</code>）</strong>：不会自动上传，只有在你手动点击并再次确认后，才会先脱敏再上传。</li>
             <li><strong class="text-[var(--fg)]">GitHub Releases（检查更新）</strong>：安装版每次启动拉取一次轻量的 <code>latest.json</code> 检查更新；便携版不检查更新。</li>
             <li><strong class="text-[var(--fg)]">本机 Discord 活动状态（可选，默认关闭）</strong>：仅通过本机命名管道（<code>\\.\pipe\discord-ipc-*</code>）与本机 Discord 客户端通信。</li>
@@ -120,7 +120,14 @@ const isZh = locale === "zh";
             >
               GitHub 私密漏洞报告（Private Vulnerability Reporting）
             </a>
-            联系我们，我们力争在 72 小时内确认并响应。一般使用问题欢迎前往
+            联系我们（或发送邮件至{" "}
+            <a
+              href={LINKS.mailto}
+              class="font-semibold text-[var(--accent)] hover:underline"
+            >
+              {LINKS.email}
+            </a>
+            ），我们力争在 72 小时内确认并响应。一般使用问题欢迎前往
             <a
               href={LINKS.discussions}
               target="_blank"
@@ -170,9 +177,9 @@ const isZh = locale === "zh";
             <li><strong class="text-[var(--fg)]">Microsoft / Xbox Live / Mojang Official Services</strong>: Used for OAuth 2.0 Authorization Code + PKCE sign-in, Java Edition play entitlement verification, profile lookup, and official asset/runtime downloads. Sign-in traffic does not go through download mirrors.</li>
             <li><strong class="text-[var(--fg)]">Mod loader sources</strong> (Fabric, Quilt, Forge, NeoForge): To list and install loader files.</li>
             <li><strong class="text-[var(--fg)]">Modrinth &amp; CurseForge</strong>: To browse, install, and update mods, modpacks, shaders, resource packs, worlds, and servers.</li>
-            <li><strong class="text-[var(--fg)]">Optional Download Mirrors (BMCLAPI / MCIM)</strong>: Only for public game assets or public mod metadata/files when enabled. Personal API keys and authentication requests are not sent to mirrors.</li>
+            <li><strong class="text-[var(--fg)]">Optional Download Mirrors (BMCLAPI / MCIM)</strong>: Minecraft game files and metadata use official Mojang sources first by default; mirrors are used only as fallback on failure or if you switch settings to Auto / Mirror. Personal API keys and authentication requests are never sent to mirrors.</li>
             <li><strong class="text-[var(--fg)]">DNS-over-HTTPS (on by default)</strong>: Resolves download source domains via Cloudflare (<code>1.1.1.1</code>) or AliDNS (<code>223.5.5.5</code> for mainland mirrors), falling back to system DNS automatically. Can be turned off in Settings.</li>
-            <li><strong class="text-[var(--fg)]">Download speed test &amp; Minecraft server pings</strong>: Brief mirror speed check in Auto mode; standard server list status pings to servers you display.</li>
+            <li><strong class="text-[var(--fg)]">Download speed test &amp; Minecraft server pings</strong>: Brief mirror speed check only when switched to Auto mode; standard server list status pings to servers you display.</li>
             <li><strong class="text-[var(--fg)]">Optional Manual Log Sharing (<code>mclo.gs</code>)</strong>: Triggered only after clicking upload and confirming a second dialog, with automatic secret redaction beforehand.</li>
             <li><strong class="text-[var(--fg)]">GitHub Releases (Updates)</strong>: Installed builds fetch the small <code>latest.json</code> once at startup; portable builds do not check for updates.</li>
             <li><strong class="text-[var(--fg)]">Local Discord IPC (Optional, Off by Default)</strong>: Communicates only over the local Windows named pipe (<code>\\.\pipe\discord-ipc-*</code>).</li>
@@ -211,7 +218,14 @@ const isZh = locale === "zh";
             >
               GitHub Private Vulnerability Reporting
             </a>
-            (target acknowledgement within 72 hours). General questions are welcome in
+            (or email{" "}
+            <a
+              href={LINKS.mailto}
+              class="font-semibold text-[var(--accent)] hover:underline"
+            >
+              {LINKS.email}
+            </a>
+            ; target acknowledgement within 72 hours). General questions are welcome in
             <a
               href={LINKS.discussions}
               target="_blank"
