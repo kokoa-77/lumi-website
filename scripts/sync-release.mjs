@@ -51,7 +51,14 @@ function toAnchor(tag) {
 function classifyRelease(release) {
   const tag = (release.tag_name || "").toLowerCase();
   if (tag.includes("prereview")) return "prereview";
-  if (release.prerelease || tag.includes("beta") || tag.includes("alpha") || tag.includes("rc")) {
+  const cleanVer = tag.replace(/^v/i, "");
+  if (
+    release.prerelease ||
+    cleanVer.startsWith("0.") ||
+    tag.includes("beta") ||
+    tag.includes("alpha") ||
+    tag.includes("rc")
+  ) {
     return "beta";
   }
   return "stable";
