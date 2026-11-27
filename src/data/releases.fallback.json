@@ -1,59 +1,97 @@
 {
-  "generatedAt": "2026-11-24T02:39:17.370Z",
+  "generatedAt": "2026-11-27T07:40:00.037Z",
   "repo": "kokoa-77/LumiLauncher",
   "latest": {
-    "tag": "v0.6.3-prereview",
-    "version": "0.6.3-prereview",
-    "name": "Lumi Launcher v0.6.3 (Pre-review Build)",
-    "kind": "prereview",
+    "tag": "v0.7.0",
+    "version": "0.7.0",
+    "name": "Lumi Launcher v0.7.0 (Pre-release)",
+    "kind": "beta",
     "prerelease": true,
-    "publishedAt": "2026-11-24T02:20:54Z",
-    "htmlUrl": "https://github.com/kokoa-77/LumiLauncher/releases/tag/v0.6.3-prereview",
-    "body": "Pre-review build for source verification and Mojang AppID allowlist review (`732fc771-cf09-4ec5-b899-ee92fd012d57`).\r\n\r\n> **Note:** Clicking **Sign in** launches the official Microsoft OAuth 2.0 + PKCE flow in your system browser and stops at the expected `403` Minecraft Services gate until Mojang approves Lumi's AppID. You can already explore instances, worlds, Modrinth/CurseForge discovery, and settings.\r\n>\r\n> NOT AN OFFICIAL MINECRAFT PRODUCT. NOT APPROVED BY OR ASSOCIATED WITH MOJANG OR MICROSOFT.\r\n\r\n### What's Changed\r\n- Configured official pre-review builds with Lumi's Microsoft Entra public client ID (`732fc771-cf09-4ec5-b899-ee92fd012d57`) so the official Microsoft sign-in redirect can be verified directly.\r\n- Set default Minecraft file and metadata download sources to official Mojang endpoints first.\r\n- Removed retired legacy account shims and updated English task progress labels.\r\n- Added public maintainer contact (`lumilauncher@outlook.com`) across documentation.\r\n\r\n### Verification\r\nVerify downloaded files against `SHA256SUMS.txt`:\r\n`Get-FileHash .\\LumiLauncher_0.6.3_x64-setup.exe -Algorithm SHA256`",
-    "anchor": "v0-6-3-prereview",
-    "checksumsUrl": "https://github.com/kokoa-77/LumiLauncher/releases/download/v0.6.3-prereview/SHA256SUMS.txt",
+    "publishedAt": "2026-11-27T07:22:54Z",
+    "htmlUrl": "https://github.com/kokoa-77/LumiLauncher/releases/tag/v0.7.0",
+    "body": "## English\r\n\r\nFirst public pre-release following Mojang's official AppID allowlist approval — ready for official Minecraft: Java Edition sign-in and play out of the box.\r\n\r\n> **Note:** Official Microsoft sign-in is now live. Found a bug or have feedback? Let us know on [GitHub Issues](https://github.com/kokoa-77/LumiLauncher/issues/new/choose).\r\n>\r\n> NOT AN OFFICIAL MINECRAFT PRODUCT. NOT APPROVED BY OR ASSOCIATED WITH MOJANG OR MICROSOFT.\r\n\r\n### ✨ What's Changed\r\n- 🔐 **Login System v2 & Official Skin/Cape Studio** — Upgraded to OAuth 2.1 + PKCE with native Passkey / Windows Hello support, sign-in progress feedback, Account Security Center, session pre-warming, and a built-in official 3D Skin & Cape Studio.\r\n- ⚡ **Next-Gen Official Download Engine** — Rebuilt official-source downloads with multi-segment acceleration, adaptive concurrency, resumable transfers, RFC 8484 DoH, live proxy watching, and a real-time Task Center cockpit.\r\n- 🕰️ **Full Version Matrix & Legacy Loaders** — Expanded support to Release, Snapshot, April Fools, and Beta/Alpha versions, adding Legacy Forge (1.5.2–1.12.2), Legacy Fabric, and Babric alongside Fabric, NeoForge, Forge, and Quilt.\r\n- 📦 **Complete Modpack Lifecycle** — Added MultiMC / Prism `.zip` import (`patches/*.json`), an instance version/loader upgrade wizard (in-place or cloned), 3-way lossless modpack updates with one-click rollback, and 4-format export with privacy filters.\r\n- 🛡️ **Visual Safety Net & Instance Notes** — Added a visual change & launch timeline with one-click rollback, reverse mod dependency hints with orphan cleanup, and per-instance notes.\r\n- 🌐 **New Official Website** — Now live at [https://lumilauncher.org](https://lumilauncher.org), with updated privacy, security, and license documentation.\r\n\r\n---\r\n\r\n## 简体中文\r\n\r\n通过 Mojang 官方 AppID 白名单审核后的首个公开内测版本，安装后开箱即可使用正版 Microsoft 账户登录并游玩 Minecraft: Java Edition。\r\n\r\n> **说明：** 官方 Microsoft 正版登录现已正式可用。内测期间如遇问题或有建议，欢迎前往 [GitHub Issues](https://github.com/kokoa-77/LumiLauncher/issues/new/choose) 反馈。\r\n>\r\n> 非 Minecraft 官方产品。未经 Mojang 或 Microsoft 批准，也不与 Mojang 或 Microsoft 关联。\r\n\r\n### ✨ 本次更新\r\n- 🔐 **登录系统 v2 与官方 3D 皮肤披风工坊** — 升级至 OAuth 2.1 + PKCE 双栈回环流程，原生支持系统浏览器 Passkey / Windows Hello，新增登录进度提示、账户安全中心、短时会话预热及内置官方 3D 皮肤与披风工坊。\r\n- ⚡ **新一代官方源下载引擎** — 重构官方源下载链路，支持大文件分段并发加速、自适应并发调度、断点续传、RFC 8484 DoH、系统代理实时监听与全新实时任务驾驶舱。\r\n- 🕰️ **全版本矩阵与怀旧加载器** — 覆盖正式版、快照、愚人节版本与远古 Beta / Alpha，并在 Fabric、NeoForge、Forge、Quilt 之外新增 Legacy Forge（1.5.2–1.12.2）、Legacy Fabric 与 Babric。\r\n- 📦 **整合包全生命周期升级** — 新增 MultiMC / Prism `.zip` 导入（含 `patches/*.json` 补丁引擎）、实例版本/加载器升级向导（支持原地或克隆升级）、三方比对无损整合包更新与一键回滚，以及 4 格式导出与隐私项过滤。\r\n- 🛡️ **可视化改动时间线与实例笔记** — 改动快照与启动记录融合展示支持一键回滚，新增模组反向依赖提示与孤儿前置清理，以及每实例独立的实例笔记。\r\n- 🌐 **全新官方网站上线** — 官方域名 [https://lumilauncher.org/zh/](https://lumilauncher.org/zh/) 正式启用，同步更新隐私、安全与许可文档。",
+    "anchor": "v0-7-0",
+    "checksumsUrl": "https://github.com/kokoa-77/LumiLauncher/releases/download/v0.7.0/SHA256SUMS.txt",
     "checksumsSitePath": null,
     "installer": {
-      "name": "LumiLauncher_0.6.3_x64-setup.exe",
-      "size": 10077688,
-      "sha256": "41798365e628c39e47b47e7996ccc5164304f45fa8790c77e7a2054f1478d751",
-      "githubUrl": "https://github.com/kokoa-77/LumiLauncher/releases/download/v0.6.3-prereview/LumiLauncher_0.6.3_x64-setup.exe",
+      "name": "LumiLauncher_0.7.0_x64-setup.exe",
+      "size": 11276491,
+      "sha256": "83db067413a805d1c666b1f5e94195efad31bbff9241312adb7a2ce0b48774c2",
+      "githubUrl": "https://github.com/kokoa-77/LumiLauncher/releases/download/v0.7.0/LumiLauncher_0.7.0_x64-setup.exe",
       "sitePath": null
     },
     "portable": {
-      "name": "LumiLauncher_0.6.3_x64-portable.zip",
-      "size": 14480100,
-      "sha256": "718125e54a031f3ec2d8d4d3f8ca44638ec6063bc3c0c0ae277908f3380173e8",
-      "githubUrl": "https://github.com/kokoa-77/LumiLauncher/releases/download/v0.6.3-prereview/LumiLauncher_0.6.3_x64-portable.zip",
+      "name": "LumiLauncher_0.7.0_x64-portable.zip",
+      "size": 16332725,
+      "sha256": "f29a993807b4994bf032ec1a1269f529932706fa5e2ad792db3308c085575e07",
+      "githubUrl": "https://github.com/kokoa-77/LumiLauncher/releases/download/v0.7.0/LumiLauncher_0.7.0_x64-portable.zip",
       "sitePath": null
     }
   },
   "releases": [
     {
-      "tag": "v0.6.3-prereview",
-      "version": "0.6.3-prereview",
-      "name": "Lumi Launcher v0.6.3 (Pre-review Build)",
-      "kind": "prereview",
+      "tag": "v0.7.0",
+      "version": "0.7.0",
+      "name": "Lumi Launcher v0.7.0 (Pre-release)",
+      "kind": "beta",
       "prerelease": true,
-      "publishedAt": "2026-11-24T02:20:54Z",
-      "htmlUrl": "https://github.com/kokoa-77/LumiLauncher/releases/tag/v0.6.3-prereview",
-      "body": "Pre-review build for source verification and Mojang AppID allowlist review (`732fc771-cf09-4ec5-b899-ee92fd012d57`).\r\n\r\n> **Note:** Clicking **Sign in** launches the official Microsoft OAuth 2.0 + PKCE flow in your system browser and stops at the expected `403` Minecraft Services gate until Mojang approves Lumi's AppID. You can already explore instances, worlds, Modrinth/CurseForge discovery, and settings.\r\n>\r\n> NOT AN OFFICIAL MINECRAFT PRODUCT. NOT APPROVED BY OR ASSOCIATED WITH MOJANG OR MICROSOFT.\r\n\r\n### What's Changed\r\n- Configured official pre-review builds with Lumi's Microsoft Entra public client ID (`732fc771-cf09-4ec5-b899-ee92fd012d57`) so the official Microsoft sign-in redirect can be verified directly.\r\n- Set default Minecraft file and metadata download sources to official Mojang endpoints first.\r\n- Removed retired legacy account shims and updated English task progress labels.\r\n- Added public maintainer contact (`lumilauncher@outlook.com`) across documentation.\r\n\r\n### Verification\r\nVerify downloaded files against `SHA256SUMS.txt`:\r\n`Get-FileHash .\\LumiLauncher_0.6.3_x64-setup.exe -Algorithm SHA256`",
-      "anchor": "v0-6-3-prereview",
+      "publishedAt": "2026-11-27T07:22:54Z",
+      "htmlUrl": "https://github.com/kokoa-77/LumiLauncher/releases/tag/v0.7.0",
+      "body": "## English\r\n\r\nFirst public pre-release following Mojang's official AppID allowlist approval — ready for official Minecraft: Java Edition sign-in and play out of the box.\r\n\r\n> **Note:** Official Microsoft sign-in is now live. Found a bug or have feedback? Let us know on [GitHub Issues](https://github.com/kokoa-77/LumiLauncher/issues/new/choose).\r\n>\r\n> NOT AN OFFICIAL MINECRAFT PRODUCT. NOT APPROVED BY OR ASSOCIATED WITH MOJANG OR MICROSOFT.\r\n\r\n### ✨ What's Changed\r\n- 🔐 **Login System v2 & Official Skin/Cape Studio** — Upgraded to OAuth 2.1 + PKCE with native Passkey / Windows Hello support, sign-in progress feedback, Account Security Center, session pre-warming, and a built-in official 3D Skin & Cape Studio.\r\n- ⚡ **Next-Gen Official Download Engine** — Rebuilt official-source downloads with multi-segment acceleration, adaptive concurrency, resumable transfers, RFC 8484 DoH, live proxy watching, and a real-time Task Center cockpit.\r\n- 🕰️ **Full Version Matrix & Legacy Loaders** — Expanded support to Release, Snapshot, April Fools, and Beta/Alpha versions, adding Legacy Forge (1.5.2–1.12.2), Legacy Fabric, and Babric alongside Fabric, NeoForge, Forge, and Quilt.\r\n- 📦 **Complete Modpack Lifecycle** — Added MultiMC / Prism `.zip` import (`patches/*.json`), an instance version/loader upgrade wizard (in-place or cloned), 3-way lossless modpack updates with one-click rollback, and 4-format export with privacy filters.\r\n- 🛡️ **Visual Safety Net & Instance Notes** — Added a visual change & launch timeline with one-click rollback, reverse mod dependency hints with orphan cleanup, and per-instance notes.\r\n- 🌐 **New Official Website** — Now live at [https://lumilauncher.org](https://lumilauncher.org), with updated privacy, security, and license documentation.\r\n\r\n---\r\n\r\n## 简体中文\r\n\r\n通过 Mojang 官方 AppID 白名单审核后的首个公开内测版本，安装后开箱即可使用正版 Microsoft 账户登录并游玩 Minecraft: Java Edition。\r\n\r\n> **说明：** 官方 Microsoft 正版登录现已正式可用。内测期间如遇问题或有建议，欢迎前往 [GitHub Issues](https://github.com/kokoa-77/LumiLauncher/issues/new/choose) 反馈。\r\n>\r\n> 非 Minecraft 官方产品。未经 Mojang 或 Microsoft 批准，也不与 Mojang 或 Microsoft 关联。\r\n\r\n### ✨ 本次更新\r\n- 🔐 **登录系统 v2 与官方 3D 皮肤披风工坊** — 升级至 OAuth 2.1 + PKCE 双栈回环流程，原生支持系统浏览器 Passkey / Windows Hello，新增登录进度提示、账户安全中心、短时会话预热及内置官方 3D 皮肤与披风工坊。\r\n- ⚡ **新一代官方源下载引擎** — 重构官方源下载链路，支持大文件分段并发加速、自适应并发调度、断点续传、RFC 8484 DoH、系统代理实时监听与全新实时任务驾驶舱。\r\n- 🕰️ **全版本矩阵与怀旧加载器** — 覆盖正式版、快照、愚人节版本与远古 Beta / Alpha，并在 Fabric、NeoForge、Forge、Quilt 之外新增 Legacy Forge（1.5.2–1.12.2）、Legacy Fabric 与 Babric。\r\n- 📦 **整合包全生命周期升级** — 新增 MultiMC / Prism `.zip` 导入（含 `patches/*.json` 补丁引擎）、实例版本/加载器升级向导（支持原地或克隆升级）、三方比对无损整合包更新与一键回滚，以及 4 格式导出与隐私项过滤。\r\n- 🛡️ **可视化改动时间线与实例笔记** — 改动快照与启动记录融合展示支持一键回滚，新增模组反向依赖提示与孤儿前置清理，以及每实例独立的实例笔记。\r\n- 🌐 **全新官方网站上线** — 官方域名 [https://lumilauncher.org/zh/](https://lumilauncher.org/zh/) 正式启用，同步更新隐私、安全与许可文档。",
+      "anchor": "v0-7-0",
       "assets": [
         {
-          "name": "LumiLauncher_0.6.3_x64-portable.zip",
-          "size": 14480100,
-          "githubUrl": "https://github.com/kokoa-77/LumiLauncher/releases/download/v0.6.3-prereview/LumiLauncher_0.6.3_x64-portable.zip"
+          "name": "latest.json",
+          "size": 655,
+          "githubUrl": "https://github.com/kokoa-77/LumiLauncher/releases/download/v0.7.0/latest.json"
         },
         {
-          "name": "LumiLauncher_0.6.3_x64-setup.exe",
-          "size": 10077688,
-          "githubUrl": "https://github.com/kokoa-77/LumiLauncher/releases/download/v0.6.3-prereview/LumiLauncher_0.6.3_x64-setup.exe"
+          "name": "LumiLauncher_0.7.0_x64-portable.zip",
+          "size": 16332725,
+          "githubUrl": "https://github.com/kokoa-77/LumiLauncher/releases/download/v0.7.0/LumiLauncher_0.7.0_x64-portable.zip"
+        },
+        {
+          "name": "LumiLauncher_0.7.0_x64-setup.exe",
+          "size": 11276491,
+          "githubUrl": "https://github.com/kokoa-77/LumiLauncher/releases/download/v0.7.0/LumiLauncher_0.7.0_x64-setup.exe"
+        },
+        {
+          "name": "LumiLauncher_0.7.0_x64-setup.exe.sig",
+          "size": 432,
+          "githubUrl": "https://github.com/kokoa-77/LumiLauncher/releases/download/v0.7.0/LumiLauncher_0.7.0_x64-setup.exe.sig"
+        },
+        {
+          "name": "SHA256SUMS.txt",
+          "size": 382,
+          "githubUrl": "https://github.com/kokoa-77/LumiLauncher/releases/download/v0.7.0/SHA256SUMS.txt"
+        }
+      ]
+    },
+    {
+      "tag": "v0.6.4-prereview",
+      "version": "0.6.4-prereview",
+      "name": "Lumi Launcher v0.6.4 (Pre-review Build)",
+      "kind": "prereview",
+      "prerelease": true,
+      "publishedAt": "2026-11-24T04:52:16Z",
+      "htmlUrl": "https://github.com/kokoa-77/LumiLauncher/releases/tag/v0.6.4-prereview",
+      "body": "## English\r\n\r\nPre-review build for source verification and Mojang AppID allowlist review (`<app-id>`).\r\n\r\n> **Note:** Clicking **Sign in** launches the official Microsoft OAuth 2.0 + PKCE flow in your system browser and stops at the expected `403` Minecraft Services gate until Mojang approves Lumi's AppID. You can already explore instances, worlds, Modrinth discovery, and settings.\r\n>\r\n> NOT AN OFFICIAL MINECRAFT PRODUCT. NOT APPROVED BY OR ASSOCIATED WITH MOJANG OR MICROSOFT.\r\n\r\n### What's Changed\r\n- Connected all Minecraft game files, metadata, Java runtimes, mod loaders, and mod platforms directly to official endpoints only, removing all built-in third-party mirrors.\r\n- Streamlined network connectivity diagnostics to probe core official endpoints only.\r\n- Configured official pre-review builds with Lumi's Microsoft Entra public client ID (`<app-id>`) and public maintainer contact (`lumilauncher@outlook.com`).\r\n\r\n### Verification\r\nVerify downloaded files against `SHA256SUMS.txt`:\r\n`Get-FileHash .\\LumiLauncher_0.6.4_x64-setup.exe -Algorithm SHA256`\r\n\r\n---\r\n\r\n## 简体中文\r\n\r\n面向源码核验与 Mojang AppID 白名单审核的预审构建（客户端 ID：`<app-id>`）。\r\n\r\n> **说明：** 点击「登录」会正常拉起系统浏览器的官方 Microsoft OAuth 2.0 + PKCE 授权流程，并在 Mojang 批准 Lumi 的 AppID 白名单前按预期停在 Minecraft Services 的 `403` 校验门禁。在此期间你已可完整体验界面、管理实例与存档、浏览 Modrinth 并检查各项设置。\r\n>\r\n> 非 Minecraft 官方产品。未经 Mojang 或 Microsoft 批准，也不与 Mojang 或 Microsoft 关联。\r\n\r\n### 本次更新\r\n- 游戏本体、元数据、Java 运行时、模组加载器与模组平台全链路改为仅直连官方源，移除全部内置第三方镜像。\r\n- 网络连通性诊断精简为仅探测核心官方服务端点。\r\n- 官方预审构建已配置 Lumi 的 Microsoft Entra 公共客户端 ID（`<app-id>`）与公开维护者联系邮箱（`lumilauncher@outlook.com`）。\r\n\r\n### 文件校验\r\n下载后请对照同页面的 `SHA256SUMS.txt` 核验文件完整性：\r\n`Get-FileHash .\\LumiLauncher_0.6.4_x64-setup.exe -Algorithm SHA256`",
+      "anchor": "v0-6-4-prereview",
+      "assets": [
+        {
+          "name": "LumiLauncher_0.6.4_x64-portable.zip",
+          "size": 14429187,
+          "githubUrl": "https://github.com/kokoa-77/LumiLauncher/releases/download/v0.6.4-prereview/LumiLauncher_0.6.4_x64-portable.zip"
+        },
+        {
+          "name": "LumiLauncher_0.6.4_x64-setup.exe",
+          "size": 10046182,
+          "githubUrl": "https://github.com/kokoa-77/LumiLauncher/releases/download/v0.6.4-prereview/LumiLauncher_0.6.4_x64-setup.exe"
         },
         {
           "name": "SHA256SUMS.txt",
           "size": 201,
-          "githubUrl": "https://github.com/kokoa-77/LumiLauncher/releases/download/v0.6.3-prereview/SHA256SUMS.txt"
+          "githubUrl": "https://github.com/kokoa-77/LumiLauncher/releases/download/v0.6.4-prereview/SHA256SUMS.txt"
         }
       ]
     }

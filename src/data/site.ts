@@ -137,32 +137,26 @@ const ZH_RELEASE_OVERRIDES: Record<string, { name: string; body: string }> = {
   "v0.6.4-prereview": {
     name: "Lumi Launcher v0.6.4（预审构建）",
     body: [
-      "面向源码核验与 Mojang AppID 白名单审核的预审构建（客户端 ID：`732fc771-cf09-4ec5-b899-ee92fd012d57`）。",
-      "> 说明：点击「登录」会正常拉起系统浏览器的官方 Microsoft OAuth 2.0 + PKCE 授权流程，并在 Mojang 批准 Lumi 的 AppID 白名单前按预期停在 Minecraft Services 的 `403` 校验门禁。在此期间你已可完整体验界面、管理实例与存档、浏览 Modrinth 并检查各项设置。",
+      "面向源码核验与 Mojang AppID 白名单审核的预审构建。",
+      "> 说明：该历史预审构建发布于 Mojang 白名单审核期间；正式正版游玩请使用最新版本。",
       "> 非 Minecraft 官方产品。未经 Mojang 或 Microsoft 批准，也不与 Mojang 或 Microsoft 关联。",
       "### 本次更新",
       "- 游戏本体、加载器、Java 运行时与模组平台全链路改为直连官方源（Mojang、各加载器官方仓库、Modrinth、CurseForge），移除所有硬编码的第三方镜像源。",
       "- 网络连通性诊断精简为探测 Microsoft 登录、Minecraft 官方、Modrinth 与 CurseForge 四个核心官方端点。",
-      "- 官方预审构建包含 Lumi 的 Microsoft Entra 公共客户端 ID（`732fc771-cf09-4ec5-b899-ee92fd012d57`）与公开联系邮箱（`lumilauncher@outlook.com`）。",
-      "### 文件校验",
-      "下载后请对照同页面的 `SHA256SUMS.txt` 核验文件完整性：",
-      "`Get-FileHash .\\LumiLauncher_0.6.4_x64-setup.exe -Algorithm SHA256`",
+      "- 官方预审构建已配置 Lumi 的 Microsoft Entra 公共客户端 ID 与公开联系邮箱（`lumilauncher@outlook.com`）。",
     ].join("\n"),
   },
   "v0.6.3-prereview": {
     name: "Lumi Launcher v0.6.3（预审构建）",
     body: [
-      "面向源码核验与 Mojang AppID 白名单审核的预审构建（客户端 ID：`732fc771-cf09-4ec5-b899-ee92fd012d57`）。",
-      "> 说明：点击「登录」会正常拉起系统浏览器的官方 Microsoft OAuth 2.0 + PKCE 授权流程，并在 Mojang 批准 Lumi 的 AppID 白名单前按预期停在 Minecraft Services 的 `403` 校验门禁。在此期间你已可完整体验界面、管理实例与存档、浏览 Modrinth / CurseForge 并检查各项设置。",
+      "面向源码核验与 Mojang AppID 白名单审核的预审构建。",
+      "> 说明：该历史预审构建发布于 Mojang 白名单审核期间；正式正版游玩请使用最新版本。",
       "> 非 Minecraft 官方产品。未经 Mojang 或 Microsoft 批准，也不与 Mojang 或 Microsoft 关联。",
       "### 本次更新",
-      "- 官方预审构建已注入 Lumi 的 Microsoft Entra 公共客户端 ID（`732fc771-cf09-4ec5-b899-ee92fd012d57`），可直接核验系统浏览器的官方 Microsoft 登录跳转流程。",
+      "- 官方预审构建已注入 Lumi 的 Microsoft Entra 公共客户端 ID，可直接核验系统浏览器的官方 Microsoft 登录跳转流程。",
       "- Minecraft 游戏文件与元数据的默认下载源调整为优先直连 Mojang 官方端点。",
       "- 移除已废弃的旧账户兼容桩代码，并补全英文模式下的启动进度状态翻译。",
       "- 在仓库文档与官网统一补充公开维护者联系邮箱（`lumilauncher@outlook.com`）。",
-      "### 文件校验",
-      "下载后请对照同页面的 `SHA256SUMS.txt` 核验文件完整性：",
-      "`Get-FileHash .\\LumiLauncher_0.6.3_x64-setup.exe -Algorithm SHA256`",
     ].join("\n"),
   },
 };
@@ -185,6 +179,7 @@ function localizeReleaseTitle(name: string, locale: Locale): string {
   if (locale !== "zh") return name;
   return name
     .replace(/\s*\(Pre-review Build\)/i, "（预审构建）")
+    .replace(/\s*\(Pre-release\)/i, "（内测预览版）")
     .replace(/\s*\(Public Beta\)/i, "（公开测试版）");
 }
 

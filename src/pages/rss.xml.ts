@@ -4,7 +4,7 @@ import { getReleases, localizeRelease } from "../data/site";
 
 export function GET(context: APIContext) {
   const { releases } = getReleases();
-  const site = context.site ?? new URL("https://lumilauncher.pages.dev");
+  const site = context.site ?? new URL("https://lumilauncher.org");
 
   return rss({
     title: "Lumi Launcher Releases",

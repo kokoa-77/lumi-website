@@ -23,7 +23,7 @@ const shotInstancesLight = isZh ? zhInstancesLight : enInstancesLight;
 const shotInstancesDark = isZh ? zhInstancesDark : enInstancesDark;
 const { latest } = getReleases();
 const installerHref = primaryDownloadHref(latest.installer, latest.htmlUrl);
-const installerName = latest.installer?.name || "LumiLauncher_0.6.3_x64-setup.exe";
+const installerName = latest.installer?.name || "LumiLauncher_0.7.0_x64-setup.exe";
 const langParam = isZh ? "zh-CN" : "en";
 const onboardingSrc = `/demo-app/?lang=${langParam}&theme=light&onboarding=1`;
 const homeSrc = `/demo-app/?lang=${langParam}&theme=light`;
@@ -95,8 +95,8 @@ const homeHref = localizedPath(locale, "/");
     <p class="mt-3 text-center text-xs text-[var(--fg-muted)]">
       {
         isZh
-          ? "提示：本页仅为静态界面预览（显示「界面演示」占位档案，不执行登录或启动游戏；桌面版通过系统浏览器跳转 Microsoft 官方 OAuth 2.0 + PKCE 登录）。进入首页后可体验随实例变色、发现页、9 大分类设置与本机跨实例同步。"
-          : "Tip: Static UI preview only (shows a 'UI Demo' mock profile and never performs real sign-in or launches Minecraft; the desktop app signs in via official Microsoft OAuth 2.0 + PKCE in your system browser)."
+          ? "提示：本页仅为静态界面预览（显示「界面演示」占位档案，不执行登录或启动游戏；桌面版通过系统浏览器跳转 Microsoft 官方 OAuth 2.1 + PKCE 登录）。进入首页后可体验随实例变色、发现页、7 大分类设置与本机跨实例同步。"
+          : "Tip: Static UI preview only (shows a 'UI Demo' mock profile and never performs real sign-in or launches Minecraft; the desktop app signs in via official Microsoft OAuth 2.1 + PKCE in your system browser)."
       }
     </p>
   </div>

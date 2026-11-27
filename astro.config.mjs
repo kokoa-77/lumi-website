@@ -2,7 +2,7 @@ import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "astro/config";
 
-const siteUrl = (process.env.SITE_URL || "https://lumilauncher.pages.dev").replace(/\/+$/, "");
+const siteUrl = (process.env.SITE_URL || "https://lumilauncher.org").replace(/\/+$/, "");
 
 export default defineConfig({
   site: siteUrl,

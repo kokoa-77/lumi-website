@@ -14,7 +14,7 @@ interface Props {
 }
 
 const { locale, title, description, routePath, noindex = false } = Astro.props;
-const siteOrigin = (Astro.site?.toString() || "https://lumilauncher.pages.dev").replace(/\/+$/, "");
+const siteOrigin = (Astro.site?.toString() || "https://lumilauncher.org").replace(/\/+$/, "");
 
 const canonicalPath = localizedPath(locale, routePath);
 const enPath = localizedPath("en", routePath);

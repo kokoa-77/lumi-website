@@ -1,7 +1,7 @@
 import type { APIContext } from "astro";
 
 export function GET(context: APIContext) {
-  const site = (context.site?.toString() || "https://lumilauncher.pages.dev").replace(/\/+$/, "");
+  const site = (context.site?.toString() || "https://lumilauncher.org").replace(/\/+$/, "");
   const body = `User-agent: *
 Allow: /
 Disallow: /press

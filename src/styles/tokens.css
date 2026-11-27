@@ -128,6 +128,8 @@
   --on-danger: oklch(99% 0 0);
   --warning: oklch(58% 0.14 70);
   --warning-soft: oklch(70% 0.14 75 / 0.16);
+  --success: oklch(52% 0.14 150);
+  --success-soft: oklch(55% 0.14 150 / 0.14);
   --scrim: oklch(20% 0.02 260 / 0.4);
   --shadow-raised: 0 1px 2px oklch(20% 0.02 260 / 0.07);
   --shadow-overlay: 0 12px 32px -8px oklch(20% 0.02 260 / 0.22);
@@ -190,6 +192,8 @@
   --on-danger: oklch(99% 0 0);
   --warning: oklch(80% 0.14 80);
   --warning-soft: oklch(80% 0.14 80 / 0.16);
+  --success: oklch(76% 0.14 152);
+  --success-soft: oklch(76% 0.14 152 / 0.16);
   --scrim: oklch(8% 0.02 var(--night-h) / 0.55);
   /* 深色玻璃微光顶描边：1px 极淡顶部内高光，零模糊开销即可拉开卡片与浮层质感 */
   --shadow-raised: inset 0 1px 0 oklch(100% 0 0 / 0.05), 0 1px 2px oklch(0% 0 0 / 0.3);

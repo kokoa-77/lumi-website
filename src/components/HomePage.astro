@@ -71,9 +71,9 @@ const installerHref = primaryDownloadHref(latest.installer, latest.htmlUrl);
 const portableHref = primaryDownloadHref(latest.portable, latest.htmlUrl);
 const installerUsesSite = Boolean(latest.installer?.sitePath);
 const portableUsesSite = Boolean(latest.portable?.sitePath);
-const installerName = latest.installer?.name || "Lumi_0.6.2_x64-setup.exe";
-const portableName = latest.portable?.name || "Lumi_0.6.2_x64-portable.zip";
-const installerSize = latest.installer ? formatBytes(latest.installer.size) : "9.8 MB";
+const installerName = latest.installer?.name || "LumiLauncher_0.7.0_x64-setup.exe";
+const portableName = latest.portable?.name || "LumiLauncher_0.7.0_x64-portable.zip";
+const installerSize = latest.installer ? formatBytes(latest.installer.size) : "10.8 MB";
 const portableSize = latest.portable ? formatBytes(latest.portable.size) : "";
 const checksumsHref = latest.checksumsSitePath || latest.checksumsUrl;
 
@@ -330,18 +330,26 @@ const ecoRow2 = [
       : "NeoForge install support with automatic mod filtering",
   },
   {
-    name: "Forge",
+    name: "Forge / Legacy Forge",
     tag: isZh ? "加载器" : "Loader",
     hue: 235,
     tip: isZh
-      ? "支持经典与新版 Forge 实例，自动匹配对应 Java 版本"
-      : "Supports classic & modern Forge with automatic Java matching",
+      ? "支持现代与 1.5.2–1.12.2 怀旧版 Forge 实例，自动匹配对应 Java 版本"
+      : "Supports modern & Legacy Forge (1.5.2–1.12.2) with automatic Java matching",
   },
   {
     name: "Quilt",
     tag: isZh ? "加载器" : "Loader",
     hue: 295,
     tip: isZh ? "支持 Quilt 加载器和兼容模组筛选" : "Quilt loader install and mod filtering",
+  },
+  {
+    name: "Legacy Fabric / Babric",
+    tag: isZh ? "怀旧" : "Legacy",
+    hue: 190,
+    tip: isZh
+      ? "支持远古 Beta / Alpha 与经典旧版 MC 的怀旧加载器"
+      : "Legacy loaders for Beta / Alpha and classic Minecraft versions",
   },
   {
     name: "Complementary Unbound",
@@ -406,6 +414,14 @@ const ecoRow2 = [
     tip: isZh
       ? "遵守作者的分发设置，受限文件按 SHA-256 哈希自动认领"
       : "Creator-compliant CurseForge import with SHA-256 auto-claim",
+  },
+  {
+    name: "MultiMC / Prism .zip",
+    tag: isZh ? "补丁兼容" : "Patches",
+    hue: 205,
+    tip: isZh
+      ? "原生解析 patches/*.json 运行库补丁与实例笔记，支持高魔改整合包"
+      : "Parses patches/*.json runtime overrides and notes for heavily customized packs",
   },
 ];
 
@@ -1034,8 +1050,8 @@ const interactiveSyncItems = isZh
         <p class="mt-3 text-sm leading-relaxed text-[var(--fg-muted)]">
           {
             isZh
-              ? "启动前先在本地检查缺少前置、modId 重复、加载器不对和 Java 冲突；每次改动都会自动留一份快照。点下面的按钮试一下「一键回滚」："
-              : "A local check before launch catches missing dependencies and loader mismatches, and every change leaves a snapshot. Try a one-click rollback below:"
+              ? "启动前本地检查缺少前置、重复 modId、加载器与 Java 冲突；每次改动与启动记录汇入可视化时间线，还能自动清理孤儿前置。点下面的按钮试一下「一键回滚」："
+              : "Local preflight catches missing dependencies and loader mismatches, while every change and launch record feeds a visual timeline with orphan-dependency cleanup. Try a one-click rollback below:"
           }
         </p>
 
@@ -1255,7 +1271,7 @@ const interactiveSyncItems = isZh
             {isZh ? "Windows 凭据管理器" : "Windows Credential Manager"}
           </p>
           <p class="mt-1 leading-relaxed text-[var(--fg-muted)]">
-            {isZh ? "OAuth 2.0 PKCE 刷新令牌按账号存进系统凭据库，不写进普通文件。" : "Per-account OAuth 2.0 PKCE refresh tokens live in the OS credential vault, not in plain files."}
+            {isZh ? "OAuth 2.1 PKCE 刷新令牌按账号存进 Windows 凭据管理器（DPAPI 用户隔离），内置账户安全中心与官方 3D 皮肤披风工坊。" : "Per-account OAuth 2.1 PKCE refresh tokens live in Windows Credential Manager (DPAPI), paired with an Account Security Center and 3D Skin & Cape Studio."}
           </p>
         </div>
         <div class="rounded-2xl bg-[var(--surface-2)] p-3.5">
@@ -1288,7 +1304,7 @@ const interactiveSyncItems = isZh
             {isZh ? "界面无文件权限" : "No UI File Access"}
           </span>
           <span class="lumi-pill bg-[var(--surface-2)] px-2.5 py-1">
-            {isZh ? "6 端点网络诊断" : "6-Endpoint Net Check"}
+            {isZh ? "官方核心端点诊断" : "Official Endpoint Check"}
           </span>
           <span class="lumi-pill bg-[var(--surface-2)] px-2.5 py-1">GPL-3.0</span>
         </div>
@@ -1390,8 +1406,8 @@ const interactiveSyncItems = isZh
       <p class="max-w-md text-sm leading-relaxed text-[var(--fg-muted)]">
         {
           isZh
-            ? "支持 Fabric、NeoForge、Forge、Quilt 和 .mrpack。鼠标停上去会暂停滚动，点任意胶囊可以看 Lumi 对它的支持。"
-            : "Fabric, NeoForge, Forge, Quilt and .mrpack are supported. Hover to pause, or click any pill to see how Lumi handles it."
+            ? "覆盖正式、快照、愚人节与远古 Beta/Alpha，支持 Fabric、NeoForge、Forge（含怀旧版）、Quilt、Legacy Fabric、Babric 及 .mrpack / CurseForge / MultiMC 整合包。鼠标停上去会暂停滚动，点任意胶囊查看支持方式。"
+            : "Covers Release, Snapshot, April Fools, and Beta/Alpha across Fabric, NeoForge, Forge (including Legacy), Quilt, Legacy Fabric, Babric, and .mrpack / CurseForge / MultiMC modpacks. Hover to pause, or click any pill for details."
         }
       </p>
     </div>

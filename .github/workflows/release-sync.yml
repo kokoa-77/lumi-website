@@ -32,7 +32,7 @@ jobs:
       should_deploy: ${{ steps.check.outputs.should_deploy }}
       latest_tag: ${{ steps.check.outputs.latest_tag }}
     env:
-      SITE_URL: ${{ vars.SITE_URL || 'https://lumilauncher.pages.dev' }}
+      SITE_URL: ${{ vars.SITE_URL || 'https://lumilauncher.org' }}
       UPSTREAM_REPO: kokoa-77/LumiLauncher
     steps:
       - name: Compare live release-meta.json against upstream GitHub Releases
@@ -103,7 +103,7 @@ jobs:
     if: needs.check-changes.outputs.should_deploy == 'true'
     runs-on: ubuntu-latest
     env:
-      SITE_URL: ${{ vars.SITE_URL || 'https://lumilauncher.pages.dev' }}
+      SITE_URL: ${{ vars.SITE_URL || 'https://lumilauncher.org' }}
       PAGES_PROJECT_NAME: ${{ vars.PAGES_PROJECT_NAME || 'lumilauncher' }}
       UPSTREAM_REPO: kokoa-77/LumiLauncher
 

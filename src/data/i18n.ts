@@ -207,9 +207,9 @@ const EN: Dict = {
     ctaDownload: "Download for Windows",
     ctaGitHub: "Source on GitHub",
     heroNotePrereview:
-      "Pre-review build for Mojang AppID verification (Client ID 732fc771-cf09-4ec5-b899-ee92fd012d57) — opens official Microsoft OAuth in your browser; full gameplay unlocks once approved.",
+      "Pre-review build for Mojang AppID verification — opens official Microsoft OAuth in your browser; full gameplay unlocks once approved.",
     heroNoteBeta:
-      "Public beta for Windows 10/11 (x64). Requires a legitimate Minecraft: Java Edition Microsoft account.",
+      "Pre-release for Windows 10/11 (x64) with Mojang AppID allowlist active. Requires a legitimate Minecraft: Java Edition Microsoft account.",
     heroNoteStable:
       "Free & open source for Windows 10/11 (x64). Requires a legitimate Minecraft: Java Edition Microsoft account.",
     previewTitle: "Light up every world you play",
@@ -308,7 +308,7 @@ const EN: Dict = {
           "Lumi checks your mods locally before launch, takes a snapshot every time content changes so you can roll back in one click, and backs up your worlds automatically.",
         bullets: [
           "Before launch, Lumi checks for missing dependencies, duplicate mod IDs, wrong loaders and incompatible Java",
-          "Full change history with one-click undo, version locking, and mod version switching",
+          "Visual change & launch timeline with one-click rollback, reverse dependency cleanup, version locking, and per-instance notes",
           "Automatic world backups, with a backup folder you can move to another drive",
         ],
         imageKey: "detail",
@@ -319,11 +319,11 @@ const EN: Dict = {
         eyebrow: "04 · Modrinth & CurseForge Unified",
         title: "Browse everything in one place, respecting creators",
         description:
-          "Search, install, and update mods, modpacks (.mrpack & CurseForge), shaders, resource packs, worlds, and servers side by side with automatic dependency resolution.",
+          "Search, install, update, and export mods, modpacks (.mrpack, CurseForge, and MultiMC/Prism .zip with patches/*.json), shaders, resource packs, worlds, and servers side by side.",
         bullets: [
-          "Unified discovery across Modrinth and CurseForge with automatic dependency preview",
+          "Unified discovery across Modrinth and CurseForge with automatic dependency preview and lossless 3-way modpack updates",
           "Files whose authors block third-party downloads open on the official CurseForge page and are matched by SHA-256 once downloaded, respecting the author's settings",
-          "Drag-and-drop local .jar, .zip, or .mrpack files straight into the window",
+          "Upgrade instance versions/loaders in place or on a clone, and export in 4 formats with privacy filters",
         ],
         imageKey: "discover",
       },
@@ -347,9 +347,9 @@ const EN: Dict = {
         description:
           "The core is written in Rust and built with Tauri 2. Every game file, loader, mod, and sign-in request connects directly to official Microsoft, Mojang, Modrinth, and CurseForge endpoints.",
         bullets: [
-          "Concurrent resumable downloads with cryptographic hash verification and optional DoH / HTTP·SOCKS5 proxy",
-          "Detects installed Java or downloads official runtimes, with memory allocation suggestions",
-          "Storage analysis, cleanup of unused game versions, and preference export without account data",
+          "Segmented Range downloads, adaptive concurrency, cryptographic hash verification, RFC 8484 DoH, live proxy watching, and a real-time Task Center",
+          "Built-in official 3D Skin & Cape Studio, Account Security Center, automatic Java detection/download, and memory suggestions",
+          "Full version matrix (Release, Snapshot, April Fools, Beta/Alpha) plus Fabric, NeoForge, Forge (including Legacy), Quilt, Legacy Fabric, and Babric",
         ],
         imageKey: "architecture",
         artKey: "homeDay",
@@ -394,7 +394,7 @@ const EN: Dict = {
     faqs: [
       {
         q: "Does Lumi require an official Microsoft Minecraft: Java Edition account?",
-        a: "Yes. Lumi only signs in via official Microsoft OAuth 2.0 + PKCE and verifies legitimate Minecraft: Java Edition ownership before launching. Offline usernames, third-party skin/auth servers, and authlib injectors are intentionally not supported.",
+        a: "Yes. Lumi only signs in via official Microsoft OAuth 2.1 + PKCE and verifies legitimate Minecraft: Java Edition ownership before launching. Offline usernames, third-party skin/auth servers, and authlib injectors are intentionally not supported.",
       },
       {
         q: "Is Lumi available on macOS or Linux?",
@@ -458,7 +458,7 @@ const EN: Dict = {
     publishedLabel: "Published",
     prereviewNoticeTitle: "Current release is a Pre-review Build",
     prereviewNoticeBody:
-      "This pre-review build includes Lumi's Microsoft Entra public client ID (732fc771-cf09-4ec5-b899-ee92fd012d57) and launches the official Microsoft OAuth 2.0 + PKCE flow in your system browser. Until Mojang adds the AppID to the Minecraft Services allowlist, sign-in stops at the expected 403 gate — you can already explore the interface, manage instances and saves, and browse Modrinth/CurseForge.",
+      "This pre-review build launches the official Microsoft OAuth 2.1 + PKCE flow in your system browser. For full official gameplay, please download the latest release.",
     installerTitle: "Windows Installer",
     installerBadge: "Recommended · Auto-updates",
     installerDesc:
@@ -515,7 +515,7 @@ const EN: Dict = {
   privacy: {
     metaTitle: "Privacy & Security — Lumi Launcher",
     metaDesc:
-      "Privacy policy and security design of Lumi Launcher: no telemetry, OAuth 2.0 PKCE sign-in, Windows Credential Manager, and a stdin session pipe.",
+      "Privacy policy and security design of Lumi Launcher: no telemetry, OAuth 2.1 PKCE sign-in, Windows Credential Manager, and a stdin session pipe.",
     title: "Privacy & Security",
     subtitle:
       "Matches PRIVACY.md and SECURITY.md in the main repository: no telemetry, no user database, no ads.",
@@ -547,7 +547,7 @@ const EN: Dict = {
     ],
     assetsTitle: "Video & GIF Archive",
     assetsDesc:
-      "Clean 60fps screen recordings and GIFs will be published after Mojang approves Lumi's AppID. Until then, feel free to use the screenshots on this page.",
+      "Lumi's official AppID allowlist is now live. Clean 60fps screen recordings and GIFs are being assembled for 1.0; in the meantime, feel free to use the screenshots on this page or test the live /demo.",
     assetsBtn: "Open GitHub Releases",
     brandTitle: "Brand Guidelines",
     brandDesc:
@@ -599,9 +599,9 @@ const ZH: Dict = {
     ctaDownload: "下载 Windows 版",
     ctaGitHub: "查看 GitHub 源码",
     heroNotePrereview:
-      "当前为 Mojang AppID 审核预审包（客户端 ID 732fc771-cf09-4ec5-b899-ee92fd012d57）：已支持拉起系统浏览器官方 Microsoft 授权，待白名单获批后即可进入游戏。",
+      "当前为 Mojang AppID 审核预审包：已支持拉起系统浏览器官方 Microsoft 授权，正式游玩请下载最新版本。",
     heroNoteBeta:
-      "公开测试版 · 适用于 Windows 10/11（64 位），需拥有 Minecraft Java 版的 Microsoft 正版账户。",
+      "内测预览版 · Mojang 官方白名单已过审，适用于 Windows 10/11（64 位），需拥有 Minecraft Java 版的 Microsoft 正版账户。",
     heroNoteStable:
       "开源免费 · 适用于 Windows 10/11（64 位），需拥有 Minecraft Java 版的 Microsoft 正版账户。",
     previewTitle: "微光实机预览：一换世界，整套界面跟着变色",
@@ -698,7 +698,7 @@ const ZH: Dict = {
           "Lumi 在启动前先在本地检查一遍模组；每次改动内容都会自动记一份快照，可以一键回滚。世界存档支持自动备份，备份目录可以放在别的硬盘上。",
         bullets: [
           "启动前检查缺少前置、modId 重复、加载器不对和 Java 版本不匹配，发现问题会用中文说明原因",
-          "改动历史可以一键撤销，单个模组可以锁定版本，也可以换成别的版本",
+          "改动快照与启动记录汇入可视化时间线可一键回滚，支持模组反向依赖与孤儿前置清理、锁版本、换版本与实例笔记",
           "世界自动备份，备份目录可以迁移到别的硬盘",
         ],
         imageKey: "detail",
@@ -709,11 +709,11 @@ const ZH: Dict = {
         eyebrow: "04 · 内置 Modrinth & CurseForge",
         title: "两个平台一起搜、一起装，也尊重模组作者的设置",
         description:
-          "在同一个界面里搜索、安装和更新模组、整合包（.mrpack / CurseForge）、光影、材质包、地图和服务器，前置会自动列出并补齐。",
+          "在同一个界面里搜索、安装、更新与导出模组、整合包（.mrpack / CurseForge / 含 patches/*.json 补丁的 MultiMC·Prism .zip）、光影、材质包、地图和服务器。",
         bullets: [
-          "Modrinth 与 CurseForge 统一检索，支持中英文名称匹配与依赖预览",
+          "Modrinth 与 CurseForge 统一检索，支持三方比对无损整合包更新与一键回滚",
           "作者不允许第三方下载的 CurseForge 文件，会引导你去官方页面下载，下载后按哈希自动认领，不绕过作者的设置",
-          "支持直接把本地 .jar / .zip / .mrpack 拖进窗口安装",
+          "支持实例版本/加载器原地或克隆升级，以及 4 格式整合包导出与隐私项过滤",
         ],
         imageKey: "discover",
       },
@@ -737,9 +737,9 @@ const ZH: Dict = {
         description:
           "核心用 Rust 自研，基于 Tauri 2 构建。游戏本体、加载器、模组与账号登录全部直连 Microsoft、Mojang、Modrinth 和 CurseForge 官方接口。",
         bullets: [
-          "并发断点续传、哈希校验、默认 DoH 解析，支持系统 / 直连 / HTTP·SOCKS5 代理与官方端点一键网络诊断",
-          "自动扫描电脑上的 Java 或一键安装 Mojang 官方 Java，附带内存分配建议",
-          "存储空间分析、清理没有实例在用的游戏版本，以及导出 / 导入偏好设置（不含账号信息）",
+          "大文件 HTTP Range 分段并发、自适应带宽调度、哈希校验、RFC 8484 DoH、实时代理监听与任务驾驶舱",
+          "内置官方 3D 皮肤与披风工坊、账户安全中心、自动扫描/安装官方 Java 与内存分配建议",
+          "支持正式/快照/愚人节/远古 Beta·Alpha 全版本矩阵，覆盖 Fabric、NeoForge、Forge（含怀旧版）、Quilt、Legacy Fabric 与 Babric",
         ],
         imageKey: "architecture",
         artKey: "homeDay",
@@ -783,7 +783,7 @@ const ZH: Dict = {
     faqs: [
       {
         q: "只支持正版 Microsoft 账户吗？",
-        a: "是的。这是 Lumi 明确的产品取舍：只通过系统浏览器走 Microsoft 官方 OAuth 2.0 + PKCE 登录并核验 Java 版游玩权，不提供离线用户名、第三方皮肤站或认证注入器。",
+        a: "是的。这是 Lumi 明确的产品取舍：只通过系统浏览器走 Microsoft 官方 OAuth 2.1 + PKCE 登录并核验 Java 版游玩权，不提供离线用户名、第三方皮肤站或认证注入器。",
       },
       {
         q: "Mac 或 Linux 能用吗？",
@@ -830,7 +830,7 @@ const ZH: Dict = {
     publishedLabel: "发布日期",
     prereviewNoticeTitle: "当前版本为 Mojang 审核预审构建",
     prereviewNoticeBody:
-      "本预审构建已内置 Lumi 的 Microsoft Entra 公共客户端 ID（732fc771-cf09-4ec5-b899-ee92fd012d57），点击登录可正常拉起系统浏览器的官方 Microsoft OAuth 2.0 + PKCE 授权页；在 Mojang 通过白名单审核前会按预期停在 403 门禁，期间你仍可完整体验界面、管理实例与存档并浏览 Modrinth / CurseForge。",
+      "本预审构建支持拉起系统浏览器的官方 Microsoft OAuth 2.1 + PKCE 授权页；正式正版游玩请下载最新版本。",
     installerTitle: "安装版（推荐）",
     installerBadge: "推荐 · 带签名自动更新",
     installerDesc:
@@ -885,7 +885,7 @@ const ZH: Dict = {
   privacy: {
     metaTitle: "隐私与安全 — Lumi 微光启动器",
     metaDesc:
-      "Lumi 微光启动器的隐私政策与安全设计说明：不收集遥测，使用 OAuth 2.0 PKCE 登录，凭据存在 Windows 凭据管理器，会话经 Java 标准输入传递。",
+      "Lumi 微光启动器的隐私政策与安全设计说明：不收集遥测，使用 OAuth 2.1 PKCE 登录，凭据存在 Windows 凭据管理器，会话经 Java 标准输入传递。",
     title: "隐私与安全",
     subtitle:
       "内容和主仓的 PRIVACY.md、SECURITY.md 一致：不收集遥测，没有用户后台，没有广告；登录凭据存在系统凭据库，通过进程管道交给游戏。",
@@ -913,7 +913,7 @@ const ZH: Dict = {
     ],
     assetsTitle: "录屏与动图素材",
     assetsDesc:
-      "无配乐、无字幕的 60fps 实机录屏和动图，会在 Mojang 批准 AppID 后发布；在那之前可以先用本页的截图。",
+      "Mojang 官方白名单现已正式过审，实机录屏与动图素材正在整理中；现可直接使用本页高清截图或访问 /zh/demo 在线试玩。",
     assetsBtn: "查看 GitHub Releases",
     brandTitle: "使用与声明提醒",
     brandDesc:

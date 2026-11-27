@@ -20,7 +20,7 @@ const changelogHref = localizedPath(locale, "/changelog");
 
 const { latest } = getReleases();
 const directInstallerHref = primaryDownloadHref(latest.installer, latest.htmlUrl);
-const installerName = latest.installer?.name || "Lumi_0.6.2_x64-setup.exe";
+const installerName = latest.installer?.name || "LumiLauncher_0.7.0_x64-setup.exe";
 
 const isHome = routePath === "/";
 const featuresHref = isHome ? "#features" : `${homeHref}#features`;

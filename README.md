@@ -27,7 +27,7 @@ pnpm check
 - **Zero React on marketing pages**: Landing, Demo wrapper, Privacy, Changelog, Press, and 404 pages output pure static HTML + minimal vanilla scripts (< 30 KiB gzipped).
 - **Automated release pipeline**: `.github/workflows/release-sync.yml` checks `kokoa-77/LumiLauncher` hourly, verifies every installer and portable archive against `SHA256SUMS.txt`, bundles files ≤ 25 MiB into Cloudflare Pages with GitHub Releases fallback, and deploys to `lumilauncher` (`--branch=main`).
 - **Environment variables**:
-  - `SITE_URL` (optional, defaults to `https://lumilauncher.pages.dev`)
+  - `SITE_URL` (optional, defaults to `https://lumilauncher.org`)
   - `PAGES_PROJECT_NAME` (optional, defaults to `lumilauncher`)
 
 ## License & Brand Policy
